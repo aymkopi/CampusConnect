@@ -128,7 +128,7 @@ public class ToggleButtonRound extends JToggleButton {
         if (isSelected()) {
             bg = Color.decode("#00d54f");
         } else {
-            bg = Color.WHITE;
+            bg = Color.decode("#FFFFFF");
         }
         setBackground(bg);
         super.paint(g);

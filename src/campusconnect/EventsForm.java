@@ -36,11 +36,11 @@ public class EventsForm extends javax.swing.JFrame {
     String forWhom;
     String clubAssigned;
     String facultyAssigned;
-    String description;
+    String details;
 
     public EventsForm() {
         initComponents();
-        
+
         // Add action listener for the date picker
         inDateForm.addDateChangeListener(new DateChangeListener() {
             @Override
@@ -257,12 +257,22 @@ public class EventsForm extends javax.swing.JFrame {
 
     private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
         if (validateInputs()) {
-            String addEventQuery = "INSERT INTO events (event_name, date, time, location, for_whom, club_assigned, faculty_assigned, description) "
-                            + "VALUES ('" + eventName + "', '" + date + "', '" + time + "', '" + location + "', '" + forWhom + "', '" + clubAssigned + "', '" + facultyAssigned + "', '" + description + "')";
+            if (conn != null) {
+                try {
+                    java.sql.Statement st = conn.createStatement();
+                    
+                    // Insert new user into database
+                    String addEventQuery = "INSERT INTO events (event_name, date, time, location, for_whom, club_assigned, faculty_assigned, details) "
+                            + "VALUES ('" + eventName + "', '" + date + "', '" + time + "', '" + location + "', '" + forWhom + "', '" + clubAssigned + "', '" + facultyAssigned + "', '" + details + "')";
                     st.executeUpdate(addEventQuery);
                     JOptionPane.showMessageDialog(this, "Account created successfully!");
-        }
+                   
 
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+                }
+            }
+        }
     }
 
     private boolean validateInputs() {

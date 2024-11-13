@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class CampusConnect extends JFrame {
     Connection conn = conn();
-    DefaultTableModel model = new DefaultTableModel(new String[]{"Event Name", "Schedule", "Details", "Location", "For Whom?", "Club Assigned", "Faculty Assigned"}, 0);
+    DefaultTableModel model = new DefaultTableModel(new String[]{"Event Name", "Date", "Time", "Location", "For Whom?", "Club Assigned", "Faculty Assigned","Details"}, 0);
 
     public CampusConnect() {
         initComponents();
@@ -38,14 +38,15 @@ public class CampusConnect extends JFrame {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                String d = rs.getString("event_name");
-                String e = rs.getString("schedule");
-                String f = rs.getString("details");
-                String g = rs.getString("location");
-                String h = rs.getString("for_whom");
-                String i = rs.getString("club_assigned");
-                String j = rs.getString("faculty_assigned");
-                model.addRow(new Object[]{d, e, f, g, h, i, j});
+                String ev = rs.getString("event_name");
+                String dt = rs.getString("date");
+                String tm = rs.getString("time");
+                String lc = rs.getString("location");
+                String fw = rs.getString("for_whom");
+                String ca = rs.getString("club_assigned");
+                String fa = rs.getString("faculty_assigned");
+                String de = rs.getString("details");
+                model.addRow(new Object[]{ev, dt, tm, lc, fw, ca, fa, de});
 
             }
         } catch (SQLException e) {

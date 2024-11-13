@@ -86,13 +86,13 @@ public class SignUpPage extends JFrame {
 
         signUpPanel.setPreferredSize(new java.awt.Dimension(463, 495));
 
-        lblCreateAccount.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
+        lblCreateAccount.setFont(new java.awt.Font("Inter ExtraBold", 0, 36)); // NOI18N
         lblCreateAccount.setText("Create an account");
 
-        lblAlreadyHaveAccount.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        lblAlreadyHaveAccount.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         lblAlreadyHaveAccount.setText("Already have an account? ");
 
-        loginRedirectButton.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        loginRedirectButton.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         loginRedirectButton.setForeground(new java.awt.Color(0, 0, 238));
         loginRedirectButton.setText("Log in");
         loginRedirectButton.setBorder(null);
@@ -104,7 +104,7 @@ public class SignUpPage extends JFrame {
         });
 
         inFirstNameSignUp.setBorder(null);
-        inFirstNameSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inFirstNameSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inFirstNameSignUp.setMargin(new java.awt.Insets(2, 12, 2, 6));
         inFirstNameSignUp.setName(""); // NOI18N
         inFirstNameSignUp.setPlaceHolder("First Name");
@@ -114,7 +114,7 @@ public class SignUpPage extends JFrame {
         inFirstNameSignUp.setRoundTopRight(8);
 
         inLastNameSignUp.setBorder(null);
-        inLastNameSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inLastNameSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inLastNameSignUp.setPlaceHolder("Last Name");
         inLastNameSignUp.setRoundBottomLeft(8);
         inLastNameSignUp.setRoundBottomRight(8);
@@ -123,7 +123,7 @@ public class SignUpPage extends JFrame {
 
         inEmailSignUp.setBorder(null);
         inEmailSignUp.setToolTipText("");
-        inEmailSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inEmailSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inEmailSignUp.setPlaceHolder("STI Email Account");
         inEmailSignUp.setRoundBottomLeft(8);
         inEmailSignUp.setRoundBottomRight(8);
@@ -132,7 +132,7 @@ public class SignUpPage extends JFrame {
 
         inStudentIDSignUp.setBorder(null);
         inStudentIDSignUp.setToolTipText("");
-        inStudentIDSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inStudentIDSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inStudentIDSignUp.setPlaceHolder("Student ID");
         inStudentIDSignUp.setRoundBottomLeft(8);
         inStudentIDSignUp.setRoundBottomRight(8);
@@ -140,7 +140,7 @@ public class SignUpPage extends JFrame {
         inStudentIDSignUp.setRoundTopRight(8);
 
         inPasswordSignUp.setBorder(null);
-        inPasswordSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inPasswordSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inPasswordSignUp.setPlaceHolder("Password");
         inPasswordSignUp.setRoundBottomLeft(8);
         inPasswordSignUp.setRoundBottomRight(8);
@@ -148,14 +148,14 @@ public class SignUpPage extends JFrame {
         inPasswordSignUp.setRoundTopRight(8);
 
         inConfirmPasswordSignUp.setBorder(null);
-        inConfirmPasswordSignUp.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inConfirmPasswordSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inConfirmPasswordSignUp.setPlaceHolder("Confirm Password");
         inConfirmPasswordSignUp.setRoundBottomLeft(8);
         inConfirmPasswordSignUp.setRoundBottomRight(8);
         inConfirmPasswordSignUp.setRoundTopLeft(8);
         inConfirmPasswordSignUp.setRoundTopRight(8);
 
-        showSignUpPassword.setFont(new java.awt.Font("Helvetica", 0, 10)); // NOI18N
+        showSignUpPassword.setFont(new java.awt.Font("Inter", 0, 10)); // NOI18N
         showSignUpPassword.setText("Show Password");
         showSignUpPassword.setAlignmentX(0.5F);
         showSignUpPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -173,7 +173,7 @@ public class SignUpPage extends JFrame {
         createAccountButton.setBackground(new java.awt.Color(153, 153, 255));
         createAccountButton.setBorder(null);
         createAccountButton.setText("Create Account");
-        createAccountButton.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        createAccountButton.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         createAccountButton.setPreferredSize(new java.awt.Dimension(86, 16));
         createAccountButton.setRoundBottomLeft(8);
         createAccountButton.setRoundBottomRight(8);
@@ -200,15 +200,15 @@ public class SignUpPage extends JFrame {
                             .addComponent(inStudentIDSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inConfirmPasswordSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inPasswordSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(signUpPanelLayout.createSequentialGroup()
                                 .addComponent(inFirstNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(inLastNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(signUpPanelLayout.createSequentialGroup()
-                                .addComponent(lblAlreadyHaveAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(loginRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(inPasswordSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblAlreadyHaveAccount)
+                                .addGap(0, 0, 0)
+                                .addComponent(loginRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(showSignUpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
@@ -222,7 +222,7 @@ public class SignUpPage extends JFrame {
                 .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAlreadyHaveAccount)
                     .addComponent(loginRedirectButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inFirstNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inLastNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -238,7 +238,7 @@ public class SignUpPage extends JFrame {
                 .addComponent(showSignUpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         accountPanel.add(signUpPanel, "card2");
@@ -428,8 +428,8 @@ public class SignUpPage extends JFrame {
             if (conn != null) {
                 try {
                     Statement st = conn.createStatement();
-                    String lookUpUser = "SELECT * FROM users WHERE user_id = '" + userID + "'";
-                    var rs = st.executeQuery(lookUpUser);
+                    String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
+                    var rs = st.executeQuery(checkUserExist);
 
                     if (rs.next()) {  // If a matching student ID is found
                         JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");

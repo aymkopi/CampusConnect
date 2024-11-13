@@ -1,7 +1,6 @@
 package test;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -10,14 +9,11 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
-public class TextFieldRound extends JTextField {
-    @Override
-    public Insets getInsets() {
-        return new Insets(0, 12, 0, 0);
-    }
-      
+public class ToggleButtonRound extends JToggleButton {
+
+   
     public int getRoundTopLeft() {
         return roundTopLeft;
     }
@@ -59,7 +55,7 @@ public class TextFieldRound extends JTextField {
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
-    public TextFieldRound() {
+    public ToggleButtonRound() {
         setOpaque(false);
     }
 
@@ -126,32 +122,16 @@ public class TextFieldRound extends JTextField {
         area.add(new Area(new Rectangle2D.Double(0, 0, width, height - roundY / 2)));
         return area;
     }
-    //enables placeholder
-    private String placeHolder = "Place Holder";
-
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
-        if (getText().length() == 0) {
-            int h = getHeight();
-            Insets ins = getInsets();
-            FontMetrics fm = g.getFontMetrics();
-            int bg = getBackground().getRGB();
-            int fg = getForeground().getRGB();
-            int m = 0xfefefefe;
-            int c = ((bg & m) >>> 1) + ((fg & m) >>> 1);
-            g.setColor(new Color(c, true));
-            g.drawString(getPlaceHolder(), ins.left, (h/2) + fm.getHeight() - 10);
-             
+        Color bg;
+        if (isSelected()) {
+            bg = Color.decode("#00d54f");
+        } else {
+            bg = Color.decode("ffffff");
         }
-    }
-    
-    public String getPlaceHolder() {
-        return placeHolder;
+        setBackground(bg);
+        super.paint(g);
     }
 
-    public void setPlaceHolder(String placeHolder) {
-        this.placeHolder = placeHolder;
-    }
-    
 }

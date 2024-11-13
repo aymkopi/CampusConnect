@@ -15,8 +15,9 @@ public class CampusConnect extends JFrame {
     public CampusConnect() {
         initComponents();
         launchEventData();
-    }
 
+    }
+   
     //establish connection
     public static Connection conn() {
         try {
@@ -30,8 +31,8 @@ public class CampusConnect extends JFrame {
         }
         return null;
     }
-
-    private void launchEventData() {
+    
+    public void launchEventData() {
         try {
             Statement st = conn.createStatement();
             String sql = "SELECT * FROM events";
@@ -46,14 +47,13 @@ public class CampusConnect extends JFrame {
                 String ca = rs.getString("club_assigned");
                 String fa = rs.getString("faculty_assigned");
                 String de = rs.getString("details");
-                model.addRow(new Object[]{ev, dt, tm, lc, fw, ca, fa, de});
-
+                model.addRow(new Object[]{ev, dt, tm, lc, fw, ca, fa, de}); 
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
-
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -77,13 +77,13 @@ public class CampusConnect extends JFrame {
         addEventButton = new test.ButtonRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventsTable = new javax.swing.JTable();
+        updateButton = new javax.swing.JButton();
         UsersPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Campus Connect");
         setMinimumSize(new java.awt.Dimension(1080, 720));
         setName("main"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1037, 670));
 
         navigationBar.setBackground(java.awt.SystemColor.controlShadow);
         navigationBar.setPreferredSize(new java.awt.Dimension(229, 574));
@@ -324,6 +324,13 @@ public class CampusConnect extends JFrame {
         eventsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(eventsTable);
 
+        updateButton.setText("update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
         EventsPanel.setLayout(EventsPanelLayout);
         EventsPanelLayout.setHorizontalGroup(
@@ -339,6 +346,8 @@ public class CampusConnect extends JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
                             .addGroup(EventsPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(updateButton)
+                                .addGap(45, 45, 45)
                                 .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))))
         );
@@ -350,7 +359,9 @@ public class CampusConnect extends JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateButton))
                 .addGap(22, 22, 22))
         );
 
@@ -432,6 +443,11 @@ public class CampusConnect extends JFrame {
         });
     }//GEN-LAST:event_addEventButton1ActionPerformed
 
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        model.setRowCount(0);
+        launchEventData();
+    }//GEN-LAST:event_updateButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -483,6 +499,7 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel lblEvent2;
     private javax.swing.JPanel mainDashboard;
     private test.PanelRound navigationBar;
+    private javax.swing.JButton updateButton;
     private test.ButtonRound usersButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,9 +10,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import java.sql.*;
 
 public class EventsForm extends javax.swing.JFrame {
-
+    
     //establish connection
     public static Connection conn() {
         try {
@@ -30,8 +31,8 @@ public class EventsForm extends javax.swing.JFrame {
     //variables
     Connection conn = conn();
     String eventName;
-    String date;
-    String time;
+    String fromDate;
+    String fromTime;
     String location;
     String forWhom;
     String clubAssigned;
@@ -57,81 +58,64 @@ public class EventsForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblEvent = new javax.swing.JLabel();
-        inEventNameForm = new test.TextFieldRound();
         jLabel1 = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
+        eventStartDate = new javax.swing.JLabel();
         inClubAssignedForm = new test.ComboBoxRound();
-        createEventSubmitButton = new test.ButtonRound();
         inDateForm = new com.github.lgooddatepicker.components.DatePicker();
         inTimeForm = new com.github.lgooddatepicker.components.TimePicker();
-        timeLabel = new javax.swing.JLabel();
         dateLabel1 = new javax.swing.JLabel();
         locationLabel = new javax.swing.JLabel();
         inLocationForm = new test.TextFieldRound();
         dateLabel2 = new javax.swing.JLabel();
         inFacultyAssignedForm = new test.ComboBoxRound();
-        inDescriptionForm = new test.TextFieldRound();
         descriptionLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        inDetailsForm = new test.TextAreaRound();
+        inForWhom = new javax.swing.JLabel();
+        inDateForm1 = new com.github.lgooddatepicker.components.DatePicker();
+        inTimeForm1 = new com.github.lgooddatepicker.components.TimePicker();
+        dateLabel3 = new javax.swing.JLabel();
+        timeLabel3 = new javax.swing.JLabel();
+        inEventNameForm = new test.TextFieldRound();
+        jPanel1 = new javax.swing.JPanel();
+        lblEvent = new javax.swing.JLabel();
+        createEventSubmitButton = new test.ButtonRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setResizable(false);
 
-        lblEvent.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
-        lblEvent.setText("Create Event");
-
-        inEventNameForm.setBorder(null);
-        inEventNameForm.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
-        inEventNameForm.setPlaceHolder("Enter event name");
-        inEventNameForm.setRoundBottomLeft(8);
-        inEventNameForm.setRoundBottomRight(8);
-        inEventNameForm.setRoundTopLeft(8);
-        inEventNameForm.setRoundTopRight(8);
-
-        jLabel1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jLabel1.setText("Title/Name of Event");
+        jLabel1.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
-        dateLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        dateLabel.setText("Date");
+        eventStartDate.setText("Event Start");
+        eventStartDate.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
+        inClubAssignedForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music", "Dance", "Csc Org" }));
         inClubAssignedForm.setBorder(null);
+        inClubAssignedForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         inClubAssignedForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inClubAssignedFormActionPerformed(evt);
             }
         });
 
-        createEventSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
-        createEventSubmitButton.setBorder(null);
-        createEventSubmitButton.setText("Confirm");
-        createEventSubmitButton.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
-        createEventSubmitButton.setRoundBottomLeft(8);
-        createEventSubmitButton.setRoundBottomRight(8);
-        createEventSubmitButton.setRoundTopLeft(8);
-        createEventSubmitButton.setRoundTopRight(8);
-        createEventSubmitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createEventSubmitButtonActionPerformed(evt);
-            }
-        });
+        dateLabel1.setText("Org/Club Assigned");
+        dateLabel1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        timeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        timeLabel.setText("Time");
-
-        dateLabel1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        dateLabel1.setText("Club Assigned");
-
-        locationLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         locationLabel.setText("Location");
+        locationLabel.setFocusable(false);
+        locationLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
         inLocationForm.setBorder(null);
-        inLocationForm.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inLocationForm.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         inLocationForm.setPlaceHolder("Enter location");
         inLocationForm.setRoundBottomLeft(8);
         inLocationForm.setRoundBottomRight(8);
@@ -143,113 +127,199 @@ public class EventsForm extends javax.swing.JFrame {
             }
         });
 
-        dateLabel2.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         dateLabel2.setText("Faculty Assigned");
+        dateLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
+        inFacultyAssignedForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elvis Atento", "Babylyn Ramos", "Akeem Pedrasa daddy" }));
         inFacultyAssignedForm.setBorder(null);
+        inFacultyAssignedForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         inFacultyAssignedForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inFacultyAssignedFormActionPerformed(evt);
             }
         });
 
-        inDescriptionForm.setBorder(null);
-        inDescriptionForm.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
-        inDescriptionForm.setPlaceHolder("(optional)");
-        inDescriptionForm.setRoundBottomLeft(8);
-        inDescriptionForm.setRoundBottomRight(8);
-        inDescriptionForm.setRoundTopLeft(8);
-        inDescriptionForm.setRoundTopRight(8);
-        inDescriptionForm.addActionListener(new java.awt.event.ActionListener() {
+        descriptionLabel.setText("Additional Details");
+        descriptionLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+
+        jScrollPane2.setBorder(null);
+
+        inDetailsForm.setBorder(null);
+        inDetailsForm.setColumns(20);
+        inDetailsForm.setLineWrap(true);
+        inDetailsForm.setRows(5);
+        inDetailsForm.setWrapStyleWord(true);
+        inDetailsForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        inDetailsForm.setPlaceHolder("(optional)");
+        inDetailsForm.setRoundBottomLeft(8);
+        inDetailsForm.setRoundBottomRight(8);
+        inDetailsForm.setRoundTopLeft(8);
+        inDetailsForm.setRoundTopRight(8);
+        jScrollPane2.setViewportView(inDetailsForm);
+
+        inForWhom.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        inForWhom.setText("Users Access");
+
+        dateLabel3.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        dateLabel3.setText("Event End");
+
+        timeLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        timeLabel3.setText("To:");
+
+        inEventNameForm.setBorder(null);
+        inEventNameForm.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        inEventNameForm.setPlaceHolder("Enter event name");
+        inEventNameForm.setRoundBottomLeft(8);
+        inEventNameForm.setRoundBottomRight(8);
+        inEventNameForm.setRoundTopLeft(8);
+        inEventNameForm.setRoundTopRight(8);
+        inEventNameForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inDescriptionFormActionPerformed(evt);
+                inEventNameFormActionPerformed(evt);
             }
         });
 
-        descriptionLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        descriptionLabel.setText("Desription");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblEvent.setText("Create Event");
+        lblEvent.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+
+        createEventSubmitButton.setText("Confirm");
+        createEventSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
+        createEventSubmitButton.setBorder(null);
+        createEventSubmitButton.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        createEventSubmitButton.setRoundBottomLeft(8);
+        createEventSubmitButton.setRoundBottomRight(8);
+        createEventSubmitButton.setRoundTopLeft(8);
+        createEventSubmitButton.setRoundTopRight(8);
+        createEventSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createEventSubmitButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(lblEvent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createEventSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createEventSubmitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(descriptionLabel)
-                    .addComponent(dateLabel2)
-                    .addComponent(inLocationForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(locationLabel)
-                    .addComponent(dateLabel1)
-                    .addComponent(jLabel1)
-                    .addComponent(inClubAssignedForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblEvent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createEventSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inEventNameForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(inDateForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(dateLabel)
-                                .addGap(193, 193, 193)))
+                                .addComponent(descriptionLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(locationLabel)
+                                    .addComponent(timeLabel3)
+                                    .addComponent(inLocationForm, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dateLabel1)
+                                            .addComponent(inClubAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dateLabel2)
+                                            .addComponent(inFacultyAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(65, 65, 65))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(timeLabel)
-                            .addComponent(inTimeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(inFacultyAssignedForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inDescriptionForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(inForWhom))
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inDateForm, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inTimeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(eventStartDate)
+                            .addComponent(dateLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inDateForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inTimeForm1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(50, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEvent, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(createEventSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(2, 2, 2)
-                .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                    .addComponent(jLabel1)
+                    .addComponent(eventStartDate))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateLabel)
-                    .addComponent(timeLabel))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inDateForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inTimeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel3)
+                    .addComponent(inForWhom))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inDateForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inTimeForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(timeLabel3)
+                .addGap(35, 35, 35)
                 .addComponent(locationLabel)
                 .addGap(0, 0, 0)
                 .addComponent(inLocationForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(dateLabel1)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel1)
+                    .addComponent(dateLabel2))
                 .addGap(0, 0, 0)
-                .addComponent(inClubAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(dateLabel2)
-                .addGap(0, 0, 0)
-                .addComponent(inFacultyAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(descriptionLabel)
-                .addGap(0, 0, 0)
-                .addComponent(inDescriptionForm, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inClubAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inFacultyAssignedForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(descriptionLabel))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void dateChangedAction(String newDate) {
-        date = newDate;
+        fromDate = newDate;
     }
 
     private void timeChangedAction(String newTime) {
-        time = newTime;
+        fromTime = newTime;
     }
     private void inClubAssignedFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inClubAssignedFormActionPerformed
         // TODO add your handling code here:
@@ -257,24 +327,27 @@ public class EventsForm extends javax.swing.JFrame {
 
     private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
         if (validateInputs()) {
-            if (conn != null) {
-                try {
-                    java.sql.Statement st = conn.createStatement();
-                    
-                    // Insert new user into database
-                    String addEventQuery = "INSERT INTO events (event_name, date, time, location, for_whom, club_assigned, faculty_assigned, details) "
-                            + "VALUES ('" + eventName + "', '" + date + "', '" + time + "', '" + location + "', '" + forWhom + "', '" + clubAssigned + "', '" + facultyAssigned + "', '" + details + "')";
-                    st.executeUpdate(addEventQuery);
-                    JOptionPane.showMessageDialog(this, "Account created successfully!");
-                   
-
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            try {
+                Statement st = conn().createStatement();
+                String checkExistingEventQuery = "SELECT * FROM events WHERE event_name = '" + eventName + "'";
+                var rs = st.executeQuery(checkExistingEventQuery);
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(this, "Event already exists.");
+                    return;  // Exit the method to avoid duplicate insertion
                 }
+                
+                String addEventQuery = "INSERT INTO events (event_name, date, time, location, for_whom, club_assigned, faculty_assigned, description) "
+                        + "VALUES ('" + eventName + "', '" + fromDate + "', '" + fromTime + "', '" + location + "', '" + forWhom + "', '" + clubAssigned + "', '" + facultyAssigned + "', '" + details + "')";
+                st.executeUpdate(addEventQuery);
+                
+                JOptionPane.showMessageDialog(this, "Account created successfully!");
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
             }
         }
     }
-
     private boolean validateInputs() {
         boolean isValid = true;
         if (inEventNameForm.getText().isEmpty()) {
@@ -284,19 +357,26 @@ public class EventsForm extends javax.swing.JFrame {
             inEventNameForm.setBorder(null);
             eventName = inEventNameForm.getText();
         }
-        if (inDateForm.getText().isEmpty()) {
+        if (inDateForm.getDate().toString().isEmpty()) {
             inDateForm.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
             inDateForm.setBorder(null);
-            date = inDateForm.getText();
+            fromDate = inDateForm.getDate().toString();
         }
-        if (inTimeForm.getText().isEmpty()) {
+        if (inTimeForm.getTime().toString().isEmpty()) {
             inTimeForm.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
             inTimeForm.setBorder(null);
-            time = inTimeForm.getText();
+            fromTime = inTimeForm.getTime().toString();
+        }
+        if (inForWhom.getText().isEmpty()) {
+            inForWhom.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inForWhom.setBorder(null);
+            forWhom = inForWhom.getText();
         }
         if (inLocationForm.getText().isEmpty()) {
             inLocationForm.setBorder(new LineBorder(Color.RED, 1));
@@ -319,6 +399,13 @@ public class EventsForm extends javax.swing.JFrame {
             inFacultyAssignedForm.setBorder(null);
             facultyAssigned = inFacultyAssignedForm.getSelectedItem().toString();
         }
+        if (inDetailsForm.getText().isEmpty()) {
+            inDetailsForm.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inDetailsForm.setBorder(null);
+            details = inDetailsForm.getText();
+        }
         return isValid;
 
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed
@@ -331,26 +418,32 @@ public class EventsForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inFacultyAssignedFormActionPerformed
 
-    private void inDescriptionFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inDescriptionFormActionPerformed
+    private void inEventNameFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inEventNameFormActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inDescriptionFormActionPerformed
+    }//GEN-LAST:event_inEventNameFormActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound createEventSubmitButton;
-    private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dateLabel1;
     private javax.swing.JLabel dateLabel2;
+    private javax.swing.JLabel dateLabel3;
     private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JLabel eventStartDate;
     private test.ComboBoxRound inClubAssignedForm;
     private com.github.lgooddatepicker.components.DatePicker inDateForm;
-    private test.TextFieldRound inDescriptionForm;
+    private com.github.lgooddatepicker.components.DatePicker inDateForm1;
+    private test.TextAreaRound inDetailsForm;
     private test.TextFieldRound inEventNameForm;
     private test.ComboBoxRound inFacultyAssignedForm;
+    private javax.swing.JLabel inForWhom;
     private test.TextFieldRound inLocationForm;
     private com.github.lgooddatepicker.components.TimePicker inTimeForm;
+    private com.github.lgooddatepicker.components.TimePicker inTimeForm1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel locationLabel;
-    private javax.swing.JLabel timeLabel;
+    private javax.swing.JLabel timeLabel3;
     // End of variables declaration//GEN-END:variables
-}
+    }

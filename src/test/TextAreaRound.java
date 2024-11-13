@@ -10,9 +10,9 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
-public class TextFieldRound extends JTextField {
+public class TextAreaRound extends JTextArea {
     @Override
     public Insets getInsets() {
         return new Insets(0, 12, 0, 0);
@@ -59,7 +59,7 @@ public class TextFieldRound extends JTextField {
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
-    public TextFieldRound() {
+    public TextAreaRound() {
         setOpaque(false);
     }
 
@@ -141,7 +141,7 @@ public class TextFieldRound extends JTextField {
             int m = 0xfefefefe;
             int c = ((bg & m) >>> 1) + ((fg & m) >>> 1);
             g.setColor(new Color(c, true));
-            g.drawString(getPlaceHolder(), ins.left, (h/2) + fm.getHeight() - 10);
+            g.drawString(getPlaceHolder(), ins.left, (h/2) + fm.getHeight() - 8);
              
         }
     }

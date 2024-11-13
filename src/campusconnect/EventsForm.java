@@ -33,6 +33,7 @@ public class EventsForm extends javax.swing.JFrame {
     String date;
     String time;
     String location;
+    String forWhom;
     String clubAssigned;
     String facultyAssigned;
     String description;
@@ -256,7 +257,10 @@ public class EventsForm extends javax.swing.JFrame {
 
     private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
         if (validateInputs()) {
-            
+            String addEventQuery = "INSERT INTO events (event_name, date, time, location, for_whom, club_assigned, faculty_assigned, description) "
+                            + "VALUES ('" + eventName + "', '" + date + "', '" + time + "', '" + location + "', '" + forWhom + "', '" + clubAssigned + "', '" + facultyAssigned + "', '" + description + "')";
+                    st.executeUpdate(addEventQuery);
+                    JOptionPane.showMessageDialog(this, "Account created successfully!");
         }
 
     }

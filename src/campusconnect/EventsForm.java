@@ -167,11 +167,11 @@ class EventsForm extends javax.swing.JFrame {
 
         jScrollPane2.setBorder(null);
 
-        inDetailsForm.setBorder(null);
         inDetailsForm.setColumns(20);
         inDetailsForm.setLineWrap(true);
         inDetailsForm.setRows(5);
         inDetailsForm.setWrapStyleWord(true);
+        inDetailsForm.setBorder(null);
         inDetailsForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         inDetailsForm.setPlaceHolder("(optional)");
         inDetailsForm.setRoundBottomLeft(10);
@@ -187,8 +187,8 @@ class EventsForm extends javax.swing.JFrame {
 
         inEventEndTime.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
 
-        eventEndLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         eventEndLabel.setText("Event End");
+        eventEndLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inEventNameForm.setBorder(null);
         inEventNameForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -287,20 +287,22 @@ class EventsForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(inLocationForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(eventNameLabel)
-                                    .addComponent(userAcessLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(juniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(eventNameLabel))
+                                    .addGap(1, 1, 1))
                                 .addComponent(orgClubInChargeLabel)
                                 .addComponent(inClubInChargeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(locationLabel)))
-                    .addComponent(facultyInChargeLabel))
+                    .addComponent(facultyInChargeLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(juniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userAcessLabel))
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(detailsLabel)
@@ -331,15 +333,15 @@ class EventsForm extends javax.swing.JFrame {
                     .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inEventStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inEventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addComponent(userAcessLabel)
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(juniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addComponent(locationLabel)
                         .addGap(11, 11, 11)
@@ -353,14 +355,15 @@ class EventsForm extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(inFacultyInChargeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(eventEndLabel)
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inEventEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inEventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                        .addGap(31, 31, 31)
                         .addComponent(detailsLabel)
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );

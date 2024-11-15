@@ -81,6 +81,11 @@ public class CampusConnect extends JFrame {
         eventsTable = new javax.swing.JTable();
         updateButton = new javax.swing.JButton();
         UsersPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        eventsTable2 = new javax.swing.JTable();
+        updateButton1 = new javax.swing.JButton();
+        addUsersButton = new test.ButtonRound();
+        usersLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Campus Connect");
@@ -369,15 +374,74 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(EventsPanel, "card4");
 
+        jScrollPane3.setAutoscrolls(true);
+
+        eventsTable2.setFont(new java.awt.Font("Inter Display", 0, 12)); // NOI18N
+        eventsTable2.setModel(model);
+        eventsTable2.setRowHeight(30);
+        eventsTable2.setShowHorizontalLines(false);
+        eventsTable2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(eventsTable2);
+
+        updateButton1.setText("update");
+        updateButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButton1ActionPerformed(evt);
+            }
+        });
+
+        addUsersButton.setBackground(new java.awt.Color(255, 255, 204));
+        addUsersButton.setBorder(null);
+        addUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add16.png"))); // NOI18N
+        addUsersButton.setText("Add");
+        addUsersButton.setToolTipText("");
+        addUsersButton.setFocusable(false);
+        addUsersButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        addUsersButton.setRoundBottomLeft(8);
+        addUsersButton.setRoundBottomRight(8);
+        addUsersButton.setRoundTopLeft(8);
+        addUsersButton.setRoundTopRight(8);
+        addUsersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUsersButtonActionPerformed(evt);
+            }
+        });
+
+        usersLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
+        usersLabel.setText("Users");
+
         javax.swing.GroupLayout UsersPanelLayout = new javax.swing.GroupLayout(UsersPanel);
         UsersPanel.setLayout(UsersPanelLayout);
         UsersPanelLayout.setHorizontalGroup(
             UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 776, Short.MAX_VALUE)
+            .addGroup(UsersPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UsersPanelLayout.createSequentialGroup()
+                        .addComponent(usersLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UsersPanelLayout.createSequentialGroup()
+                        .addGroup(UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                            .addGroup(UsersPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(updateButton1)
+                                .addGap(45, 45, 45)
+                                .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29))))
         );
         UsersPanelLayout.setVerticalGroup(
             UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGroup(UsersPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(usersLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateButton1))
+                .addGap(22, 22, 22))
         );
 
         mainDashboard.add(UsersPanel, "card5");
@@ -451,6 +515,18 @@ public class CampusConnect extends JFrame {
         launchEventData();
     }//GEN-LAST:event_updateButtonActionPerformed
 
+    private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateButton1ActionPerformed
+
+    private void addUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UsersForm().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_addUsersButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -489,20 +565,25 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPanel UsersPanel;
     private test.ButtonRound addEventButton;
     private test.ButtonRound addEventButton1;
+    private test.ButtonRound addUsersButton;
     private javax.swing.JLabel clubAndOrgsLabel;
     private test.ButtonRound clubsAndOrgsButton;
     private test.ButtonRound dashboardButton;
     private test.ButtonRound eventsButton;
     private javax.swing.JTable eventsTable;
     private javax.swing.JTable eventsTable1;
+    private javax.swing.JTable eventsTable2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel lblEvent1;
     private javax.swing.JPanel mainDashboard;
     private test.PanelRound navigationBar;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton updateButton1;
     private test.ButtonRound usersButton;
+    private javax.swing.JLabel usersLabel;
     // End of variables declaration//GEN-END:variables
 }

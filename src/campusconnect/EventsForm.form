@@ -34,17 +34,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                               <Component id="inLocationForm" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="inEventNameForm" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
-                                  <Component id="eventNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tertiaryAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="juniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="seniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="inEventNameForm" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
+                                      <Component id="eventNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               </Group>
                               <Component id="orgClubInChargeLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="inClubInChargeForm" alignment="0" max="32767" attributes="0"/>
@@ -53,6 +48,14 @@
                       </Group>
                   </Group>
                   <Component id="facultyInChargeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="tertiaryAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="juniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="seniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,15 +95,15 @@
                   <Component id="inEventStartDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="inEventStartTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tertiaryAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="juniorHighAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="seniorHighAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="seniorHighAccessButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
@@ -115,16 +118,17 @@
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="inFacultyInChargeForm" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="eventEndLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="inEventEndDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="inEventEndTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="251" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -269,13 +273,13 @@
       <SubComponents>
         <Component class="test.TextAreaRound" name="inDetailsForm">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter" size="14" style="0"/>
             </Property>

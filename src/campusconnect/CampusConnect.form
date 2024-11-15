@@ -288,7 +288,7 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblEvent2" min="-2" max="-2" attributes="0"/>
+                              <Component id="clubAndOrgsLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -309,7 +309,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="lblEvent2" min="-2" max="-2" attributes="0"/>
+                      <Component id="clubAndOrgsLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="518" max="32767" attributes="0"/>
                       <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -347,12 +347,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblEvent2">
+            <Component class="javax.swing.JLabel" name="clubAndOrgsLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Inter Medium" size="24" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Events"/>
+                <Property name="text" type="java.lang.String" value="Clubs And Organizations"/>
               </Properties>
             </Component>
             <Component class="test.ButtonRound" name="addEventButton1">

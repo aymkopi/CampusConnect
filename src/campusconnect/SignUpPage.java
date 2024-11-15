@@ -27,11 +27,13 @@ public class SignUpPage extends JFrame {
 
     //variables
     Connection conn = conn();
-    String firstName;
-    String lastName;
+    String fullName;
     String email;
     String userID;
     String password;
+    String userType;
+ 
+
 
     //creates new SignUpPage
     public SignUpPage() {
@@ -71,7 +73,7 @@ public class SignUpPage extends JFrame {
         showLoginPassword = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         loginButton = new test.ButtonRound();
-        userType = new test.ComboBoxRound();
+        inUserType = new test.ComboBoxRound();
         imagePlaceHolder = new test.ButtonRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -313,12 +315,12 @@ public class SignUpPage extends JFrame {
             }
         });
 
-        userType.setBorder(null);
-        userType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student", "Faculty", "Admin" }));
-        userType.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
-        userType.addActionListener(new java.awt.event.ActionListener() {
+        inUserType.setBorder(null);
+        inUserType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student", "Faculty", "Admin" }));
+        inUserType.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        inUserType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTypeActionPerformed(evt);
+                inUserTypeActionPerformed(evt);
             }
         });
 
@@ -347,7 +349,7 @@ public class SignUpPage extends JFrame {
                                     .addGroup(LogInPanelLayout.createSequentialGroup()
                                         .addComponent(inStudentIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(userType, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(inUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(showLoginPassword)
                                     .addComponent(inPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -364,15 +366,15 @@ public class SignUpPage extends JFrame {
                     .addComponent(signUpRedirectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(94, 94, 94)
                 .addGroup(LogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inUserType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inStudentIDLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(13, 13, 13)
                 .addComponent(inPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showLoginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
         );
@@ -388,6 +390,11 @@ public class SignUpPage extends JFrame {
         imagePlaceHolder.setRoundBottomRight(20);
         imagePlaceHolder.setRoundTopLeft(20);
         imagePlaceHolder.setRoundTopRight(20);
+        imagePlaceHolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imagePlaceHolderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -437,8 +444,8 @@ public class SignUpPage extends JFrame {
                     }
 
                     // Insert new user into database
-                    String signUpQuery = "INSERT INTO users (first_name, last_name, email, user_id, password) "
-                            + "VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + userID + "', '" + password + "')";
+                    String signUpQuery = "INSERT INTO users (full_name, email, user_id, password) "
+                            + "VALUES ('" + fullName + "', '" + email + "', '" + userID + "', '" + password + "')";
                     st.executeUpdate(signUpQuery);
                     JOptionPane.showMessageDialog(this, "Account created successfully!");
                     inFirstNameSignUp.setText("");
@@ -447,6 +454,9 @@ public class SignUpPage extends JFrame {
                     inStudentIDSignUp.setText("");
                     inPasswordSignUp.setText("");
                     inConfirmPasswordSignUp.setText("");
+                    
+                    signUpPanel.setVisible(false);
+                    LogInPanel.setVisible(true);
 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -464,7 +474,6 @@ public class SignUpPage extends JFrame {
             isValid = false;
         } else {
             inFirstNameSignUp.setBorder(null);
-            firstName = inFirstNameSignUp.getText();
         }
 
         if (inLastNameSignUp.getText().isEmpty()) {
@@ -472,7 +481,7 @@ public class SignUpPage extends JFrame {
             isValid = false;
         } else {
             inLastNameSignUp.setBorder(null);
-            lastName = inLastNameSignUp.getText();
+            fullName = inFirstNameSignUp.getText() + " " + inLastNameSignUp.getText();
         }
 
         if (inEmailSignUp.getText().isEmpty()) {
@@ -533,14 +542,14 @@ public class SignUpPage extends JFrame {
                     if (rs.next()) {  // If a matching student ID is found
                         JOptionPane.showMessageDialog(this, "Login Successful!");
                         //launch interface based on userType
-                        if ((userType.getSelectedItem().toString()).equals("Student")) {
+                        if ((inUserType.getSelectedItem().toString()).equals("Student")) {
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 public void run() {
                                     new CampusConnect().setVisible(true);
                                 }
                             });
-                        } else if ((userType.getSelectedItem().toString()).equals("Faculty")) {
-                            inStudentIDLogin.setPlaceHolder("Faculty ID");
+                        } else if ((inUserType.getSelectedItem().toString()).equals("Faculty")) {
+                            
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 public void run() {
                                     new CampusConnect().setVisible(true);
@@ -614,9 +623,21 @@ public class SignUpPage extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inPasswordLoginActionPerformed
 
-    private void userTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeActionPerformed
+    private void inUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inUserTypeActionPerformed
+        if ((inUserType.getSelectedItem().toString()).equals("Student")) {
+            inStudentIDLogin.setPlaceHolder("Student ID");
+        } else if ((inUserType.getSelectedItem().toString()).equals("Faculty")) {
+            inStudentIDLogin.setPlaceHolder("Faculty ID");
+        } else {
+            inStudentIDLogin.setPlaceHolder("Admin ID");
+            
+        }
+        inStudentIDLogin.update(inStudentIDLogin.getGraphics());
+    }//GEN-LAST:event_inUserTypeActionPerformed
+
+    private void imagePlaceHolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagePlaceHolderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userTypeActionPerformed
+    }//GEN-LAST:event_imagePlaceHolderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -669,6 +690,7 @@ public class SignUpPage extends JFrame {
     private test.PasswordRound inPasswordSignUp;
     private test.TextFieldRound inStudentIDLogin;
     private test.TextFieldRound inStudentIDSignUp;
+    private test.ComboBoxRound inUserType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAlreadyHaveAccount;
     private javax.swing.JLabel lblAlreadyHaveAccount1;
@@ -680,6 +702,5 @@ public class SignUpPage extends JFrame {
     private javax.swing.JCheckBox showSignUpPassword;
     private javax.swing.JPanel signUpPanel;
     private javax.swing.JButton signUpRedirectButton;
-    private test.ComboBoxRound userType;
     // End of variables declaration//GEN-END:variables
 }

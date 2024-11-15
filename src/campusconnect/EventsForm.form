@@ -29,60 +29,51 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="inFacultyInChargeForm" alignment="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="descriptionLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="431" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="locationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="timeLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="inLocationForm" alignment="0" min="-2" pref="431" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="inLocationForm" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="inEventNameForm" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
+                                  <Component id="eventNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dateLabel1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="inClubAssignedForm" min="-2" pref="198" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dateLabel2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="inFacultyAssignedForm" min="-2" pref="419" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="tertiaryAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="juniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="seniorHighAccessButton" min="-2" pref="114" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="orgClubInChargeLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="inClubInChargeForm" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="locationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inEventNameForm" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="inForWhom" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="inDateForm" min="-2" pref="189" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="inTimeForm" min="-2" pref="164" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="eventStartDate" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="inDateForm1" min="-2" pref="189" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="inTimeForm1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="facultyInChargeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="inEventStartDate" min="-2" pref="189" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="inEventStartTime" min="-2" pref="164" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="eventStartLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="eventEndLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="inEventEndDate" min="-2" pref="189" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="inEventEndTime" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,63 +83,66 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="eventStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="eventNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="eventStartLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="inEventNameForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="inDateForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="inTimeForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="inEventStartDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="inEventStartTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="dateLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inForWhom" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="inDateForm1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="inTimeForm1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="timeLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="inLocationForm" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="dateLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="inClubAssignedForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="inFacultyAssignedForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="tertiaryAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="juniorHighAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="seniorHighAccessButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="descriptionLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="inLocationForm" min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="orgClubInChargeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="inClubInChargeForm" min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="facultyInChargeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="inFacultyInChargeForm" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="eventEndLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="inEventEndDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="inEventEndTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="251" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="eventNameLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Title/Name of Event"/>
+        <Property name="text" type="java.lang.String" value="Event Name"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="eventStartDate">
+    <Component class="javax.swing.JLabel" name="eventStartLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Event Start"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -156,7 +150,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="test.ComboBoxRound" name="inClubAssignedForm">
+    <Component class="test.ComboBoxRound" name="inClubInChargeForm">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -173,16 +167,26 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inClubAssignedFormActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inClubInChargeFormActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.github.lgooddatepicker.components.DatePicker" name="inDateForm">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inTimeForm">
-    </Component>
-    <Component class="javax.swing.JLabel" name="dateLabel1">
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="inEventStartDate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Org/Club Assigned"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inEventStartTime">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="orgClubInChargeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Org/Club In-Charge"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="14" style="0"/>
         </Property>
@@ -193,7 +197,7 @@
         <Property name="text" type="java.lang.String" value="Location"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter Medium" size="14" style="0"/>
+          <Font name="Inter Medium" size="15" style="0"/>
         </Property>
       </Properties>
     </Component>
@@ -203,7 +207,7 @@
           <Border info="null"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter" size="12" style="0"/>
+          <Font name="Inter" size="14" style="0"/>
         </Property>
         <Property name="placeHolder" type="java.lang.String" value="Enter location"/>
         <Property name="roundBottomLeft" type="int" value="8"/>
@@ -215,15 +219,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inLocationFormActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="dateLabel2">
+    <Component class="javax.swing.JLabel" name="facultyInChargeLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Faculty Assigned"/>
+        <Property name="text" type="java.lang.String" value="Faculty In-Charge"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="test.ComboBoxRound" name="inFacultyAssignedForm">
+    <Component class="test.ComboBoxRound" name="inFacultyInChargeForm">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -240,10 +244,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inFacultyAssignedFormActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inFacultyInChargeFormActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="descriptionLabel">
+    <Component class="javax.swing.JLabel" name="detailsLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Additional Details"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -276,40 +280,42 @@
               <Font name="Inter" size="14" style="0"/>
             </Property>
             <Property name="placeHolder" type="java.lang.String" value="(optional)"/>
-            <Property name="roundBottomLeft" type="int" value="8"/>
-            <Property name="roundBottomRight" type="int" value="8"/>
-            <Property name="roundTopLeft" type="int" value="8"/>
-            <Property name="roundTopRight" type="int" value="8"/>
+            <Property name="roundBottomLeft" type="int" value="10"/>
+            <Property name="roundBottomRight" type="int" value="10"/>
+            <Property name="roundTopLeft" type="int" value="10"/>
+            <Property name="roundTopRight" type="int" value="10"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="inForWhom">
+    <Component class="javax.swing.JLabel" name="userAcessLabel">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter Medium" size="15" style="0"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Users Access"/>
-      </Properties>
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.DatePicker" name="inDateForm1">
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inTimeForm1">
-    </Component>
-    <Component class="javax.swing.JLabel" name="dateLabel3">
-      <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Event End"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="timeLabel3">
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="inEventEndDate">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter Medium" size="14" style="0"/>
+          <Font name="Inter" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="To:"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inEventEndTime">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="eventEndLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Event End"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter Medium" size="15" style="0"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="test.TextFieldRound" name="inEventNameForm">
@@ -318,13 +324,13 @@
           <Border info="null"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter" size="12" style="0"/>
+          <Font name="Inter" size="14" style="0"/>
         </Property>
         <Property name="placeHolder" type="java.lang.String" value="Enter event name"/>
-        <Property name="roundBottomLeft" type="int" value="8"/>
-        <Property name="roundBottomRight" type="int" value="8"/>
-        <Property name="roundTopLeft" type="int" value="8"/>
-        <Property name="roundTopRight" type="int" value="8"/>
+        <Property name="roundBottomLeft" type="int" value="10"/>
+        <Property name="roundBottomRight" type="int" value="10"/>
+        <Property name="roundTopLeft" type="int" value="10"/>
+        <Property name="roundTopRight" type="int" value="10"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inEventNameFormActionPerformed"/>
@@ -344,10 +350,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="lblEvent" min="-2" max="-2" attributes="0"/>
+                  <Component id="eventLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="createEventSubmitButton" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="createEventSubmitButton" min="-2" pref="83" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -355,17 +361,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblEvent" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="createEventSubmitButton" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="eventLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="createEventSubmitButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblEvent">
+        <Component class="javax.swing.JLabel" name="eventLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Create Event"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -383,7 +389,7 @@
               <Border info="null"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica" size="12" style="1"/>
+              <Font name="Inter Medium" size="14" style="0"/>
             </Property>
             <Property name="roundBottomLeft" type="int" value="8"/>
             <Property name="roundBottomRight" type="int" value="8"/>
@@ -396,5 +402,55 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="test.ToggleButtonRound" name="tertiaryAccessButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tertiary"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="14" style="0"/>
+        </Property>
+        <Property name="roundBottomLeft" type="int" value="10"/>
+        <Property name="roundBottomRight" type="int" value="10"/>
+        <Property name="roundTopLeft" type="int" value="10"/>
+        <Property name="roundTopRight" type="int" value="10"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tertiaryAccessButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="test.ToggleButtonRound" name="juniorHighAccessButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Junior High"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="14" style="0"/>
+        </Property>
+        <Property name="roundBottomLeft" type="int" value="10"/>
+        <Property name="roundBottomRight" type="int" value="10"/>
+        <Property name="roundTopLeft" type="int" value="10"/>
+        <Property name="roundTopRight" type="int" value="10"/>
+      </Properties>
+    </Component>
+    <Component class="test.ToggleButtonRound" name="seniorHighAccessButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Senior High"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="14" style="0"/>
+        </Property>
+        <Property name="roundBottomLeft" type="int" value="10"/>
+        <Property name="roundBottomRight" type="int" value="10"/>
+        <Property name="roundTopLeft" type="int" value="10"/>
+        <Property name="roundTopRight" type="int" value="10"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

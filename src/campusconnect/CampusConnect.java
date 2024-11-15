@@ -9,15 +9,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class CampusConnect extends JFrame {
+
     Connection conn = conn();
-    DefaultTableModel model = new DefaultTableModel(new String[]{"Event Name", "Date", "Time", "Location", "For Whom?", "Club Assigned", "Faculty Assigned","Details"}, 0);
+    DefaultTableModel model = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Start Time", "End Time", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
 
     public CampusConnect() {
         initComponents();
         launchEventData();
-
     }
-   
+
     //establish connection
     public static Connection conn() {
         try {
@@ -31,7 +31,7 @@ public class CampusConnect extends JFrame {
         }
         return null;
     }
-    
+
     public void launchEventData() {
         try {
             Statement st = conn.createStatement();
@@ -39,21 +39,23 @@ public class CampusConnect extends JFrame {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                String ev = rs.getString("event_name");
-                String dt = rs.getString("date");
-                String tm = rs.getString("time");
+                String evn = rs.getString("event_name");
+                String fdt = rs.getString("start_date");
+                String tdt = rs.getString("end_date");
+                String ftm = rs.getString("start_time");
+                String ttm = rs.getString("end_time");
                 String lc = rs.getString("location");
-                String fw = rs.getString("for_whom");
+                String fw = rs.getString("user_access");
                 String ca = rs.getString("club_assigned");
                 String fa = rs.getString("faculty_assigned");
                 String de = rs.getString("details");
-                model.addRow(new Object[]{ev, dt, tm, lc, fw, ca, fa, de}); 
+                model.addRow(new Object[]{evn, fdt, tdt, ftm, ttm, lc, fw, ca, fa, de});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
- 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,7 +72,7 @@ public class CampusConnect extends JFrame {
         ClubsAndOrgsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         eventsTable1 = new javax.swing.JTable();
-        lblEvent2 = new javax.swing.JLabel();
+        clubAndOrgsLabel = new javax.swing.JLabel();
         addEventButton1 = new test.ButtonRound();
         EventsPanel = new javax.swing.JPanel();
         lblEvent = new javax.swing.JLabel();
@@ -241,8 +243,8 @@ public class CampusConnect extends JFrame {
         eventsTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(eventsTable1);
 
-        lblEvent2.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
-        lblEvent2.setText("Events");
+        clubAndOrgsLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
+        clubAndOrgsLabel.setText("Clubs And Organizations");
 
         addEventButton1.setBackground(new java.awt.Color(255, 255, 204));
         addEventButton1.setBorder(null);
@@ -269,7 +271,7 @@ public class CampusConnect extends JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(ClubsAndOrgsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ClubsAndOrgsPanelLayout.createSequentialGroup()
-                        .addComponent(lblEvent2)
+                        .addComponent(clubAndOrgsLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClubsAndOrgsPanelLayout.createSequentialGroup()
                         .addGroup(ClubsAndOrgsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +285,7 @@ public class CampusConnect extends JFrame {
             ClubsAndOrgsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ClubsAndOrgsPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lblEvent2)
+                .addComponent(clubAndOrgsLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
@@ -431,6 +433,7 @@ public class CampusConnect extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EventsForm().setVisible(true);
+
             }
         });
     }//GEN-LAST:event_addEventButtonActionPerformed
@@ -470,7 +473,7 @@ public class CampusConnect extends JFrame {
             java.util.logging.Logger.getLogger(CampusConnect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CampusConnect().setVisible(true);
@@ -486,6 +489,7 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPanel UsersPanel;
     private test.ButtonRound addEventButton;
     private test.ButtonRound addEventButton1;
+    private javax.swing.JLabel clubAndOrgsLabel;
     private test.ButtonRound clubsAndOrgsButton;
     private test.ButtonRound dashboardButton;
     private test.ButtonRound eventsButton;
@@ -496,7 +500,6 @@ public class CampusConnect extends JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel lblEvent1;
-    private javax.swing.JLabel lblEvent2;
     private javax.swing.JPanel mainDashboard;
     private test.PanelRound navigationBar;
     private javax.swing.JButton updateButton;

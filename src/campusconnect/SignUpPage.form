@@ -362,7 +362,7 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="inStudentIDLogin" min="-2" pref="211" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="userType" min="-2" pref="135" max="-2" attributes="0"/>
+                                              <Component id="inUserType" min="-2" pref="135" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="showLoginPassword" min="-2" max="-2" attributes="0"/>
                                           <Component id="inPasswordLogin" min="-2" pref="358" max="-2" attributes="0"/>
@@ -388,16 +388,16 @@
                       </Group>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="userType" max="32767" attributes="0"/>
+                          <Component id="inUserType" max="32767" attributes="0"/>
                           <Component id="inStudentIDLogin" pref="37" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Component id="inPasswordLogin" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="showLoginPassword" pref="23" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="21" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                       <Component id="loginButton" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
@@ -518,7 +518,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="test.ComboBoxRound" name="userType">
+            <Component class="test.ComboBoxRound" name="inUserType">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -535,7 +535,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userTypeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inUserTypeActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -558,6 +558,9 @@
         <Property name="roundTopLeft" type="int" value="20"/>
         <Property name="roundTopRight" type="int" value="20"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imagePlaceHolderActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

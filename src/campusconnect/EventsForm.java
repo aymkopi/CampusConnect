@@ -41,8 +41,7 @@ class EventsForm extends javax.swing.JFrame {
     String facultyInCharge;
     String details;
     int tertiaryAccess;
-    int juniorHighAccess;
-    int seniorHighAccess;
+    int secondaryAccess;
 
     public EventsForm() {
         initComponents();
@@ -104,8 +103,7 @@ class EventsForm extends javax.swing.JFrame {
         eventLabel = new javax.swing.JLabel();
         createEventSubmitButton = new test.ButtonRound();
         tertiaryAccessButton = new test.ToggleButtonRound();
-        juniorHighAccessButton = new test.ToggleButtonRound();
-        seniorHighAccessButton = new test.ToggleButtonRound();
+        secondaryAccessButton = new test.ToggleButtonRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -258,21 +256,18 @@ class EventsForm extends javax.swing.JFrame {
             }
         });
 
-        juniorHighAccessButton.setText("Junior High");
-        juniorHighAccessButton.setBorder(null);
-        juniorHighAccessButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        juniorHighAccessButton.setRoundBottomLeft(10);
-        juniorHighAccessButton.setRoundBottomRight(10);
-        juniorHighAccessButton.setRoundTopLeft(10);
-        juniorHighAccessButton.setRoundTopRight(10);
-
-        seniorHighAccessButton.setText("Senior High");
-        seniorHighAccessButton.setBorder(null);
-        seniorHighAccessButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        seniorHighAccessButton.setRoundBottomLeft(10);
-        seniorHighAccessButton.setRoundBottomRight(10);
-        seniorHighAccessButton.setRoundTopLeft(10);
-        seniorHighAccessButton.setRoundTopRight(10);
+        secondaryAccessButton.setText("Secondary");
+        secondaryAccessButton.setBorder(null);
+        secondaryAccessButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        secondaryAccessButton.setRoundBottomLeft(10);
+        secondaryAccessButton.setRoundBottomRight(10);
+        secondaryAccessButton.setRoundTopLeft(10);
+        secondaryAccessButton.setRoundTopRight(10);
+        secondaryAccessButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secondaryAccessButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,11 +292,9 @@ class EventsForm extends javax.swing.JFrame {
                             .addComponent(locationLabel)))
                     .addComponent(facultyInChargeLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(juniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(secondaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(userAcessLabel))
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,9 +332,8 @@ class EventsForm extends javax.swing.JFrame {
                         .addComponent(userAcessLabel)
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(juniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seniorHighAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(secondaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addComponent(locationLabel)
                         .addGap(11, 11, 11)
@@ -394,8 +386,8 @@ class EventsForm extends javax.swing.JFrame {
                     return;  // Exit the method to avoid duplicate insertion
                 }
 
-                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details, access_tertiary, access_juniorhigh, access_seniorhigh) "
-                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "', '" + startTime + "', '" + endTime + "', '" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "', '" + tertiaryAccess + "', '" + juniorHighAccess + "', '" + seniorHighAccess + "')";
+                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details) "
+                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "', '" + startTime + "', '" + endTime + "', '" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "')";
                 st.executeUpdate(addEventQuery);
 
                 JOptionPane.showMessageDialog(this, "Event created successfully!");
@@ -475,29 +467,15 @@ class EventsForm extends javax.swing.JFrame {
         if (tertiaryAccessButton.isSelected()) {
             tertiaryAccess = 1;
             userAccess = "Tertiary";
-
-        } else {
-            tertiaryAccess = 0;
-        }
-        if (juniorHighAccessButton.isSelected()) {
-            juniorHighAccess = 1;
+        }      
+        
+        if (secondaryAccessButton.isSelected()) {
+            secondaryAccess = 1;
             if (userAccess.isEmpty()) {
-                userAccess = "Junior High";
+                userAccess = "Secondary";
             } else {
-                userAccess += ", Junior High";
+                userAccess += ", Secondary";
             }
-        } else {
-            juniorHighAccess = 0;
-        }
-        if (seniorHighAccessButton.isSelected()) {
-            seniorHighAccess = 1;
-            if (userAccess.isEmpty()) {
-                userAccess = "Senior High";
-            } else {
-                userAccess += ", Senior High";
-            }
-        } else {
-            seniorHighAccess = 0;
         }
 
         return isValid;
@@ -520,6 +498,10 @@ class EventsForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tertiaryAccessButtonActionPerformed
 
+    private void secondaryAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondaryAccessButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secondaryAccessButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound createEventSubmitButton;
     private javax.swing.JLabel detailsLabel;
@@ -539,10 +521,9 @@ class EventsForm extends javax.swing.JFrame {
     private test.TextFieldRound inLocationForm;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private test.ToggleButtonRound juniorHighAccessButton;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JLabel orgClubInChargeLabel;
-    private test.ToggleButtonRound seniorHighAccessButton;
+    private test.ToggleButtonRound secondaryAccessButton;
     private test.ToggleButtonRound tertiaryAccessButton;
     private javax.swing.JLabel userAcessLabel;
     // End of variables declaration//GEN-END:variables

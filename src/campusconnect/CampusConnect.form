@@ -58,16 +58,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dashboardButton" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                      <Component id="clubsAndOrgsButton" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                      <Component id="eventsButton" min="-2" pref="204" max="-2" attributes="0"/>
-                      <Component id="usersButton" min="-2" pref="204" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="logoPlaceHolder" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="dashboardButton" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="clubsAndOrgsButton" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="eventsButton" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="usersButton" min="-2" pref="204" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
               </Group>
@@ -76,9 +77,9 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="logoPlaceHolder" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Component id="dashboardButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="clubsAndOrgsButton" min="-2" pref="33" max="-2" attributes="0"/>
@@ -124,7 +125,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dashboardButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="logoPlaceHolder">
           <Properties>
             <Property name="text" type="java.lang.String" value="logo"/>
           </Properties>
@@ -296,7 +297,7 @@
                                   <Component id="jScrollPane2" alignment="0" pref="717" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="addEventButton1" min="-2" pref="56" max="-2" attributes="0"/>
+                                      <Component id="addOrgsButton" min="-2" pref="56" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -313,7 +314,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="518" max="32767" attributes="0"/>
                       <EmptySpace pref="27" max="32767" attributes="0"/>
-                      <Component id="addEventButton1" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="addOrgsButton" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -330,13 +331,13 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="eventsTable1">
+                <Component class="javax.swing.JTable" name="orgsTable">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Inter Display" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="model" type="code"/>
+                      <Connection code="orgsModel" type="code"/>
                     </Property>
                     <Property name="rowHeight" type="int" value="30"/>
                     <Property name="showHorizontalLines" type="boolean" value="false"/>
@@ -355,7 +356,7 @@
                 <Property name="text" type="java.lang.String" value="Clubs And Organizations"/>
               </Properties>
             </Component>
-            <Component class="test.ButtonRound" name="addEventButton1">
+            <Component class="test.ButtonRound" name="addOrgsButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="ff" type="rgb"/>
@@ -378,7 +379,7 @@
                 <Property name="roundTopRight" type="int" value="8"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addEventButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addOrgsButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -489,7 +490,7 @@
                       <Font name="Inter Display" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="model" type="code"/>
+                      <Connection code="eventsModel" type="code"/>
                     </Property>
                     <Property name="rowHeight" type="int" value="30"/>
                     <Property name="showHorizontalLines" type="boolean" value="false"/>
@@ -571,13 +572,13 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="eventsTable2">
+                <Component class="javax.swing.JTable" name="usersTable">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Inter Display" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="model" type="code"/>
+                      <Connection code="usersModel" type="code"/>
                     </Property>
                     <Property name="rowHeight" type="int" value="30"/>
                     <Property name="showHorizontalLines" type="boolean" value="false"/>

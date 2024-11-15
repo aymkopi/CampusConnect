@@ -120,7 +120,7 @@
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="eventLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="createEventSubmitButton" min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="addUserSubmitButton" min="-2" pref="83" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -131,7 +131,7 @@
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="eventLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="createEventSubmitButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="addUserSubmitButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
@@ -147,7 +147,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="test.ButtonRound" name="createEventSubmitButton">
+        <Component class="test.ButtonRound" name="addUserSubmitButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirm"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -165,7 +165,7 @@
             <Property name="roundTopRight" type="int" value="8"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createEventSubmitButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUserSubmitButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -245,6 +245,9 @@
         <Property name="roundTopLeft" type="int" value="10"/>
         <Property name="roundTopRight" type="int" value="10"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="facultyTypeButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="studentLevelLabel">
       <Properties>

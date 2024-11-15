@@ -1,23 +1,22 @@
 package campusconnect;
 
-import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
-import com.github.lgooddatepicker.optionalusertools.TimeChangeListener;
-import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-import com.github.lgooddatepicker.zinternaltools.TimeChangeEvent;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
-import java.sql.*;
+
 
 class UsersForm extends javax.swing.JFrame {
     
-    
-    String fullName;
-    int userType;
-    int userLevel;
+    String userName;
+    String userType;;
+    String studentLevel;
+    String userID;
+    String password;
     
 
     //establish connection
@@ -51,7 +50,7 @@ class UsersForm extends javax.swing.JFrame {
         studentLevelButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         eventLabel = new javax.swing.JLabel();
-        createEventSubmitButton = new test.ButtonRound();
+        addUserSubmitButton = new test.ButtonRound();
         userNameLabel = new javax.swing.JLabel();
         inUserName = new test.TextFieldRound();
         userTypeLabel = new javax.swing.JLabel();
@@ -75,17 +74,17 @@ class UsersForm extends javax.swing.JFrame {
         eventLabel.setText("Add User");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
 
-        createEventSubmitButton.setText("Confirm");
-        createEventSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
-        createEventSubmitButton.setBorder(null);
-        createEventSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        createEventSubmitButton.setRoundBottomLeft(8);
-        createEventSubmitButton.setRoundBottomRight(8);
-        createEventSubmitButton.setRoundTopLeft(8);
-        createEventSubmitButton.setRoundTopRight(8);
-        createEventSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+        addUserSubmitButton.setText("Confirm");
+        addUserSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
+        addUserSubmitButton.setBorder(null);
+        addUserSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        addUserSubmitButton.setRoundBottomLeft(8);
+        addUserSubmitButton.setRoundBottomRight(8);
+        addUserSubmitButton.setRoundTopLeft(8);
+        addUserSubmitButton.setRoundTopRight(8);
+        addUserSubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createEventSubmitButtonActionPerformed(evt);
+                addUserSubmitButtonActionPerformed(evt);
             }
         });
 
@@ -97,7 +96,7 @@ class UsersForm extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(eventLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createEventSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,7 +105,7 @@ class UsersForm extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createEventSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -154,6 +153,11 @@ class UsersForm extends javax.swing.JFrame {
         facultyTypeButton.setRoundBottomRight(10);
         facultyTypeButton.setRoundTopLeft(10);
         facultyTypeButton.setRoundTopRight(10);
+        facultyTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facultyTypeButtonActionPerformed(evt);
+            }
+        });
 
         studentLevelLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         studentLevelLabel.setText("Student Level");
@@ -283,11 +287,73 @@ class UsersForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
-        
-   
+    private void addUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserSubmitButtonActionPerformed
+        if (validateInputs()) {
+            try {
+                Statement st = conn.createStatement();
+                String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
+                var rs = st.executeQuery(checkUserExist);
 
-    }//GEN-LAST:event_createEventSubmitButtonActionPerformed
+                if (rs.next()) {  // If a matching student ID is found
+                    JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");
+                    return;  // Exit the method to avoid duplicate insertion
+                }
+
+                String addUserQuery = "INSERT INTO users (user_name, user_type, student_type, user_id, password) "
+                        + "VALUES ('" + userName + "', '" + userType + "', '" + studentLevel + "', '" + userID + "', '" + password + "')";
+                st.executeUpdate(addUserQuery);
+
+                JOptionPane.showMessageDialog(this, "Event created successfully!");
+                dispose();
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            }
+        }
+    }
+
+    private boolean validateInputs() {
+        boolean isValid = true;
+        if (inUserName.getText().isEmpty()) {
+            inUserName.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inUserName.setBorder(null);
+            userName = inUserName.getText().toUpperCase();
+        }
+        if (inUserID.getText().isEmpty()) {
+            inUserID.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inUserID.setBorder(null);
+            userID = inUserID.getText();
+        }
+        if (inPassword.getText().isEmpty()) {
+            inPassword.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inPassword.setBorder(null);
+            password = inPassword.getText();
+        }
+        //if faculty, sets boolean on sql of is_faculty to faculty, else user is Student
+        if (facultyTypeButton.isSelected()) {
+            
+            
+            userType = "Faculty";
+        } else if (studentTypeButton.isSelected()){
+            userType = "Student";
+        }
+                
+        //if, tertiary, sets boolean on sql of 
+        if (tertiaryLevelButton.isSelected()){
+            studentLevel = "Tertiary";
+        } else if (secondaryLevelButton.isSelected()) {
+            studentLevel = "Secondary";
+        }
+        
+        return isValid;
+
+    }//GEN-LAST:event_addUserSubmitButtonActionPerformed
 
     private void inUserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inUserIDActionPerformed
         // TODO add your handling code here:
@@ -309,8 +375,12 @@ class UsersForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tertiaryLevelButtonActionPerformed
 
+    private void facultyTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyTypeButtonActionPerformed
+        
+    }//GEN-LAST:event_facultyTypeButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private test.ButtonRound createEventSubmitButton;
+    private test.ButtonRound addUserSubmitButton;
     private javax.swing.JLabel eventLabel;
     private test.ToggleButtonRound facultyTypeButton;
     private test.TextFieldRound inPassword;

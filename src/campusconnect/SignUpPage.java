@@ -27,7 +27,7 @@ public class SignUpPage extends JFrame {
 
     //variables
     Connection conn = conn();
-    String fullName;
+    String userName;
     String email;
     String userID;
     String password;
@@ -58,12 +58,12 @@ public class SignUpPage extends JFrame {
         loginRedirectButton = new javax.swing.JButton();
         inFirstNameSignUp = new test.TextFieldRound();
         inLastNameSignUp = new test.TextFieldRound();
-        inEmailSignUp = new test.TextFieldRound();
         inStudentIDSignUp = new test.TextFieldRound();
         inPasswordSignUp = new test.PasswordRound();
         inConfirmPasswordSignUp = new test.PasswordRound();
         showSignUpPassword = new javax.swing.JCheckBox();
         createAccountButton = new test.ButtonRound();
+        inUserType1 = new test.ComboBoxRound();
         LogInPanel = new javax.swing.JPanel();
         lblWelcomeBack = new javax.swing.JLabel();
         lblAlreadyHaveAccount1 = new javax.swing.JLabel();
@@ -123,15 +123,6 @@ public class SignUpPage extends JFrame {
         inLastNameSignUp.setRoundTopLeft(8);
         inLastNameSignUp.setRoundTopRight(8);
 
-        inEmailSignUp.setBorder(null);
-        inEmailSignUp.setToolTipText("");
-        inEmailSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        inEmailSignUp.setPlaceHolder("STI Email Account");
-        inEmailSignUp.setRoundBottomLeft(8);
-        inEmailSignUp.setRoundBottomRight(8);
-        inEmailSignUp.setRoundTopLeft(8);
-        inEmailSignUp.setRoundTopRight(8);
-
         inStudentIDSignUp.setBorder(null);
         inStudentIDSignUp.setToolTipText("");
         inStudentIDSignUp.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
@@ -187,6 +178,10 @@ public class SignUpPage extends JFrame {
             }
         });
 
+        inUserType1.setBorder(null);
+        inUserType1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student", "Faculty" }));
+        inUserType1.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout signUpPanelLayout = new javax.swing.GroupLayout(signUpPanel);
         signUpPanel.setLayout(signUpPanelLayout);
         signUpPanelLayout.setHorizontalGroup(
@@ -196,23 +191,23 @@ public class SignUpPage extends JFrame {
                 .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(signUpPanelLayout.createSequentialGroup()
-                            .addComponent(inEmailSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(inStudentIDSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(showSignUpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inConfirmPasswordSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inPasswordSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(signUpPanelLayout.createSequentialGroup()
+                                .addComponent(lblAlreadyHaveAccount)
+                                .addGap(0, 0, 0)
+                                .addComponent(loginRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(signUpPanelLayout.createSequentialGroup()
                                 .addComponent(inFirstNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(inLastNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(signUpPanelLayout.createSequentialGroup()
-                                .addComponent(lblAlreadyHaveAccount)
-                                .addGap(0, 0, 0)
-                                .addComponent(loginRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(showSignUpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(inStudentIDSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inUserType1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         signUpPanelLayout.setVerticalGroup(
@@ -224,15 +219,15 @@ public class SignUpPage extends JFrame {
                 .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAlreadyHaveAccount)
                     .addComponent(loginRedirectButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inFirstNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inLastNameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inStudentIDSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inEmailSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inUserType1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inStudentIDSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
                 .addComponent(inPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inConfirmPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -422,114 +417,6 @@ public class SignUpPage extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginRedirectButtonActionPerformed
-        //show login panel
-        LogInPanel.setVisible(true);
-        signUpPanel.setVisible(false);
-
-    }//GEN-LAST:event_loginRedirectButtonActionPerformed
-
-    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
-        if (validateInputs()) {
-            //database data insertion
-            if (conn != null) {
-                try {
-                    Statement st = conn.createStatement();
-                    String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
-                    var rs = st.executeQuery(checkUserExist);
-
-                    if (rs.next()) {  // If a matching student ID is found
-                        JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");
-                        return;  // Exit the method to avoid duplicate insertion
-                    }
-
-                    // Insert new user into database
-                    String signUpQuery = "INSERT INTO users (full_name, email, user_id, password) "
-                            + "VALUES ('" + fullName + "', '" + email + "', '" + userID + "', '" + password + "')";
-                    st.executeUpdate(signUpQuery);
-                    JOptionPane.showMessageDialog(this, "Account created successfully!");
-                    inFirstNameSignUp.setText("");
-                    inLastNameSignUp.setText("");
-                    inEmailSignUp.setText("");
-                    inStudentIDSignUp.setText("");
-                    inPasswordSignUp.setText("");
-                    inConfirmPasswordSignUp.setText("");
-                    
-                    signUpPanel.setVisible(false);
-                    LogInPanel.setVisible(true);
-
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-                }
-            }
-        }
-    }
-
-    //checks if all fields met conditions; return boolean
-    private boolean validateInputs() {
-        boolean isValid = true;
-
-        if (inFirstNameSignUp.getText().isEmpty()) {
-            inFirstNameSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-        } else {
-            inFirstNameSignUp.setBorder(null);
-        }
-
-        if (inLastNameSignUp.getText().isEmpty()) {
-            inLastNameSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-        } else {
-            inLastNameSignUp.setBorder(null);
-            fullName = inFirstNameSignUp.getText() + " " + inLastNameSignUp.getText();
-        }
-
-        if (inEmailSignUp.getText().isEmpty()) {
-            inEmailSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-        } else {
-            inEmailSignUp.setBorder(null);
-            email = inEmailSignUp.getText();
-        }
-
-        if (inStudentIDSignUp.getText().isEmpty() || inStudentIDSignUp.getText().length() != 11) {
-            inStudentIDSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-
-        } else {
-            inStudentIDSignUp.setBorder(null);
-            userID = inStudentIDSignUp.getText();
-        }
-
-        if (inPasswordSignUp.getText().isEmpty()) {
-            inPasswordSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-        } else {
-            inPasswordSignUp.setBorder(null);
-        }
-
-        if (inConfirmPasswordSignUp.getText().isEmpty() || !Arrays.equals(inPasswordSignUp.getPassword(), inConfirmPasswordSignUp.getPassword())) {
-            inConfirmPasswordSignUp.setBorder(new LineBorder(Color.red, 1));
-            isValid = false;
-        } else {
-            inConfirmPasswordSignUp.setBorder(null);
-            password = new String(inConfirmPasswordSignUp.getPassword());
-        }
-
-        return isValid;
-    }//GEN-LAST:event_createAccountButtonActionPerformed
-
-    private void showSignUpPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showSignUpPasswordActionPerformed
-        //mask and unmask password
-        if (showSignUpPassword.isSelected()) {
-            inPasswordSignUp.setEchoChar((char) 0);
-            inConfirmPasswordSignUp.setEchoChar((char) 0);
-        } else {
-            inPasswordSignUp.setEchoChar('\u25cf');
-            inConfirmPasswordSignUp.setEchoChar('\u25cf');
-        }
-    }//GEN-LAST:event_showSignUpPasswordActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if (userVerify()) {
             //database insertion
@@ -639,6 +526,104 @@ public class SignUpPage extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_imagePlaceHolderActionPerformed
 
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        if (validateInputs()) {
+            //database data insertion
+            if (conn != null) {
+                try {
+                    Statement st = conn.createStatement();
+                    String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
+                    var rs = st.executeQuery(checkUserExist);
+
+                    if (rs.next()) {  // If a matching student ID is found
+                        JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");
+                        return;  // Exit the method to avoid duplicate insertion
+                    }
+
+                    // Insert new user into database
+                    String signUpQuery = "INSERT INTO users (user_name, email, user_id, password) "
+                    + "VALUES ('" + userName + "', '" + email + "', '" + userID + "', '" + password + "')";
+                    st.executeUpdate(signUpQuery);
+                    JOptionPane.showMessageDialog(this, "Account created successfully!");
+                    inFirstNameSignUp.setText("");
+                    inLastNameSignUp.setText("");
+                    inStudentIDSignUp.setText("");
+                    inPasswordSignUp.setText("");
+                    inConfirmPasswordSignUp.setText("");
+
+                    signUpPanel.setVisible(false);
+                    LogInPanel.setVisible(true);
+
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+                }
+            }
+        }
+        }
+
+        //checks if all fields met conditions; return boolean
+        private boolean validateInputs() {
+            boolean isValid = true;
+
+            if (inFirstNameSignUp.getText().isEmpty()) {
+                inFirstNameSignUp.setBorder(new LineBorder(Color.red, 1));
+                isValid = false;
+            } else {
+                inFirstNameSignUp.setBorder(null);
+            }
+
+            if (inLastNameSignUp.getText().isEmpty()) {
+                inLastNameSignUp.setBorder(new LineBorder(Color.red, 1));
+                isValid = false;
+            } else {
+                inLastNameSignUp.setBorder(null);
+                userName = inFirstNameSignUp.getText() + " " + inLastNameSignUp.getText();
+            }
+
+            if (inStudentIDSignUp.getText().isEmpty() || inStudentIDSignUp.getText().length() != 11) {
+                inStudentIDSignUp.setBorder(new LineBorder(Color.red, 1));
+                isValid = false;
+
+            } else {
+                inStudentIDSignUp.setBorder(null);
+                userID = inStudentIDSignUp.getText();
+            }
+
+            if (inPasswordSignUp.getText().isEmpty()) {
+                inPasswordSignUp.setBorder(new LineBorder(Color.red, 1));
+                isValid = false;
+            } else {
+                inPasswordSignUp.setBorder(null);
+            }
+
+            if (inConfirmPasswordSignUp.getText().isEmpty() || !Arrays.equals(inPasswordSignUp.getPassword(), inConfirmPasswordSignUp.getPassword())) {
+                inConfirmPasswordSignUp.setBorder(new LineBorder(Color.red, 1));
+                isValid = false;
+            } else {
+                inConfirmPasswordSignUp.setBorder(null);
+                password = new String(inConfirmPasswordSignUp.getPassword());
+            }
+
+            return isValid;
+    }//GEN-LAST:event_createAccountButtonActionPerformed
+
+    private void showSignUpPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showSignUpPasswordActionPerformed
+        //mask and unmask password
+        if (showSignUpPassword.isSelected()) {
+            inPasswordSignUp.setEchoChar((char) 0);
+            inConfirmPasswordSignUp.setEchoChar((char) 0);
+        } else {
+            inPasswordSignUp.setEchoChar('\u25cf');
+            inConfirmPasswordSignUp.setEchoChar('\u25cf');
+        }
+    }//GEN-LAST:event_showSignUpPasswordActionPerformed
+
+    private void loginRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginRedirectButtonActionPerformed
+        //show login panel
+        LogInPanel.setVisible(true);
+        signUpPanel.setVisible(false);
+    }//GEN-LAST:event_loginRedirectButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -683,7 +668,6 @@ public class SignUpPage extends JFrame {
     private test.ButtonRound createAccountButton;
     private test.ButtonRound imagePlaceHolder;
     private test.PasswordRound inConfirmPasswordSignUp;
-    private test.TextFieldRound inEmailSignUp;
     private test.TextFieldRound inFirstNameSignUp;
     private test.TextFieldRound inLastNameSignUp;
     private test.PasswordRound inPasswordLogin;
@@ -691,6 +675,7 @@ public class SignUpPage extends JFrame {
     private test.TextFieldRound inStudentIDLogin;
     private test.TextFieldRound inStudentIDSignUp;
     private test.ComboBoxRound inUserType;
+    private test.ComboBoxRound inUserType1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAlreadyHaveAccount;
     private javax.swing.JLabel lblAlreadyHaveAccount1;

@@ -87,27 +87,27 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblCreateAccount" alignment="0" min="-2" pref="332" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="inEmailSignUp" min="-2" pref="222" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="inStudentIDSignUp" min="-2" pref="125" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="createAccountButton" alignment="1" min="-2" pref="359" max="-2" attributes="0"/>
+                              <Component id="showSignUpPassword" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="inConfirmPasswordSignUp" alignment="0" max="32767" attributes="0"/>
                                   <Component id="inPasswordSignUp" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblAlreadyHaveAccount" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                      <Component id="loginRedirectButton" min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="inFirstNameSignUp" min="-2" pref="173" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="inLastNameSignUp" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblAlreadyHaveAccount" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="loginRedirectButton" min="-2" pref="39" max="-2" attributes="0"/>
+                                      <Component id="inStudentIDSignUp" min="-2" pref="196" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="inUserType1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="createAccountButton" alignment="1" min="-2" pref="359" max="-2" attributes="0"/>
-                              <Component id="showSignUpPassword" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="53" max="32767" attributes="0"/>
@@ -124,17 +124,17 @@
                           <Component id="lblAlreadyHaveAccount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="loginRedirectButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="inFirstNameSignUp" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="inLastNameSignUp" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inStudentIDSignUp" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="inEmailSignUp" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="inUserType1" max="32767" attributes="0"/>
+                          <Component id="inStudentIDSignUp" pref="37" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="inPasswordSignUp" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="inConfirmPasswordSignUp" min="-2" pref="37" max="-2" attributes="0"/>
@@ -210,22 +210,6 @@
                   <Font name="Inter" size="12" style="0"/>
                 </Property>
                 <Property name="placeHolder" type="java.lang.String" value="Last Name"/>
-                <Property name="roundBottomLeft" type="int" value="8"/>
-                <Property name="roundBottomRight" type="int" value="8"/>
-                <Property name="roundTopLeft" type="int" value="8"/>
-                <Property name="roundTopRight" type="int" value="8"/>
-              </Properties>
-            </Component>
-            <Component class="test.TextFieldRound" name="inEmailSignUp">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Inter" size="12" style="0"/>
-                </Property>
-                <Property name="placeHolder" type="java.lang.String" value="STI Email Account"/>
                 <Property name="roundBottomLeft" type="int" value="8"/>
                 <Property name="roundBottomRight" type="int" value="8"/>
                 <Property name="roundTopLeft" type="int" value="8"/>
@@ -321,6 +305,22 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAccountButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="test.ComboBoxRound" name="inUserType1">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="Student"/>
+                    <StringItem index="1" value="Faculty"/>
+                  </StringArray>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Helvetica" size="12" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

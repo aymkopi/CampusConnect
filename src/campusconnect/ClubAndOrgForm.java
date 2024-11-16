@@ -1,6 +1,6 @@
 package campusconnect;
 
-import static campusconnect.EventsForm.conn;
+import static campusconnect.CampusConnect.conn;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 class ClubAndOrgForm extends javax.swing.JFrame {
+    
     DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
     String orgName;
     String level;
@@ -17,7 +18,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
     
     public ClubAndOrgForm() {
         initComponents(); 
-        facultyVerify();
+      
         
     }
 
@@ -207,21 +208,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
-    private void facultyVerify(){
-        try {
-            Statement st = conn().createStatement();
-            String checkIsFaculty = "SELECT full_name FROM users WHERE isFaculty = 1";
-            var rs = st.executeQuery(checkIsFaculty);
 
-            while (rs.next()) {
-                String fullName = rs.getString("full_name");
-                facultyComboBoxModel.addElement(fullName);
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        }
-    }
     
     private void createOrgSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrgSubmitButtonActionPerformed
         if (validateInputs()) {

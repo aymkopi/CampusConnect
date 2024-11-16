@@ -1,12 +1,11 @@
 package campusconnect;
 
+import static campusconnect.CampusConnect.conn;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.optionalusertools.TimeChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import com.github.lgooddatepicker.zinternaltools.TimeChangeEvent;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -14,22 +13,7 @@ import java.sql.*;
 
 class EventsForm extends javax.swing.JFrame {
 
-    //establish connection
-    public static Connection conn() {
-        try {
-            String url = "jdbc:mysql://localhost:3306/campusconnect?zeroDateTimeBehavior=CONVERT_TO_NULL";
-            String user = "justi";
-            String password = "1234";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return null;
-    }
-
-    //variables
-    Connection conn = conn();
+    //init variables
     String eventName;
     String startDate;
     String startTime;
@@ -40,8 +24,7 @@ class EventsForm extends javax.swing.JFrame {
     String clubInCharge;
     String facultyInCharge;
     String details;
-    int tertiaryAccess;
-    int secondaryAccess;
+
 
     public EventsForm() {
         initComponents();
@@ -465,12 +448,10 @@ class EventsForm extends javax.swing.JFrame {
             details = inDetailsForm.getText();
         }
         if (tertiaryAccessButton.isSelected()) {
-            tertiaryAccess = 1;
             userAccess = "Tertiary";
         }      
         
         if (secondaryAccessButton.isSelected()) {
-            secondaryAccess = 1;
             if (userAccess.isEmpty()) {
                 userAccess = "Secondary";
             } else {

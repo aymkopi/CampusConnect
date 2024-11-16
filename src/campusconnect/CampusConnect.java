@@ -37,7 +37,7 @@ public class CampusConnect extends JFrame {
     public void initTableData() {
         try {
             Statement st = conn.createStatement();
-                      
+
             //adds event data from database to eventsTable
             String selectEventsData = "SELECT * FROM events";
             ResultSet evrs = st.executeQuery(selectEventsData);
@@ -54,6 +54,8 @@ public class CampusConnect extends JFrame {
                 String fa = evrs.getString("faculty_assigned");
                 String de = evrs.getString("details");
                 eventsModel.addRow(new Object[]{evn, fdt, tdt, ftm, ttm, lc, fw, ca, fa, de});
+                
+                //add total number of members in this part
             }
 
             //adds users data from database to usersTable
@@ -69,27 +71,23 @@ public class CampusConnect extends JFrame {
 
                 usersModel.addRow(new Object[]{unm, uid, psw, uty, sty});
             }
-            
+
             //adds orgs data from database to orgsTable
             String selectOrgsData = "SELECT * FROM orgs";
             ResultSet orrs = st.executeQuery(selectOrgsData);
+            
 
             while (orrs.next()) {
-                String evn = orrs.getString("event_name");
-                String fdt = orrs.getString("start_date");
-                String tdt = orrs.getString("end_date");
-                String ftm = orrs.getString("start_time");
-                String ttm = orrs.getString("end_time");
-                String lc = orrs.getString("location");
-                String fw = orrs.getString("user_access");
-                String ca = orrs.getString("club_assigned");
-                String fa = orrs.getString("faculty_assigned");
-                String de = orrs.getString("details");
-                orgsModel.addRow(new Object[]{evn, fdt, tdt, ftm, ttm, lc, fw, ca, fa, de});
+                String orn = orrs.getString("org_name");
+                String lvl = orrs.getString("level");
+                String adv = orrs.getString("adviser");
+                String det = orrs.getString("details");
+                
+                //add total number of members in this part
+                
+                orgsModel.addRow(new Object[]{orn, lvl, adv, det});
             }
-            
-            
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }

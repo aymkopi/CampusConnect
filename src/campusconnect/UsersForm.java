@@ -1,9 +1,7 @@
 package campusconnect;
 
+import static campusconnect.CampusConnect.conn;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -12,34 +10,15 @@ import javax.swing.border.LineBorder;
 
 class UsersForm extends javax.swing.JFrame {
     
+    //variables
     String userName;
     String userType;;
     String studentLevel;
     String userID;
     String password;
     
-
-    //establish connection
-    public static Connection conn() {
-        try {
-            String url = "jdbc:mysql://localhost:3306/campusconnect?zeroDateTimeBehavior=CONVERT_TO_NULL";
-            String user = "justi";
-            String password = "1234";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return null;
-    }
-
-    //variables
-    Connection conn = conn();
-    
-
     public UsersForm() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -290,7 +269,7 @@ class UsersForm extends javax.swing.JFrame {
     private void addUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserSubmitButtonActionPerformed
         if (validateInputs()) {
             try {
-                Statement st = conn.createStatement();
+                Statement st = conn().createStatement();
                 String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
                 var rs = st.executeQuery(checkUserExist);
 

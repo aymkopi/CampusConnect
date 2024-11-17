@@ -10,8 +10,11 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import java.sql.*;
+import javax.swing.DefaultComboBoxModel;
 
 class EventsForm extends javax.swing.JFrame {
+    DefaultComboBoxModel<Object> orgsComboBoxModel = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
 
     //init variables
     String eventName;
@@ -24,11 +27,12 @@ class EventsForm extends javax.swing.JFrame {
     String clubInCharge;
     String facultyInCharge;
     String details;
-
+ 
 
     public EventsForm() {
         initComponents();
-
+        initOrgs();
+        
         // Add action listener for the date picker
         inEventStartDate.addDateChangeListener(new DateChangeListener() {
             @Override
@@ -58,6 +62,33 @@ class EventsForm extends javax.swing.JFrame {
                 timeChangedAction(event.getNewTime().toString());
             }
         });
+    }
+    
+    private void initOrgs() {
+        try {
+            Statement st = conn().createStatement();
+
+            String selectClubs = "SELECT * FROM orgs";
+            ResultSet scrs = st.executeQuery(selectClubs);
+
+            while (scrs.next()) {
+                String orn = scrs.getString("org_name");
+                orgsComboBoxModel.addElement(orn);
+
+            }
+            
+            String selectFaculty = "SELECT * FROM users WHERE user_type = 'Faculty'";
+            ResultSet sfrs = st.executeQuery(selectFaculty);
+
+            while (sfrs.next()) {
+                String fcn = sfrs.getString("user_name");
+                facultyComboBoxModel.addElement(fcn);
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -98,7 +129,7 @@ class EventsForm extends javax.swing.JFrame {
         eventStartLabel.setText("Event Start");
         eventStartLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
-        inClubInChargeForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music", "Dance", "Csc Org" }));
+        inClubInChargeForm.setModel(orgsComboBoxModel);
         inClubInChargeForm.setBorder(null);
         inClubInChargeForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         inClubInChargeForm.addActionListener(new java.awt.event.ActionListener() {
@@ -125,23 +156,13 @@ class EventsForm extends javax.swing.JFrame {
         inLocationForm.setRoundBottomRight(8);
         inLocationForm.setRoundTopLeft(8);
         inLocationForm.setRoundTopRight(8);
-        inLocationForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inLocationFormActionPerformed(evt);
-            }
-        });
 
         facultyInChargeLabel.setText("Faculty In-Charge");
         facultyInChargeLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        inFacultyInChargeForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elvis Atento", "Babylyn Ramos", "Akeem Pedrasa daddy" }));
+        inFacultyInChargeForm.setModel(facultyComboBoxModel);
         inFacultyInChargeForm.setBorder(null);
         inFacultyInChargeForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        inFacultyInChargeForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inFacultyInChargeFormActionPerformed(evt);
-            }
-        });
 
         detailsLabel.setText("Additional Details");
         detailsLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -178,11 +199,6 @@ class EventsForm extends javax.swing.JFrame {
         inEventNameForm.setRoundBottomRight(10);
         inEventNameForm.setRoundTopLeft(10);
         inEventNameForm.setRoundTopRight(10);
-        inEventNameForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inEventNameFormActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -233,11 +249,6 @@ class EventsForm extends javax.swing.JFrame {
         tertiaryAccessButton.setRoundTopLeft(10);
         tertiaryAccessButton.setRoundTopRight(10);
         tertiaryAccessButton.setToolTipText("");
-        tertiaryAccessButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tertiaryAccessButtonActionPerformed(evt);
-            }
-        });
 
         secondaryAccessButton.setText("Secondary");
         secondaryAccessButton.setBorder(null);
@@ -246,11 +257,6 @@ class EventsForm extends javax.swing.JFrame {
         secondaryAccessButton.setRoundBottomRight(10);
         secondaryAccessButton.setRoundTopLeft(10);
         secondaryAccessButton.setRoundTopRight(10);
-        secondaryAccessButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondaryAccessButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -462,26 +468,6 @@ class EventsForm extends javax.swing.JFrame {
         return isValid;
 
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed
-
-    private void inLocationFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inLocationFormActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inLocationFormActionPerformed
-
-    private void inFacultyInChargeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inFacultyInChargeFormActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inFacultyInChargeFormActionPerformed
-
-    private void inEventNameFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inEventNameFormActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inEventNameFormActionPerformed
-
-    private void tertiaryAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tertiaryAccessButtonActionPerformed
-
-    }//GEN-LAST:event_tertiaryAccessButtonActionPerformed
-
-    private void secondaryAccessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondaryAccessButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_secondaryAccessButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound createEventSubmitButton;

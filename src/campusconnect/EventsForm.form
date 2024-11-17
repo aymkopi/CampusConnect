@@ -153,12 +153,8 @@
     </Component>
     <Component class="test.ComboBoxRound" name="inClubInChargeForm">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Music"/>
-            <StringItem index="1" value="Dance"/>
-            <StringItem index="2" value="Csc Org"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="orgsComboBoxModel" type="code"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
@@ -216,9 +212,6 @@
         <Property name="roundTopLeft" type="int" value="8"/>
         <Property name="roundTopRight" type="int" value="8"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inLocationFormActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="facultyInChargeLabel">
       <Properties>
@@ -230,12 +223,8 @@
     </Component>
     <Component class="test.ComboBoxRound" name="inFacultyInChargeForm">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Elvis Atento"/>
-            <StringItem index="1" value="Babylyn Ramos"/>
-            <StringItem index="2" value="Akeem Pedrasa daddy"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="facultyComboBoxModel" type="code"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
@@ -244,9 +233,6 @@
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inFacultyInChargeFormActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="detailsLabel">
       <Properties>
@@ -333,9 +319,6 @@
         <Property name="roundTopLeft" type="int" value="10"/>
         <Property name="roundTopRight" type="int" value="10"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inEventNameFormActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
@@ -419,9 +402,6 @@
         <Property name="roundTopRight" type="int" value="10"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tertiaryAccessButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="test.ToggleButtonRound" name="secondaryAccessButton">
       <Properties>
@@ -437,9 +417,6 @@
         <Property name="roundTopLeft" type="int" value="10"/>
         <Property name="roundTopRight" type="int" value="10"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondaryAccessButtonActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -1,10 +1,12 @@
 package campusconnect;
 
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,7 +15,7 @@ public class CampusConnect extends JFrame {
     Connection conn = conn();
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
     DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Start Time", "End Time", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
-    DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User Name", "User ID", "Password", "User Type", "Student Type"}, 0);
+    DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "Password", "User Type", "Student Type"}, 0);
 
     public CampusConnect() {
         initComponents();
@@ -34,7 +36,19 @@ public class CampusConnect extends JFrame {
         return null;
     }
 
-    public void initTableData() {
+    //rightclick popup
+    private void showPopUp(MouseEvent e) {
+        if (jScrollPane1.isShowing()) {
+            popupMenu.show(jScrollPane1, e.getX(), e.getY());
+        } else if (jScrollPane2.isShowing()) {
+            popupMenu.show(jScrollPane2, e.getX(), e.getY());
+        } else if (jScrollPane3.isShowing()) {
+            popupMenu.show(jScrollPane3, e.getX(), e.getY());
+        }
+    }
+
+    //initialize table
+    private void initTableData() {
         try {
             Statement st = conn.createStatement();
 
@@ -54,7 +68,7 @@ public class CampusConnect extends JFrame {
                 String fa = evrs.getString("faculty_assigned");
                 String de = evrs.getString("details");
                 eventsModel.addRow(new Object[]{evn, fdt, tdt, ftm, ttm, lc, fw, ca, fa, de});
-                
+
                 //add total number of members in this part
             }
 
@@ -63,29 +77,28 @@ public class CampusConnect extends JFrame {
             ResultSet usrs = st.executeQuery(selectUsersData);
 
             while (usrs.next()) {
-                String unm = usrs.getString("user_name");
                 String uid = usrs.getString("user_id");
+                String unm = usrs.getString("user_name");
                 String psw = usrs.getString("password");
                 String uty = usrs.getString("user_type");
                 String sty = usrs.getString("student_type");
 
-                usersModel.addRow(new Object[]{unm, uid, psw, uty, sty});
+                usersModel.addRow(new Object[]{uid, unm, psw, uty, sty});
             }
 
             //adds orgs data from database to orgsTable
             String selectOrgsData = "SELECT * FROM orgs";
             ResultSet orrs = st.executeQuery(selectOrgsData);
-            
 
             while (orrs.next()) {
                 String orn = orrs.getString("org_name");
+                String mbc = orrs.getString("member_count");
                 String lvl = orrs.getString("level");
                 String adv = orrs.getString("adviser");
                 String det = orrs.getString("details");
-                
+
                 //add total number of members in this part
-                
-                orgsModel.addRow(new Object[]{orn, lvl, adv, det});
+                orgsModel.addRow(new Object[]{orn, mbc, lvl, adv, det});
             }
 
         } catch (SQLException e) {
@@ -97,6 +110,11 @@ public class CampusConnect extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenu = new javax.swing.JPopupMenu();
+        popupOpenButton = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        popupEditButton = new javax.swing.JMenuItem();
+        popupDeleteButton = new javax.swing.JMenuItem();
         navigationBar = new test.PanelRound();
         dashboardButton = new test.ButtonRound();
         logoPlaceHolder = new javax.swing.JLabel();
@@ -123,6 +141,33 @@ public class CampusConnect extends JFrame {
         updateButton1 = new javax.swing.JButton();
         addUsersButton = new test.ButtonRound();
         usersLabel = new javax.swing.JLabel();
+
+        popupMenu.setBorder(null);
+
+        popupOpenButton.setText("Open");
+        popupOpenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popupOpenButtonActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupOpenButton);
+        popupMenu.add(jSeparator1);
+
+        popupEditButton.setText("Edit");
+        popupEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popupEditButtonActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupEditButton);
+
+        popupDeleteButton.setText("Delete");
+        popupDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popupDeleteButtonActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupDeleteButton);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Campus Connect");
@@ -276,13 +321,21 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(DashBoardPanel, "card2");
 
+        jScrollPane2.setBorder(null);
         jScrollPane2.setAutoscrolls(true);
 
         orgsTable.setFont(new java.awt.Font("Inter Display", 0, 12)); // NOI18N
         orgsTable.setModel(orgsModel);
         orgsTable.setRowHeight(30);
-        orgsTable.setShowHorizontalLines(false);
-        orgsTable.getTableHeader().setReorderingAllowed(false);
+        orgsTable.setShowGrid(false);
+        orgsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                orgsTableMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                orgsTableMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(orgsTable);
 
         clubAndOrgsLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
@@ -418,6 +471,14 @@ public class CampusConnect extends JFrame {
         usersTable.setRowHeight(30);
         usersTable.setShowHorizontalLines(false);
         usersTable.getTableHeader().setReorderingAllowed(false);
+        usersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                usersTableMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                usersTableMouseReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(usersTable);
 
         updateButton1.setText("update");
@@ -564,6 +625,177 @@ public class CampusConnect extends JFrame {
         });
     }//GEN-LAST:event_addUsersButtonActionPerformed
 
+    private void usersTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMousePressed
+        if (evt.isPopupTrigger()) {
+            showPopUp(evt);
+        }
+    }//GEN-LAST:event_usersTableMousePressed
+
+    private void usersTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMouseReleased
+        if (evt.isPopupTrigger()) {
+            showPopUp(evt);
+        }
+    }//GEN-LAST:event_usersTableMouseReleased
+
+    private void popupEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupEditButtonActionPerformed
+
+    }//GEN-LAST:event_popupEditButtonActionPerformed
+
+    private void popupDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupDeleteButtonActionPerformed
+        int[] selectedRows;
+        JTable activeTable = null;
+
+        if (ClubsAndOrgsPanel.isVisible()) {
+            activeTable = orgsTable;
+        } else if (EventsPanel.isVisible()) {
+            activeTable = eventsTable;
+        } else if (UsersPanel.isVisible()) {
+            activeTable = usersTable;
+        }
+
+        if (activeTable != null) {
+            selectedRows = activeTable.getSelectedRows(); // Get selected rows
+
+            if (selectedRows.length > 0) {
+                int confirmDelete = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this data?", "Delete?", JOptionPane.YES_NO_OPTION);
+                if (confirmDelete == JOptionPane.YES_OPTION) {
+                    try (Connection connection = conn()) { // Auto-close connection
+                        connection.setAutoCommit(false); // Enable transaction for batch operations
+
+                        PreparedStatement archiveStmt = null;
+                        PreparedStatement deleteStmt = null;
+
+                        if (activeTable == orgsTable) {
+                            // SQL statement for organizations
+                            String archiveOrgSQL = "INSERT INTO archived_orgs (org_name, member_count, level, adviser, details) VALUES (?, ?, ?, ?, ?)";
+                            String deleteOrgSQL = "DELETE FROM orgs WHERE org_name = ?";
+                            archiveStmt = connection.prepareStatement(archiveOrgSQL);
+                            deleteStmt = connection.prepareStatement(deleteOrgSQL);
+                        } else if (activeTable == eventsTable) {
+                            // SQL statement for events
+                            String archiveEventSQL = "INSERT INTO archived_events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            String deleteEventSQL = "DELETE FROM orgs WHERE event_name = ?";
+                            archiveStmt = connection.prepareStatement(archiveEventSQL);
+                            deleteStmt = connection.prepareStatement(deleteEventSQL);
+                        } else if (activeTable == usersTable) {
+                            // SQL statement fro users
+                            String archiveUserSQL = "INSERT INTO archived_users (user_id, user_name, password, user_type, student_type) VALUES (?, ?, ?, ?, ?)";
+                            String deleteUserSQL = "DELETE FROM users WHERE user_id = ?";
+                            archiveStmt = connection.prepareStatement(archiveUserSQL);
+                            deleteStmt = connection.prepareStatement(deleteUserSQL);
+                        }
+                        // Iterate in reverse to prevent index shifting
+                        for (int i = selectedRows.length - 1; i >= 0; i--) {
+                            // Extract row data
+                            if (activeTable == orgsTable) {
+                                Object orgName = activeTable.getValueAt(selectedRows[i], 0);
+                                Object memberCount = activeTable.getValueAt(selectedRows[i], 1);
+                                Object level = activeTable.getValueAt(selectedRows[i], 2);
+                                Object adviser = activeTable.getValueAt(selectedRows[i], 3);
+                                Object details = activeTable.getValueAt(selectedRows[i], 4);
+
+                                archiveStmt.setString(1, orgName.toString());
+                                archiveStmt.setString(2, memberCount.toString());
+                                archiveStmt.setString(3, level.toString());
+                                archiveStmt.setString(4, adviser.toString());
+                                archiveStmt.setString(5, details.toString());
+
+                                deleteStmt.setString(1, orgName.toString());
+
+                            } else if (activeTable == eventsTable) {
+                                Object eventName = activeTable.getValueAt(selectedRows[i], 0);
+                                Object startDate = activeTable.getValueAt(selectedRows[i], 1);
+                                Object endDate = activeTable.getValueAt(selectedRows[i], 2);
+                                Object startTime = activeTable.getValueAt(selectedRows[i], 3);
+                                Object endTime = activeTable.getValueAt(selectedRows[i], 4);
+                                Object location = activeTable.getValueAt(selectedRows[i], 5);
+                                Object userAccess = activeTable.getValueAt(selectedRows[i], 6);
+                                Object clubAssigned = activeTable.getValueAt(selectedRows[i], 7);
+                                Object facultyAssigned = activeTable.getValueAt(selectedRows[i], 8);
+                                Object details = activeTable.getValueAt(selectedRows[i], 9);
+
+                                archiveStmt.setString(1, eventName.toString());
+                                archiveStmt.setString(2, startDate.toString());
+                                archiveStmt.setString(3, endDate.toString());
+                                archiveStmt.setString(4, startTime.toString());
+                                archiveStmt.setString(5, endTime.toString());
+                                archiveStmt.setString(6, location.toString());
+                                archiveStmt.setString(7, userAccess.toString());
+                                archiveStmt.setString(8, clubAssigned.toString());
+                                archiveStmt.setString(9, facultyAssigned.toString());
+                                archiveStmt.setString(10, details.toString());
+
+                                deleteStmt.setString(1, eventName.toString());
+
+                            } else if (activeTable == usersTable) {
+                                Object userID = usersTable.getValueAt(selectedRows[i], 0);
+                                Object userName = usersTable.getValueAt(selectedRows[i], 1);
+                                Object userPassword = usersTable.getValueAt(selectedRows[i], 2);
+                                Object userType = usersTable.getValueAt(selectedRows[i], 3);
+                                Object userStudentType = usersTable.getValueAt(selectedRows[i], 4);
+
+                                archiveStmt.setString(1, userID.toString());
+                                archiveStmt.setString(2, userName.toString());
+                                archiveStmt.setString(3, userPassword.toString());
+                                archiveStmt.setString(4, userType.toString());
+                                archiveStmt.setString(5, userStudentType.toString());
+
+                                deleteStmt.setString(1, userID.toString());
+                            }
+
+                            //Add to batch for archival
+                            archiveStmt.addBatch();
+                            deleteStmt.addBatch();
+
+                            // Remove row from table
+                            if (activeTable == orgsTable) {
+                                ((DefaultTableModel) orgsTable.getModel()).removeRow(selectedRows[i]);
+                            } else if (activeTable == eventsTable) {
+                                ((DefaultTableModel) eventsTable.getModel()).removeRow(selectedRows[i]);
+                            } else {
+                                ((DefaultTableModel) usersTable.getModel()).removeRow(selectedRows[i]);
+                            }
+
+                        }
+
+                        // Execute batch operations
+                        if (archiveStmt != null && deleteStmt != null) {
+                            archiveStmt.executeBatch();
+                            deleteStmt.executeBatch();
+                        }
+
+                        connection.commit(); // Commit transaction
+
+                        JOptionPane.showMessageDialog(null, "Selected rows have been deleted and archived successfully.");
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No rows selected for deletion.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No active table detected.");
+        }
+
+    }//GEN-LAST:event_popupDeleteButtonActionPerformed
+
+    private void orgsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orgsTableMousePressed
+        if (evt.isPopupTrigger()) {
+            showPopUp(evt);
+        }
+    }//GEN-LAST:event_orgsTableMousePressed
+
+    private void orgsTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orgsTableMouseReleased
+        if (evt.isPopupTrigger()) {
+            showPopUp(evt);
+        }
+    }//GEN-LAST:event_orgsTableMouseReleased
+
+    private void popupOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupOpenButtonActionPerformed
+
+    }//GEN-LAST:event_popupOpenButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -611,12 +843,17 @@ public class CampusConnect extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel lblEvent1;
     private javax.swing.JLabel logoPlaceHolder;
     private javax.swing.JPanel mainDashboard;
     private test.PanelRound navigationBar;
     private javax.swing.JTable orgsTable;
+    private javax.swing.JMenuItem popupDeleteButton;
+    private javax.swing.JMenuItem popupEditButton;
+    private javax.swing.JPopupMenu popupMenu;
+    private javax.swing.JMenuItem popupOpenButton;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateButton1;
     private test.ButtonRound usersButton;

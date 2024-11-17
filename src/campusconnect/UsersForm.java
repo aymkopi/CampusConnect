@@ -7,16 +7,16 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
-
 class UsersForm extends javax.swing.JFrame {
-    
+
     //variables
     String userName;
-    String userType;;
+    String userType;
+    ;
     String studentLevel;
     String userID;
     String password;
-    
+
     public UsersForm() {
         initComponents();
     }
@@ -76,7 +76,7 @@ class UsersForm extends javax.swing.JFrame {
                 .addComponent(eventLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +166,11 @@ class UsersForm extends javax.swing.JFrame {
         secondaryLevelButton.setRoundBottomRight(10);
         secondaryLevelButton.setRoundTopLeft(10);
         secondaryLevelButton.setRoundTopRight(10);
+        secondaryLevelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secondaryLevelButtonActionPerformed(evt);
+            }
+        });
 
         userIDLabel.setText("User ID");
         userIDLabel.setFocusable(false);
@@ -229,7 +234,7 @@ class UsersForm extends javax.swing.JFrame {
                         .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passwordLabel))
                     .addComponent(userIDLabel))
-                .addContainerGap(491, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +303,7 @@ class UsersForm extends javax.swing.JFrame {
             isValid = false;
         } else {
             inUserName.setBorder(null);
-            userName = inUserName.getText().toUpperCase();
+            userName = inUserName.getText();
         }
         if (inUserID.getText().isEmpty()) {
             inUserID.setBorder(new LineBorder(Color.RED, 1));
@@ -316,20 +321,19 @@ class UsersForm extends javax.swing.JFrame {
         }
         //if faculty, sets boolean on sql of is_faculty to faculty, else user is Student
         if (facultyTypeButton.isSelected()) {
-            
-            
+
             userType = "Faculty";
-        } else if (studentTypeButton.isSelected()){
+        } else if (studentTypeButton.isSelected()) {
             userType = "Student";
         }
-                
+
         //if, tertiary, sets boolean on sql of 
-        if (tertiaryLevelButton.isSelected()){
+        if (tertiaryLevelButton.isSelected()) {
             studentLevel = "Tertiary";
         } else if (secondaryLevelButton.isSelected()) {
             studentLevel = "Secondary";
         }
-        
+
         return isValid;
 
     }//GEN-LAST:event_addUserSubmitButtonActionPerformed
@@ -343,7 +347,6 @@ class UsersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_inUserNameActionPerformed
 
     private void studentTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentTypeButtonActionPerformed
-
     }//GEN-LAST:event_studentTypeButtonActionPerformed
 
     private void inPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inPasswordActionPerformed
@@ -351,12 +354,21 @@ class UsersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_inPasswordActionPerformed
 
     private void tertiaryLevelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tertiaryLevelButtonActionPerformed
-        // TODO add your handling code here:
+        if (facultyTypeButton.isSelected()) {
+            studentLevelButtonGroup.clearSelection();
+        }
     }//GEN-LAST:event_tertiaryLevelButtonActionPerformed
-
     private void facultyTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyTypeButtonActionPerformed
-        
+        if (facultyTypeButton.isSelected()) {
+            studentLevelButtonGroup.clearSelection();
+        }
     }//GEN-LAST:event_facultyTypeButtonActionPerformed
+
+    private void secondaryLevelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondaryLevelButtonActionPerformed
+        if (facultyTypeButton.isSelected()) {
+            studentLevelButtonGroup.clearSelection();
+        }
+    }//GEN-LAST:event_secondaryLevelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound addUserSubmitButton;

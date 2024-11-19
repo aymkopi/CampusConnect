@@ -55,7 +55,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         levelLabel = new javax.swing.JLabel();
         secondaryLevelButton = new test.ToggleButtonRound();
         adviserLabel = new javax.swing.JLabel();
-        comboBoxRound1 = new test.ComboBoxRound();
+        inAdviser = new test.ComboBoxRound();
         additionalDetailsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inAdditionalDetails = new test.TextAreaRound();
@@ -143,13 +143,13 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         adviserLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         adviserLabel.setText("Adviser");
 
-        comboBoxRound1.setBorder(null);
-        comboBoxRound1.setModel(facultyComboBoxModel);
-        comboBoxRound1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        comboBoxRound1.setRoundBottomLeft(10);
-        comboBoxRound1.setRoundBottomRight(10);
-        comboBoxRound1.setRoundTopLeft(10);
-        comboBoxRound1.setRoundTopRight(10);
+        inAdviser.setBorder(null);
+        inAdviser.setModel(facultyComboBoxModel);
+        inAdviser.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        inAdviser.setRoundBottomLeft(10);
+        inAdviser.setRoundBottomRight(10);
+        inAdviser.setRoundTopLeft(10);
+        inAdviser.setRoundTopRight(10);
 
         additionalDetailsLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         additionalDetailsLabel.setText("Additional Details");
@@ -184,7 +184,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                     .addComponent(additionalDetailsLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(comboBoxRound1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inAdviser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(tertiaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -209,7 +209,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(adviserLabel)
                 .addGap(11, 11, 11)
-                .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inAdviser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(additionalDetailsLabel)
                 .addGap(11, 11, 11)
@@ -262,6 +262,16 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         if (secondaryLevelButton.isSelected()) {
             level = "Secondary";
         }
+        if (inAdviser.getSelectedItem().toString().isEmpty()) {
+            inOrgClubName.setBorder(new LineBorder(Color.RED, 1));
+            isValid = false;
+        } else {
+            inOrgClubName.setBorder(null);
+            adviser = inAdviser.getSelectedItem().toString();
+        }
+        details = inAdditionalDetails.getText();
+        
+        
         return isValid;
     }//GEN-LAST:event_createOrgSubmitButtonActionPerformed
 
@@ -274,10 +284,10 @@ class ClubAndOrgForm extends javax.swing.JFrame {
     private javax.swing.JLabel additionalDetailsLabel;
     private javax.swing.JLabel adviserLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private test.ComboBoxRound comboBoxRound1;
     private javax.swing.JLabel createOrgLabel;
     private test.ButtonRound createOrgSubmitButton;
     private test.TextAreaRound inAdditionalDetails;
+    private test.ComboBoxRound inAdviser;
     private test.TextFieldRound inOrgClubName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel levelLabel;

@@ -31,9 +31,6 @@ public class SignUpPage extends JFrame {
     String email;
     String userID;
     String password;
-    String userType;
- 
-
 
     //creates new SignUpPage
     public SignUpPage() {

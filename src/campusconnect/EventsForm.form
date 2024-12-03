@@ -57,24 +57,24 @@
               </Group>
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="inEventStartDate" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="inEventStartTime" min="-2" pref="164" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" pref="371" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="inEventStartDate" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="eventStartLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="eventStartLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="eventEndLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="inEventEndDate" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="inEventEndTime" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="eventEndLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="inEventEndDate" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,18 +86,22 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="eventNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="eventStartLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="eventEndLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="inEventNameForm" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="inEventStartDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="inEventStartTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="inEventEndDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="userAcessLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="userAcessLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="detailsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tertiaryAccessButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="secondaryAccessButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
@@ -115,19 +119,7 @@
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="inFacultyInChargeForm" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="eventEndLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="inEventEndDate" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="inEventEndTime" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="detailsLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="251" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane2" min="-2" pref="333" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
@@ -168,13 +160,6 @@
       </Events>
     </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="inEventStartDate">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter" size="12" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inEventStartTime">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="12" style="0"/>
@@ -238,7 +223,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Additional Details"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter Medium" size="14" style="0"/>
+          <Font name="Inter Medium" size="15" style="0"/>
         </Property>
       </Properties>
     </Component>
@@ -284,13 +269,6 @@
       </Properties>
     </Component>
     <Component class="com.github.lgooddatepicker.components.DatePicker" name="inEventEndDate">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter" size="12" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.TimePicker" name="inEventEndTime">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="12" style="0"/>

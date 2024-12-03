@@ -14,12 +14,13 @@ public class CampusConnect extends JFrame {
 
     Connection conn = conn();
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
-    DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Start Time", "End Time", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
+    DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
     DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "Password", "User Type", "Student Type"}, 0);
 
     public CampusConnect() {
         initComponents();
         initTableData();
+        
 
     }
 
@@ -43,28 +44,26 @@ public class CampusConnect extends JFrame {
             Statement st = conn.createStatement();
 
             //adds event data from database to eventsTable
-            String selectEventsData = "SELECT * FROM events";
+                String selectEventsData = "SELECT * FROM events WHERE is_deleted = 0";
             ResultSet evrs = st.executeQuery(selectEventsData);
 
             while (evrs.next()) {
                 String evn = evrs.getString("event_name");
                 String fdt = evrs.getString("start_date");
                 String tdt = evrs.getString("end_date");
-                String ftm = evrs.getString("start_time");
-                String ttm = evrs.getString("end_time");
                 String lc = evrs.getString("location");
                 String fw = evrs.getString("user_access");
                 String ca = evrs.getString("club_assigned");
                 String fa = evrs.getString("faculty_assigned");
                 String de = evrs.getString("details");
 
-                eventsModel.addRow(new Object[]{evn, fdt, tdt, ftm, ttm, lc, fw, ca, fa, de});
+                eventsModel.addRow(new Object[]{evn, fdt, tdt, lc, fw, ca, fa, de});
 
                 //add total number of members in this part
             }
 
             //adds users data from database to usersTable
-            String selectUsersData = "SELECT * FROM users";
+            String selectUsersData = "SELECT * FROM users WHERE is_deleted = 0";
             ResultSet usrs = st.executeQuery(selectUsersData);
 
             while (usrs.next()) {
@@ -78,7 +77,7 @@ public class CampusConnect extends JFrame {
             }
 
             //adds orgs data from database to orgsTable
-            String selectOrgsData = "SELECT * FROM orgs";
+            String selectOrgsData = "SELECT * FROM orgs WHERE is_deleted = 0";
             ResultSet orrs = st.executeQuery(selectOrgsData);
 
             while (orrs.next()) {
@@ -131,6 +130,13 @@ public class CampusConnect extends JFrame {
         panelRound4 = new test.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         mainDashboard = new test.PanelRound();
+        DashBoardPanel = new javax.swing.JPanel();
+        panelRound5 = new test.PanelRound();
+        clubAndOrgsLabel1 = new javax.swing.JLabel();
+        panelRound6 = new test.PanelRound();
+        panelRound7 = new test.PanelRound();
+        panelRound8 = new test.PanelRound();
+        panelRound9 = new test.PanelRound();
         ClubsAndOrgsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         orgsTable = new javax.swing.JTable();
@@ -164,10 +170,6 @@ public class CampusConnect extends JFrame {
         userTypeInfo6 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        DashBoardPanel = new javax.swing.JPanel();
-        panelRound5 = new test.PanelRound();
-        clubAndOrgsLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         popupMenu.setBorder(null);
 
@@ -409,6 +411,132 @@ public class CampusConnect extends JFrame {
         mainDashboard.setRoundTopLeft(25);
         mainDashboard.setRoundTopRight(25);
         mainDashboard.setLayout(new java.awt.CardLayout());
+
+        DashBoardPanel.setBackground(new java.awt.Color(204, 255, 51));
+        DashBoardPanel.setOpaque(false);
+
+        panelRound5.setBackground(new java.awt.Color(255, 153, 153));
+        panelRound5.setRoundBottomLeft(25);
+        panelRound5.setRoundBottomRight(25);
+        panelRound5.setRoundTopLeft(25);
+        panelRound5.setRoundTopRight(25);
+
+        clubAndOrgsLabel1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        clubAndOrgsLabel1.setText("Dashboard");
+
+        panelRound6.setRoundBottomLeft(20);
+        panelRound6.setRoundBottomRight(20);
+        panelRound6.setRoundTopLeft(20);
+        panelRound6.setRoundTopRight(20);
+
+        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
+        panelRound6.setLayout(panelRound6Layout);
+        panelRound6Layout.setHorizontalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 361, Short.MAX_VALUE)
+        );
+        panelRound6Layout.setVerticalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 333, Short.MAX_VALUE)
+        );
+
+        panelRound7.setRoundBottomLeft(20);
+        panelRound7.setRoundBottomRight(20);
+        panelRound7.setRoundTopLeft(20);
+        panelRound7.setRoundTopRight(20);
+
+        javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
+        panelRound7.setLayout(panelRound7Layout);
+        panelRound7Layout.setHorizontalGroup(
+            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 362, Short.MAX_VALUE)
+        );
+        panelRound7Layout.setVerticalGroup(
+            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        panelRound8.setMaximumSize(new java.awt.Dimension(250, 32767));
+        panelRound8.setRoundBottomLeft(20);
+        panelRound8.setRoundBottomRight(20);
+        panelRound8.setRoundTopLeft(20);
+        panelRound8.setRoundTopRight(20);
+
+        javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
+        panelRound8.setLayout(panelRound8Layout);
+        panelRound8Layout.setHorizontalGroup(
+            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 265, Short.MAX_VALUE)
+        );
+        panelRound8Layout.setVerticalGroup(
+            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        panelRound9.setRoundBottomLeft(20);
+        panelRound9.setRoundBottomRight(20);
+        panelRound9.setRoundTopLeft(20);
+        panelRound9.setRoundTopRight(20);
+
+        javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
+        panelRound9.setLayout(panelRound9Layout);
+        panelRound9Layout.setHorizontalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelRound9Layout.setVerticalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 219, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
+        panelRound5.setLayout(panelRound5Layout);
+        panelRound5Layout.setHorizontalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clubAndOrgsLabel1)
+                    .addGroup(panelRound5Layout.createSequentialGroup()
+                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound5Layout.createSequentialGroup()
+                                .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
+        );
+        panelRound5Layout.setVerticalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(clubAndOrgsLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelRound5Layout.createSequentialGroup()
+                        .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(22, 22, 22))
+        );
+
+        javax.swing.GroupLayout DashBoardPanelLayout = new javax.swing.GroupLayout(DashBoardPanel);
+        DashBoardPanel.setLayout(DashBoardPanelLayout);
+        DashBoardPanelLayout.setHorizontalGroup(
+            DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRound5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        DashBoardPanelLayout.setVerticalGroup(
+            DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRound5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        mainDashboard.add(DashBoardPanel, "card2");
 
         ClubsAndOrgsPanel.setOpaque(false);
 
@@ -827,65 +955,6 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(userDetailedPanel, "card6");
 
-        DashBoardPanel.setBackground(new java.awt.Color(204, 255, 51));
-        DashBoardPanel.setOpaque(false);
-
-        panelRound5.setBackground(new java.awt.Color(255, 153, 153));
-        panelRound5.setRoundBottomLeft(25);
-        panelRound5.setRoundBottomRight(25);
-        panelRound5.setRoundTopLeft(25);
-        panelRound5.setRoundTopRight(25);
-
-        clubAndOrgsLabel1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        clubAndOrgsLabel1.setText("Dashboard");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
-        panelRound5.setLayout(panelRound5Layout);
-        panelRound5Layout.setHorizontalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound5Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(clubAndOrgsLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addContainerGap(676, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
-        );
-        panelRound5Layout.setVerticalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(clubAndOrgsLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout DashBoardPanelLayout = new javax.swing.GroupLayout(DashBoardPanel);
-        DashBoardPanel.setLayout(DashBoardPanelLayout);
-        DashBoardPanelLayout.setHorizontalGroup(
-            DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        DashBoardPanelLayout.setVerticalGroup(
-            DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        mainDashboard.add(DashBoardPanel, "card2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -992,7 +1061,7 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_usersTableMouseReleased
 
     private void popupDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupDeleteButtonActionPerformed
-        int[] selectedRows;
+            int[] selectedRows;
         JTable activeTable = null;
 
         if (ClubsAndOrgsPanel.isVisible()) {
@@ -1013,90 +1082,40 @@ public class CampusConnect extends JFrame {
                     try (Connection conn = conn()) { // Auto-close connection
                         conn.setAutoCommit(false); // Enable transaction for batch operations
 
-                        PreparedStatement archiveStmt = null;
-                        PreparedStatement deleteStmt = null;
+                        PreparedStatement updateStmt = null;
 
                         if (activeTable == orgsTable) {
                             // SQL statement for organizations
-                            String archiveOrgSQL = "INSERT INTO archived_orgs (org_name, member_count, level, adviser, details) VALUES (?, ?, ?, ?, ?)";
-                            String deleteOrgSQL = "DELETE FROM orgs WHERE org_name = ?";
-                            archiveStmt = conn.prepareStatement(archiveOrgSQL);
-                            deleteStmt = conn.prepareStatement(deleteOrgSQL);
+                            String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
+                            updateStmt = conn.prepareStatement(updateOrgSQL);
                         } else if (activeTable == eventsTable) {
                             // SQL statement for events
-                            String archiveEventSQL = "INSERT INTO archived_events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                            String deleteEventSQL = "DELETE FROM orgs WHERE event_name = ?";
-                            archiveStmt = conn.prepareStatement(archiveEventSQL);
-                            deleteStmt = conn.prepareStatement(deleteEventSQL);
+                            String updateEventSQL = "UPDATE events SET is_deleted = 1 WHERE event_name = ?";
+                            updateStmt = conn.prepareStatement(updateEventSQL);
                         } else if (activeTable == usersTable) {
-                            // SQL statement fro users
-                            String archiveUserSQL = "INSERT INTO archived_users (user_id, user_name, password, user_type, student_type) VALUES (?, ?, ?, ?, ?)";
-                            String deleteUserSQL = "DELETE FROM users WHERE user_id = ?";
-                            archiveStmt = conn.prepareStatement(archiveUserSQL);
-                            deleteStmt = conn.prepareStatement(deleteUserSQL);
+                            // SQL statement for users
+                            String updateUserSQL = "UPDATE users SET is_deleted = 1 WHERE user_id = ?";
+                            updateStmt = conn.prepareStatement(updateUserSQL);
                         }
+
                         // Iterate in reverse to prevent index shifting
                         for (int i = selectedRows.length - 1; i >= 0; i--) {
                             // Extract row data
                             if (activeTable == orgsTable) {
                                 Object orgName = activeTable.getValueAt(selectedRows[i], 0);
-                                Object memberCount = activeTable.getValueAt(selectedRows[i], 1);
-                                Object level = activeTable.getValueAt(selectedRows[i], 2);
-                                Object adviser = activeTable.getValueAt(selectedRows[i], 3);
-                                Object details = activeTable.getValueAt(selectedRows[i], 4);
-
-                                archiveStmt.setString(1, orgName.toString());
-                                archiveStmt.setString(2, memberCount.toString());
-                                archiveStmt.setString(3, level.toString());
-                                archiveStmt.setString(4, adviser.toString());
-                                archiveStmt.setString(5, details.toString());
-
-                                deleteStmt.setString(1, orgName.toString());
-
+                                updateStmt.setString(1, orgName.toString());
                             } else if (activeTable == eventsTable) {
                                 Object eventName = activeTable.getValueAt(selectedRows[i], 0);
-                                Object startDate = activeTable.getValueAt(selectedRows[i], 1);
-                                Object endDate = activeTable.getValueAt(selectedRows[i], 2);
-                                Object startTime = activeTable.getValueAt(selectedRows[i], 3);
-                                Object endTime = activeTable.getValueAt(selectedRows[i], 4);
-                                Object location = activeTable.getValueAt(selectedRows[i], 5);
-                                Object userAccess = activeTable.getValueAt(selectedRows[i], 6);
-                                Object clubAssigned = activeTable.getValueAt(selectedRows[i], 7);
-                                Object facultyAssigned = activeTable.getValueAt(selectedRows[i], 8);
-                                Object details = activeTable.getValueAt(selectedRows[i], 9);
-
-                                archiveStmt.setString(1, eventName.toString());
-                                archiveStmt.setString(2, startDate.toString());
-                                archiveStmt.setString(3, endDate.toString());
-                                archiveStmt.setString(4, startTime.toString());
-                                archiveStmt.setString(5, endTime.toString());
-                                archiveStmt.setString(6, location.toString());
-                                archiveStmt.setString(7, userAccess.toString());
-                                archiveStmt.setString(8, clubAssigned.toString());
-                                archiveStmt.setString(9, facultyAssigned.toString());
-                                archiveStmt.setString(10, details.toString());
-
-                                deleteStmt.setString(1, eventName.toString());
-
+                                updateStmt.setString(1, eventName.toString());
                             } else if (activeTable == usersTable) {
                                 Object userID = usersTable.getValueAt(selectedRows[i], 0);
-                                Object userName = usersTable.getValueAt(selectedRows[i], 1);
-                                Object userPassword = usersTable.getValueAt(selectedRows[i], 2);
-                                Object userType = usersTable.getValueAt(selectedRows[i], 3);
-                                Object userStudentType = usersTable.getValueAt(selectedRows[i], 4);
-
-                                archiveStmt.setString(1, userID.toString());
-                                archiveStmt.setString(2, userName.toString());
-                                archiveStmt.setString(3, userPassword.toString());
-                                archiveStmt.setString(4, userType.toString());
-                                archiveStmt.setString(5, userStudentType.toString());
-
-                                deleteStmt.setString(1, userID.toString());
+                                updateStmt.setString(1, userID.toString());
                             }
 
-                            //Add to batch for archival
-                            archiveStmt.addBatch();
-                            deleteStmt.addBatch();
+                            // Add to batch for updating is_deleted
+                            if (updateStmt != null) {
+                                updateStmt.addBatch();
+                            }
 
                             // Remove row from table
                             if (activeTable == orgsTable) {
@@ -1106,18 +1125,16 @@ public class CampusConnect extends JFrame {
                             } else {
                                 ((DefaultTableModel) usersTable.getModel()).removeRow(selectedRows[i]);
                             }
-
                         }
 
                         // Execute batch operations
-                        if (archiveStmt != null && deleteStmt != null) {
-                            archiveStmt.executeBatch();
-                            deleteStmt.executeBatch();
+                        if (updateStmt != null) {
+                            updateStmt.executeBatch();
                         }
 
                         conn.commit(); // Commit transaction
 
-                        JOptionPane.showMessageDialog(null, "Selected rows have been deleted and archived successfully.");
+                        JOptionPane.showMessageDialog(null, "Selected rows have been marked as deleted successfully.");
                     } catch (SQLException e) {
                         JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
                     }
@@ -1128,7 +1145,6 @@ public class CampusConnect extends JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No active table detected.");
         }
-
     }//GEN-LAST:event_popupDeleteButtonActionPerformed
 
     private void orgsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orgsTableMousePressed
@@ -1276,7 +1292,6 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1295,6 +1310,10 @@ public class CampusConnect extends JFrame {
     private test.PanelRound panelRound3;
     private test.PanelRound panelRound4;
     private test.PanelRound panelRound5;
+    private test.PanelRound panelRound6;
+    private test.PanelRound panelRound7;
+    private test.PanelRound panelRound8;
+    private test.PanelRound panelRound9;
     private javax.swing.JMenuItem popupDeleteButton;
     private javax.swing.JMenuItem popupEditButton;
     private javax.swing.JPopupMenu popupMenu;

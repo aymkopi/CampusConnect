@@ -2,9 +2,7 @@ package campusconnect;
 
 import static campusconnect.CampusConnect.conn;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
-import com.github.lgooddatepicker.optionalusertools.TimeChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-import com.github.lgooddatepicker.zinternaltools.TimeChangeEvent;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -41,13 +39,6 @@ class EventsForm extends javax.swing.JFrame {
             }
         });
 
-        // Add action listener for the time picker
-        inEventStartTime.addTimeChangeListener(new TimeChangeListener() {
-            @Override
-            public void timeChanged(TimeChangeEvent event) {
-                timeChangedAction(event.getNewTime().toString());
-            }
-        });
         inEventEndDate.addDateChangeListener(new DateChangeListener() {
             @Override
             public void dateChanged(DateChangeEvent event) {
@@ -55,13 +46,6 @@ class EventsForm extends javax.swing.JFrame {
             }
         });
 
-        // Add action listener for the time picker
-        inEventEndTime.addTimeChangeListener(new TimeChangeListener() {
-            @Override
-            public void timeChanged(TimeChangeEvent event) {
-                timeChangedAction(event.getNewTime().toString());
-            }
-        });
     }
     
     private void initOrgs() {
@@ -99,7 +83,6 @@ class EventsForm extends javax.swing.JFrame {
         eventStartLabel = new javax.swing.JLabel();
         inClubInChargeForm = new test.ComboBoxRound();
         inEventStartDate = new com.github.lgooddatepicker.components.DatePicker();
-        inEventStartTime = new com.github.lgooddatepicker.components.TimePicker();
         orgClubInChargeLabel = new javax.swing.JLabel();
         locationLabel = new javax.swing.JLabel();
         inLocationForm = new test.TextFieldRound();
@@ -110,7 +93,6 @@ class EventsForm extends javax.swing.JFrame {
         inDetailsForm = new test.TextAreaRound();
         userAcessLabel = new javax.swing.JLabel();
         inEventEndDate = new com.github.lgooddatepicker.components.DatePicker();
-        inEventEndTime = new com.github.lgooddatepicker.components.TimePicker();
         eventEndLabel = new javax.swing.JLabel();
         inEventNameForm = new test.TextFieldRound();
         jPanel1 = new javax.swing.JPanel();
@@ -140,8 +122,6 @@ class EventsForm extends javax.swing.JFrame {
 
         inEventStartDate.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
 
-        inEventStartTime.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-
         orgClubInChargeLabel.setText("Org/Club In-Charge");
         orgClubInChargeLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
@@ -165,7 +145,7 @@ class EventsForm extends javax.swing.JFrame {
         inFacultyInChargeForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
 
         detailsLabel.setText("Additional Details");
-        detailsLabel.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        detailsLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         jScrollPane2.setBorder(null);
 
@@ -186,8 +166,6 @@ class EventsForm extends javax.swing.JFrame {
         userAcessLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inEventEndDate.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-
-        inEventEndTime.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
 
         eventEndLabel.setText("Event End");
         eventEndLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
@@ -287,20 +265,19 @@ class EventsForm extends javax.swing.JFrame {
                     .addComponent(userAcessLabel))
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(detailsLabel)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(inEventStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(inEventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(eventStartLabel)
-                        .addComponent(eventEndLabel)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(inEventEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(inEventEndTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inEventStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(detailsLabel)
+                            .addComponent(eventStartLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(eventEndLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(inEventEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,17 +286,20 @@ class EventsForm extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eventNameLabel)
-                    .addComponent(eventStartLabel))
+                    .addComponent(eventStartLabel)
+                    .addComponent(eventEndLabel))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inEventNameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inEventStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inEventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(inEventEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userAcessLabel)
+                    .addComponent(detailsLabel))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(userAcessLabel)
-                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tertiaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(secondaryAccessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -335,17 +315,7 @@ class EventsForm extends javax.swing.JFrame {
                         .addComponent(facultyInChargeLabel)
                         .addGap(11, 11, 11)
                         .addComponent(inFacultyInChargeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(eventEndLabel)
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(inEventEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inEventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addComponent(detailsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -356,9 +326,6 @@ class EventsForm extends javax.swing.JFrame {
         startDate = newDate;
     }
 
-    private void timeChangedAction(String newTime) {
-        startTime = newTime;
-    }
     private void inClubInChargeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inClubInChargeFormActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inClubInChargeFormActionPerformed
@@ -404,26 +371,13 @@ class EventsForm extends javax.swing.JFrame {
             inEventStartDate.setBorder(null);
             startDate = inEventStartDate.getDate().toString();
         }
-        if (inEventStartTime.getTime().toString().isEmpty()) {
-            inEventStartTime.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inEventStartTime.setBorder(null);
-            startTime = inEventStartTime.getTime().toString();
-        }
+   
         if (inEventEndDate.getDate().toString().isEmpty()) {
             inEventEndDate.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
             inEventEndDate.setBorder(null);
             endDate = inEventEndDate.getDate().toString();
-        }
-        if (inEventEndTime.getTime().toString().isEmpty()) {
-            inEventEndTime.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inEventEndTime.setBorder(null);
-            endTime = inEventEndTime.getTime().toString();
         }
         if (inLocationForm.getText().isEmpty()) {
             inLocationForm.setBorder(new LineBorder(Color.RED, 1));
@@ -466,9 +420,10 @@ class EventsForm extends javax.swing.JFrame {
         }
 
         return isValid;
+        
 
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound createEventSubmitButton;
     private javax.swing.JLabel detailsLabel;
@@ -480,10 +435,8 @@ class EventsForm extends javax.swing.JFrame {
     private test.ComboBoxRound inClubInChargeForm;
     private test.TextAreaRound inDetailsForm;
     private com.github.lgooddatepicker.components.DatePicker inEventEndDate;
-    private com.github.lgooddatepicker.components.TimePicker inEventEndTime;
     private test.TextFieldRound inEventNameForm;
     private com.github.lgooddatepicker.components.DatePicker inEventStartDate;
-    private com.github.lgooddatepicker.components.TimePicker inEventStartTime;
     private test.ComboBoxRound inFacultyInChargeForm;
     private test.TextFieldRound inLocationForm;
     private javax.swing.JPanel jPanel1;

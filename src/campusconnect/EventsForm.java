@@ -340,7 +340,7 @@ class EventsForm extends javax.swing.JFrame {
                     return;  // Exit the method to avoid duplicate insertion
                 }
 
-                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details) "
+                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details) "
                         + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "','" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "')";
                 st.executeUpdate(addEventQuery);
 

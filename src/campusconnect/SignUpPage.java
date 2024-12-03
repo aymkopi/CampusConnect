@@ -239,13 +239,13 @@ public class SignUpPage extends JFrame {
 
         LogInPanel.setPreferredSize(new java.awt.Dimension(463, 496));
 
-        lblWelcomeBack.setFont(new java.awt.Font("Helvetica", 1, 36)); // NOI18N
+        lblWelcomeBack.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         lblWelcomeBack.setText("Welcome back!");
 
-        lblAlreadyHaveAccount1.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        lblAlreadyHaveAccount1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         lblAlreadyHaveAccount1.setText("Don't have an account? ");
 
-        signUpRedirectButton.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        signUpRedirectButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         signUpRedirectButton.setForeground(new java.awt.Color(0, 0, 238));
         signUpRedirectButton.setText("Sign Up");
         signUpRedirectButton.setBorder(null);
@@ -277,7 +277,7 @@ public class SignUpPage extends JFrame {
             }
         });
 
-        showLoginPassword.setFont(new java.awt.Font("Helvetica", 0, 10)); // NOI18N
+        showLoginPassword.setFont(new java.awt.Font("Inter", 0, 10)); // NOI18N
         showLoginPassword.setText("Show Password");
         showLoginPassword.setAlignmentX(0.5F);
         showLoginPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -356,17 +356,17 @@ public class SignUpPage extends JFrame {
                 .addGroup(LogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAlreadyHaveAccount1)
                     .addComponent(signUpRedirectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(94, 94, 94)
+                .addGap(79, 79, 79)
                 .addGroup(LogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(inUserType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inStudentIDLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addGap(13, 13, 13)
+                    .addComponent(inStudentIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(inPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showLoginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(showLoginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
         );

@@ -7,8 +7,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class CampusConnect extends JFrame {
 
+    //instantiate connection
     Connection conn = conn();
+    
+    //instantiate an static frame of mainFrame
     private static CampusConnect instance;
+
+    //table models
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
     DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
     DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "Password", "User Type", "Student Type"}, 0);
@@ -16,13 +21,13 @@ public class CampusConnect extends JFrame {
     public CampusConnect() {
         instance = this;
         initComponents();
-        initTableData();
+        initTableData();       
     }
 
     public static CampusConnect getInstance() {
         return instance;
     }
-    
+
     //establish connection
     public static Connection conn() {
         try {
@@ -36,9 +41,12 @@ public class CampusConnect extends JFrame {
         }
         return null;
     }
-    
+
+    //refresh data on tables
     public void refreshTableData() {
         // Clear the existing table data
+        orgsModel.setRowCount(0);
+        eventsModel.setRowCount(0);
         usersModel.setRowCount(0);
         // Reinitialize the data
         initTableData();
@@ -50,7 +58,7 @@ public class CampusConnect extends JFrame {
             Statement st = conn.createStatement();
 
             //adds event data from database to eventsTable
-                String selectEventsData = "SELECT * FROM events WHERE is_deleted = 0";
+            String selectEventsData = "SELECT * FROM events WHERE is_deleted = 0";
             ResultSet evrs = st.executeQuery(selectEventsData);
 
             while (evrs.next()) {
@@ -146,6 +154,8 @@ public class CampusConnect extends JFrame {
         panelRound7 = new test.PanelRound();
         panelRound8 = new test.PanelRound();
         panelRound9 = new test.PanelRound();
+        jLabel4 = new javax.swing.JLabel();
+        totalUsers = new javax.swing.JLabel();
         ClubsAndOrgsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         orgsTable = new javax.swing.JTable();
@@ -539,15 +549,33 @@ public class CampusConnect extends JFrame {
         panelRound9.setRoundTopLeft(20);
         panelRound9.setRoundTopRight(20);
 
+        jLabel4.setText("Total Users");
+
+        totalUsers.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalUsers.setText("1");
+
         javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
         panelRound9.setLayout(panelRound9Layout);
         panelRound9Layout.setHorizontalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelRound9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
+                        .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124))))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
+            .addGroup(panelRound9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(43, 43, 43)
+                .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -1022,7 +1050,7 @@ public class CampusConnect extends JFrame {
         ClubsAndOrgsPanel.setVisible(false);
         EventsPanel.setVisible(false);
         UsersPanel.setVisible(false);
-
+        
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
     private void clubsAndOrgsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clubsAndOrgsButtonActionPerformed
@@ -1047,7 +1075,7 @@ public class CampusConnect extends JFrame {
         ClubsAndOrgsPanel.setVisible(false);
         EventsPanel.setVisible(false);
         UsersPanel.setVisible(true);
-        if (usersButton.isSelected()){
+        if (usersButton.isSelected()) {
             usersButton.setOpaque(true);
         }
 
@@ -1091,7 +1119,7 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_usersTableMouseReleased
 
     private void popupDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupDeleteButtonActionPerformed
-            int[] selectedRows;
+        int[] selectedRows;
         JTable activeTable = null;
 
         if (ClubsAndOrgsPanel.isVisible()) {
@@ -1331,6 +1359,7 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1361,6 +1390,7 @@ public class CampusConnect extends JFrame {
     private test.ButtonRound reportsButton;
     private javax.swing.JPanel sideDashboard;
     private javax.swing.JLabel toolsLabel;
+    private javax.swing.JLabel totalUsers;
     private javax.swing.JPanel userDetailedPanel;
     private javax.swing.JLabel userNameInfo;
     private javax.swing.JLabel userNameInfo1;

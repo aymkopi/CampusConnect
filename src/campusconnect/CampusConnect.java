@@ -1,29 +1,28 @@
 package campusconnect;
 
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class CampusConnect extends JFrame {
 
     Connection conn = conn();
+    private static CampusConnect instance;
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
     DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
     DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "Password", "User Type", "Student Type"}, 0);
 
     public CampusConnect() {
+        instance = this;
         initComponents();
         initTableData();
-        
-
     }
 
+    public static CampusConnect getInstance() {
+        return instance;
+    }
+    
     //establish connection
     public static Connection conn() {
         try {
@@ -36,6 +35,13 @@ public class CampusConnect extends JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         return null;
+    }
+    
+    public void refreshTableData() {
+        // Clear the existing table data
+        usersModel.setRowCount(0);
+        // Reinitialize the data
+        initTableData();
     }
 
     //initialize table
@@ -129,6 +135,9 @@ public class CampusConnect extends JFrame {
         jLabel3 = new javax.swing.JLabel();
         panelRound4 = new test.PanelRound();
         jLabel2 = new javax.swing.JLabel();
+        toolsLabel = new javax.swing.JLabel();
+        reportsButton = new test.ButtonRound();
+        binButton = new test.ButtonRound();
         mainDashboard = new test.PanelRound();
         DashBoardPanel = new javax.swing.JPanel();
         panelRound5 = new test.PanelRound();
@@ -147,11 +156,9 @@ public class CampusConnect extends JFrame {
         addEventButton = new test.ButtonRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventsTable = new javax.swing.JTable();
-        updateButton = new javax.swing.JButton();
         UsersPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
-        updateButton1 = new javax.swing.JButton();
         addUsersButton = new test.ButtonRound();
         usersLabel = new javax.swing.JLabel();
         userDetailedPanel = new javax.swing.JPanel();
@@ -217,11 +224,11 @@ public class CampusConnect extends JFrame {
         sideDashboard.setMaximumSize(new java.awt.Dimension(220, 32767));
         sideDashboard.setPreferredSize(new java.awt.Dimension(218, 715));
 
-        dashboardButton.setBackground(java.awt.Color.lightGray);
-        dashboardButton.setBorder(null);
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
         dashboardButton.setText("Dashboard");
         dashboardButton.setAlignmentX(0.5F);
+        dashboardButton.setBackground(java.awt.Color.lightGray);
+        dashboardButton.setBorder(null);
         dashboardButton.setFocusPainted(false);
         dashboardButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         dashboardButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -238,12 +245,12 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        clubsAndOrgsButton.setBackground(java.awt.Color.lightGray);
-        clubsAndOrgsButton.setBorder(null);
         clubsAndOrgsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
         clubsAndOrgsButton.setText("Organizations");
         clubsAndOrgsButton.setActionCommand("ClubsAndOrganizations");
         clubsAndOrgsButton.setAlignmentX(0.5F);
+        clubsAndOrgsButton.setBackground(java.awt.Color.lightGray);
+        clubsAndOrgsButton.setBorder(null);
         clubsAndOrgsButton.setFocusPainted(false);
         clubsAndOrgsButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         clubsAndOrgsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -260,11 +267,11 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        eventsButton.setBackground(java.awt.Color.lightGray);
-        eventsButton.setBorder(null);
         eventsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
         eventsButton.setText("Events");
         eventsButton.setAlignmentX(0.5F);
+        eventsButton.setBackground(java.awt.Color.lightGray);
+        eventsButton.setBorder(null);
         eventsButton.setFocusPainted(false);
         eventsButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         eventsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -281,11 +288,11 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        usersButton.setBackground(java.awt.Color.lightGray);
-        usersButton.setBorder(null);
         usersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
         usersButton.setText("Users");
         usersButton.setAlignmentX(0.5F);
+        usersButton.setBackground(java.awt.Color.lightGray);
+        usersButton.setBorder(null);
         usersButton.setFocusPainted(false);
         usersButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         usersButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -302,8 +309,8 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        logoPlaceHolder.setBackground(new java.awt.Color(255, 0, 153));
         logoPlaceHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CampusConnectLogo1.png"))); // NOI18N
+        logoPlaceHolder.setBackground(new java.awt.Color(255, 0, 153));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setPreferredSize(new java.awt.Dimension(180, 55));
@@ -312,12 +319,12 @@ public class CampusConnect extends JFrame {
         panelRound1.setRoundTopLeft(25);
         panelRound1.setRoundTopRight(25);
 
-        jLabel1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         jLabel1.setText("Administrator");
+        jLabel1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         jLabel1.setToolTipText("");
 
-        jLabel3.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         jLabel3.setText("Justine A.");
+        jLabel3.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         jLabel3.setToolTipText("");
 
         panelRound4.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -363,16 +370,62 @@ public class CampusConnect extends JFrame {
                 .addContainerGap())
         );
 
-        jLabel2.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         jLabel2.setText("MAIN");
+        jLabel2.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+
+        toolsLabel.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        toolsLabel.setText("TOOLS");
+
+        reportsButton.setBackground(java.awt.Color.lightGray);
+        reportsButton.setBorder(null);
+        reportsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
+        reportsButton.setText("Reports");
+        reportsButton.setAlignmentX(0.5F);
+        reportsButton.setFocusPainted(false);
+        reportsButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        reportsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        reportsButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        reportsButton.setIconTextGap(10);
+        reportsButton.setMargin(new java.awt.Insets(2, 15, 2, 14));
+        reportsButton.setRoundBottomLeft(10);
+        reportsButton.setRoundBottomRight(10);
+        reportsButton.setRoundTopLeft(10);
+        reportsButton.setRoundTopRight(10);
+        reportsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportsButtonActionPerformed(evt);
+            }
+        });
+
+        binButton.setBackground(java.awt.Color.lightGray);
+        binButton.setBorder(null);
+        binButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard16.png"))); // NOI18N
+        binButton.setText("Bin");
+        binButton.setAlignmentX(0.5F);
+        binButton.setFocusPainted(false);
+        binButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        binButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        binButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        binButton.setIconTextGap(10);
+        binButton.setMargin(new java.awt.Insets(2, 15, 2, 14));
+        binButton.setRoundBottomLeft(10);
+        binButton.setRoundBottomRight(10);
+        binButton.setRoundTopLeft(10);
+        binButton.setRoundTopRight(10);
+        binButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                binButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sideDashboardLayout = new javax.swing.GroupLayout(sideDashboard);
         sideDashboard.setLayout(sideDashboardLayout);
         sideDashboardLayout.setHorizontalGroup(
             sideDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sideDashboardLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(sideDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toolsLabel)
                     .addComponent(jLabel2)
                     .addGroup(sideDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,7 +435,9 @@ public class CampusConnect extends JFrame {
                     .addGroup(sideDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(dashboardButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(clubsAndOrgsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addComponent(usersButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(usersButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(reportsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(binButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         sideDashboardLayout.setVerticalGroup(
@@ -400,6 +455,12 @@ public class CampusConnect extends JFrame {
                 .addComponent(eventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(usersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(toolsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(binButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
@@ -421,8 +482,8 @@ public class CampusConnect extends JFrame {
         panelRound5.setRoundTopLeft(25);
         panelRound5.setRoundTopRight(25);
 
-        clubAndOrgsLabel1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         clubAndOrgsLabel1.setText("Dashboard");
+        clubAndOrgsLabel1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
 
         panelRound6.setRoundBottomLeft(20);
         panelRound6.setRoundBottomRight(20);
@@ -540,8 +601,8 @@ public class CampusConnect extends JFrame {
 
         ClubsAndOrgsPanel.setOpaque(false);
 
-        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane2.setAutoscrolls(true);
+        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
 
         orgsTable.setBorder(null);
         orgsTable.setFont(new java.awt.Font("Inter Display", 0, 12)); // NOI18N
@@ -558,20 +619,20 @@ public class CampusConnect extends JFrame {
         });
         jScrollPane2.setViewportView(orgsTable);
 
-        clubAndOrgsLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
         clubAndOrgsLabel.setText("Clubs And Organizations");
+        clubAndOrgsLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
 
-        addOrgsButton.setBackground(new java.awt.Color(255, 255, 204));
-        addOrgsButton.setBorder(null);
         addOrgsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add16.png"))); // NOI18N
         addOrgsButton.setText("Add");
-        addOrgsButton.setToolTipText("");
+        addOrgsButton.setBackground(new java.awt.Color(255, 255, 204));
+        addOrgsButton.setBorder(null);
         addOrgsButton.setFocusable(false);
         addOrgsButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         addOrgsButton.setRoundBottomLeft(8);
         addOrgsButton.setRoundBottomRight(8);
         addOrgsButton.setRoundTopLeft(8);
         addOrgsButton.setRoundTopRight(8);
+        addOrgsButton.setToolTipText("");
         addOrgsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addOrgsButtonActionPerformed(evt);
@@ -610,20 +671,20 @@ public class CampusConnect extends JFrame {
 
         EventsPanel.setBackground(new java.awt.Color(255, 204, 204));
 
-        lblEvent.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
         lblEvent.setText("Events");
+        lblEvent.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
 
-        addEventButton.setBackground(new java.awt.Color(255, 255, 204));
-        addEventButton.setBorder(null);
         addEventButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add16.png"))); // NOI18N
         addEventButton.setText("Add");
-        addEventButton.setToolTipText("");
+        addEventButton.setBackground(new java.awt.Color(255, 255, 204));
+        addEventButton.setBorder(null);
         addEventButton.setFocusable(false);
         addEventButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         addEventButton.setRoundBottomLeft(8);
         addEventButton.setRoundBottomRight(8);
         addEventButton.setRoundTopLeft(8);
         addEventButton.setRoundTopRight(8);
+        addEventButton.setToolTipText("");
         addEventButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addEventButtonActionPerformed(evt);
@@ -637,13 +698,6 @@ public class CampusConnect extends JFrame {
         eventsTable.setRowHeight(30);
         eventsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(eventsTable);
-
-        updateButton.setText("update");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
         EventsPanel.setLayout(EventsPanelLayout);
@@ -660,8 +714,6 @@ public class CampusConnect extends JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1023, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(EventsPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(updateButton)
-                                .addGap(45, 45, 45)
                                 .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))))
         );
@@ -673,23 +725,21 @@ public class CampusConnect extends JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateButton))
+                .addComponent(addEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
         mainDashboard.add(EventsPanel, "card4");
 
+        jScrollPane3.setAutoscrolls(true);
         jScrollPane3.setBorder(BorderFactory.createEmptyBorder()
         );
-        jScrollPane3.setAutoscrolls(true);
 
         usersTable.setBorder(BorderFactory.createEmptyBorder());
-        usersTable.setFont(new java.awt.Font("Inter Display", 0, 14)); // NOI18N
         usersTable.setModel(usersModel);
         usersTable.setAutoscrolls(false);
         usersTable.setFocusable(false);
+        usersTable.setFont(new java.awt.Font("Inter Display", 0, 14)); // NOI18N
         usersTable.setRowHeight(30);
         usersTable.getTableHeader().setReorderingAllowed(false);
         usersTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -702,32 +752,25 @@ public class CampusConnect extends JFrame {
         });
         jScrollPane3.setViewportView(usersTable);
 
-        updateButton1.setText("update");
-        updateButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButton1ActionPerformed(evt);
-            }
-        });
-
-        addUsersButton.setBackground(new java.awt.Color(255, 255, 204));
-        addUsersButton.setBorder(null);
         addUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add16.png"))); // NOI18N
         addUsersButton.setText("Add");
-        addUsersButton.setToolTipText("");
+        addUsersButton.setBackground(new java.awt.Color(255, 255, 204));
+        addUsersButton.setBorder(null);
         addUsersButton.setFocusable(false);
         addUsersButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         addUsersButton.setRoundBottomLeft(8);
         addUsersButton.setRoundBottomRight(8);
         addUsersButton.setRoundTopLeft(8);
         addUsersButton.setRoundTopRight(8);
+        addUsersButton.setToolTipText("");
         addUsersButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUsersButtonActionPerformed(evt);
             }
         });
 
-        usersLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
         usersLabel.setText("Users");
+        usersLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout UsersPanelLayout = new javax.swing.GroupLayout(UsersPanel);
         UsersPanel.setLayout(UsersPanelLayout);
@@ -744,8 +787,6 @@ public class CampusConnect extends JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
                             .addGroup(UsersPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(updateButton1)
-                                .addGap(45, 45, 45)
                                 .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))))
         );
@@ -757,9 +798,7 @@ public class CampusConnect extends JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addGap(27, 27, 27)
-                .addGroup(UsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateButton1))
+                .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -767,11 +806,11 @@ public class CampusConnect extends JFrame {
 
         userDetailedPanel.setBackground(new java.awt.Color(204, 255, 204));
 
-        backUsersButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         backUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
         backUsersButton.setText("Users");
         backUsersButton.setBorder(null);
         backUsersButton.setBorderPainted(false);
+        backUsersButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         backUsersButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         backUsersButton.setIconTextGap(12);
         backUsersButton.setOpaque(false);
@@ -781,25 +820,25 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        userNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         userNameInfo.setText("Justine Acuña");
+        userNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         userNameInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        userTypeInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         userTypeInfo.setText("Faculty");
+        userTypeInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         userTypeInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        userTypeInfo1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         userTypeInfo1.setText("Participated Events");
+        userTypeInfo1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        userTypeInfo2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         userTypeInfo2.setText("Clubs Joined");
+        userTypeInfo2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        userNameInfo1.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         userNameInfo1.setText("312");
+        userNameInfo1.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
 
-        userNameInfo2.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         userNameInfo2.setText("36");
+        userNameInfo2.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setPreferredSize(new java.awt.Dimension(673, 394));
@@ -808,8 +847,8 @@ public class CampusConnect extends JFrame {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
-        userTypeInfo5.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo5.setText("Joined Clubs");
+        userTypeInfo5.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -855,8 +894,8 @@ public class CampusConnect extends JFrame {
         panelRound3.setRoundTopLeft(15);
         panelRound3.setRoundTopRight(15);
 
-        userTypeInfo6.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo6.setText("Participated Events");
+        userTypeInfo6.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -1030,15 +1069,6 @@ public class CampusConnect extends JFrame {
             }
         });
     }//GEN-LAST:event_addOrgsButtonActionPerformed
-
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        eventsModel.setRowCount(0);
-        initTableData();
-    }//GEN-LAST:event_updateButtonActionPerformed
-
-    private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void addUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1243,6 +1273,14 @@ public class CampusConnect extends JFrame {
         }
     }//GEN-LAST:event_popupSelectAllButtonActionPerformed
 
+    private void reportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportsButtonActionPerformed
+
+    private void binButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_binButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_binButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1283,6 +1321,7 @@ public class CampusConnect extends JFrame {
     private test.ButtonRound addOrgsButton;
     private test.ButtonRound addUsersButton;
     private javax.swing.JButton backUsersButton;
+    private test.ButtonRound binButton;
     private javax.swing.JLabel clubAndOrgsLabel;
     private javax.swing.JLabel clubAndOrgsLabel1;
     private test.ButtonRound clubsAndOrgsButton;
@@ -1319,9 +1358,9 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPopupMenu popupMenu;
     private javax.swing.JMenuItem popupOpenButton;
     private javax.swing.JCheckBoxMenuItem popupSelectAllButton;
+    private test.ButtonRound reportsButton;
     private javax.swing.JPanel sideDashboard;
-    private javax.swing.JButton updateButton;
-    private javax.swing.JButton updateButton1;
+    private javax.swing.JLabel toolsLabel;
     private javax.swing.JPanel userDetailedPanel;
     private javax.swing.JLabel userNameInfo;
     private javax.swing.JLabel userNameInfo1;

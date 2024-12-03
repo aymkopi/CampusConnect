@@ -11,26 +11,24 @@ import java.sql.*;
 import javax.swing.DefaultComboBoxModel;
 
 class EventsForm extends javax.swing.JFrame {
+
     DefaultComboBoxModel<Object> orgsComboBoxModel = new DefaultComboBoxModel<>();
     DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
 
     //init variables
     String eventName;
     String startDate;
-    String startTime;
     String endDate;
-    String endTime;
     String location;
     String userAccess = "";
     String clubInCharge;
     String facultyInCharge;
     String details;
- 
 
     public EventsForm() {
         initComponents();
         initOrgs();
-        
+
         // Add action listener for the date picker
         inEventStartDate.addDateChangeListener(new DateChangeListener() {
             @Override
@@ -47,7 +45,7 @@ class EventsForm extends javax.swing.JFrame {
         });
 
     }
-    
+
     private void initOrgs() {
         try {
             Statement st = conn().createStatement();
@@ -60,7 +58,7 @@ class EventsForm extends javax.swing.JFrame {
                 orgsComboBoxModel.addElement(orn);
 
             }
-            
+
             String selectFaculty = "SELECT * FROM users WHERE user_type = 'Faculty'";
             ResultSet sfrs = st.executeQuery(selectFaculty);
 
@@ -343,10 +341,13 @@ class EventsForm extends javax.swing.JFrame {
                 }
 
                 String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, start_time, end_time, location, user_access, club_assigned, faculty_assigned, details) "
-                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "', '" + startTime + "', '" + endTime + "', '" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "')";
+                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "','" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "')";
                 st.executeUpdate(addEventQuery);
 
                 JOptionPane.showMessageDialog(this, "Event created successfully!");
+
+                // Refresh the table in CampusConnect
+                CampusConnect.getInstance().refreshTableData();
                 dispose();
 
             } catch (SQLException e) {
@@ -371,7 +372,7 @@ class EventsForm extends javax.swing.JFrame {
             inEventStartDate.setBorder(null);
             startDate = inEventStartDate.getDate().toString();
         }
-   
+
         if (inEventEndDate.getDate().toString().isEmpty()) {
             inEventEndDate.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
@@ -409,8 +410,8 @@ class EventsForm extends javax.swing.JFrame {
         }
         if (tertiaryAccessButton.isSelected()) {
             userAccess = "Tertiary";
-        }      
-        
+        }
+
         if (secondaryAccessButton.isSelected()) {
             if (userAccess.isEmpty()) {
                 userAccess = "Secondary";
@@ -420,10 +421,9 @@ class EventsForm extends javax.swing.JFrame {
         }
 
         return isValid;
-        
 
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private test.ButtonRound createEventSubmitButton;
     private javax.swing.JLabel detailsLabel;

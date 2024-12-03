@@ -20,6 +20,7 @@ class UsersForm extends javax.swing.JFrame {
     public UsersForm() {
         initComponents();
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -271,11 +272,12 @@ class UsersForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void addUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserSubmitButtonActionPerformed
         if (validateInputs()) {
             try {
                 Statement st = conn().createStatement();
-                String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "'";
+                String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "' AND is_deleted = 0";
                 var rs = st.executeQuery(checkUserExist);
 
                 if (rs.next()) {  // If a matching student ID is found
@@ -287,7 +289,10 @@ class UsersForm extends javax.swing.JFrame {
                         + "VALUES ('" + userName + "', '" + userType + "', '" + studentLevel + "', '" + userID + "', '" + password + "')";
                 st.executeUpdate(addUserQuery);
 
-                JOptionPane.showMessageDialog(this, "Event created successfully!");
+                JOptionPane.showMessageDialog(this, "User added successfully!");
+                
+                // Refresh the table in CampusConnect
+                CampusConnect.getInstance().refreshTableData();
                 dispose();
 
             } catch (SQLException e) {

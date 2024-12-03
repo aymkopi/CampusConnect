@@ -22,6 +22,7 @@ public class CampusConnect extends JFrame {
         instance = this;
         initComponents();
         initTableData();       
+        updateTotalUsersLabel();
     }
 
     public static CampusConnect getInstance() {
@@ -51,7 +52,11 @@ public class CampusConnect extends JFrame {
         // Reinitialize the data
         initTableData();
     }
-
+    private void updateTotalUsersLabel() {
+        int rowCount = usersTable.getRowCount();
+        totalUsers.setText(rowCount + "");
+    }
+    
     //initialize table
     private void initTableData() {
         try {
@@ -508,7 +513,7 @@ public class CampusConnect extends JFrame {
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 356, Short.MAX_VALUE)
         );
 
         panelRound7.setRoundBottomLeft(20);
@@ -549,33 +554,36 @@ public class CampusConnect extends JFrame {
         panelRound9.setRoundTopLeft(20);
         panelRound9.setRoundTopRight(20);
 
+        jLabel4.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         jLabel4.setText("Total Users");
 
-        totalUsers.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalUsers.setFont(new java.awt.Font("Inter Display ExtraBold", 2, 56)); // NOI18N
         totalUsers.setText("1");
+        totalUsers.setFocusable(false);
+        totalUsers.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
         panelRound9.setLayout(panelRound9Layout);
         panelRound9Layout.setHorizontalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
-                        .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124))))
+                    .addGroup(panelRound9Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel4))
+                    .addGroup(panelRound9Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel4)
-                .addGap(43, 43, 43)
-                .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalUsers)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -606,8 +614,8 @@ public class CampusConnect extends JFrame {
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound5Layout.createSequentialGroup()
-                        .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
                         .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1050,6 +1058,7 @@ public class CampusConnect extends JFrame {
         ClubsAndOrgsPanel.setVisible(false);
         EventsPanel.setVisible(false);
         UsersPanel.setVisible(false);
+        updateTotalUsersLabel();
         
     }//GEN-LAST:event_dashboardButtonActionPerformed
 

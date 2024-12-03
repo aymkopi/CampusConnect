@@ -348,6 +348,8 @@ class EventsForm extends javax.swing.JFrame {
 
                 // Refresh the table in CampusConnect
                 CampusConnect.getInstance().refreshTableData();
+                
+                
                 dispose();
 
             } catch (SQLException e) {

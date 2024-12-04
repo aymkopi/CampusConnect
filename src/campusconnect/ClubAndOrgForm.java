@@ -9,13 +9,17 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
+
 class ClubAndOrgForm extends javax.swing.JFrame {
 
+    
+    
     DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
     String orgName;
     String level;
     String adviser;
     String details;
+    
 
     public ClubAndOrgForm() {
         initComponents();
@@ -233,6 +237,10 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Organization already exists.");
                     return;  // Exit the method to avoid duplicate insertion
                 }
+                
+                
+                
+                
 
                 String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
                         + "VALUES ('" + orgName + "', '" + level + "', '" + adviser + "', '" + details + "')";

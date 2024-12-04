@@ -13,6 +13,8 @@ public class CampusConnect extends JFrame {
 
     //instantiate an static frame of mainFrame
     private static CampusConnect instance;
+    
+    
 
     //table models
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
@@ -1666,6 +1668,7 @@ public class CampusConnect extends JFrame {
                             String memberID = membersList.get(i);
 
                             String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + memberID + "'";
+
                             var rt = st.executeQuery(getStudentDetailsSQL);
 
                             rt.next();

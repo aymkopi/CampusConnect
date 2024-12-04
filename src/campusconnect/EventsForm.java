@@ -3,14 +3,19 @@ package campusconnect;
 import static campusconnect.CampusConnect.conn;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.github.lgooddatepicker.components.*;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import java.sql.*;
+import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
 
 class EventsForm extends javax.swing.JFrame {
+    
+    //current date
+    LocalDate date = LocalDate.now();
 
     DefaultComboBoxModel<Object> orgsComboBoxModel = new DefaultComboBoxModel<>();
     DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
@@ -24,6 +29,7 @@ class EventsForm extends javax.swing.JFrame {
     String clubInCharge;
     String facultyInCharge;
     String details;
+    String status;
 
     public EventsForm() {
         initComponents();
@@ -339,9 +345,10 @@ class EventsForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Event already exists.");
                     return;  // Exit the method to avoid duplicate insertion
                 }
+                
 
-                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details) "
-                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "','" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "')";
+                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details, status) "
+                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "','" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "', '" + status + "')";
                 st.executeUpdate(addEventQuery);
 
                 JOptionPane.showMessageDialog(this, "Event created successfully!");
@@ -421,7 +428,18 @@ class EventsForm extends javax.swing.JFrame {
                 userAccess += ", Secondary";
             }
         }
-
+        
+        if(inEventStartDate.getDate().isBefore(date)){
+            status = "INCOMING";
+        } else if (inEventStartDate.getDate().isEqual(date)) {
+            status = "ONGOING";
+        } else if (inEventEndDate.getDate().isAfter(date)) {
+            status = "FINISHED";
+        }
+        
+        System.out.println(inEventStartDate.getDate());
+        System.out.println(date);
+        
         return isValid;
 
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed

@@ -51,12 +51,12 @@ class UsersForm extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        eventLabel.setText("Add User");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        eventLabel.setText("Add User");
 
-        addUserSubmitButton.setText("Confirm");
         addUserSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         addUserSubmitButton.setBorder(null);
+        addUserSubmitButton.setText("Confirm");
         addUserSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         addUserSubmitButton.setRoundBottomLeft(8);
         addUserSubmitButton.setRoundBottomRight(8);
@@ -89,8 +89,8 @@ class UsersForm extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        userNameLabel.setText("User Name");
         userNameLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        userNameLabel.setText("User Name");
 
         inUserName.setBorder(null);
         inUserName.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -105,8 +105,8 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        userTypeLabel.setText("User Type");
         userTypeLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        userTypeLabel.setText("User Type");
 
         studentTypeButton.setBorder(null);
         userTypeButtonGroup.add(studentTypeButton);
@@ -173,9 +173,9 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
+        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         userIDLabel.setText("User ID");
         userIDLabel.setFocusable(false);
-        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inUserID.setBorder(null);
         inUserID.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N

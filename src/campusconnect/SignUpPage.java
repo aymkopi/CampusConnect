@@ -239,7 +239,7 @@ public class SignUpPage extends JFrame {
 
         LogInPanel.setPreferredSize(new java.awt.Dimension(463, 496));
 
-        lblWelcomeBack.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        lblWelcomeBack.setFont(new java.awt.Font("Inter Display SemiBold", 1, 36)); // NOI18N
         lblWelcomeBack.setText("Welcome back!");
 
         lblAlreadyHaveAccount1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N

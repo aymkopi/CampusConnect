@@ -233,6 +233,7 @@ public class CampusConnect extends JFrame {
         userTypeInfo13 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         eventParticipantsTable = new javax.swing.JTable();
+        addParticipantsButton = new test.ButtonRound();
         officerInChargeInfo = new javax.swing.JLabel();
 
         popupMenu.setBorder(null);
@@ -1342,6 +1343,13 @@ public class CampusConnect extends JFrame {
         eventParticipantsTable.setRowHeight(25);
         jScrollPane9.setViewportView(eventParticipantsTable);
 
+        addParticipantsButton.setText("Add Participants");
+        addParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addParticipantsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound13Layout = new javax.swing.GroupLayout(panelRound13);
         panelRound13.setLayout(panelRound13Layout);
         panelRound13Layout.setHorizontalGroup(
@@ -1349,18 +1357,21 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound13Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
                     .addGroup(panelRound13Layout.createSequentialGroup()
                         .addComponent(userTypeInfo13, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelRound13Layout.setVerticalGroup(
             panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userTypeInfo13)
-                .addGap(18, 18, 18)
+                .addGroup(panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userTypeInfo13)
+                    .addComponent(addParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -1723,6 +1734,7 @@ public class CampusConnect extends JFrame {
                         eventNameInfo.setText(eventName);
                         officerInChargeInfo.setText(facultyAssigned);
                         eventStatusInfo.setText(status);
+                        totalParticipantsInfo.setText(eventParticipantsTableModel.getRowCount() + "");
                         
                         
                         
@@ -1854,6 +1866,14 @@ public class CampusConnect extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void addParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addParticipantsButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UsersList().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_addParticipantsButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1892,6 +1912,7 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPanel UsersPanel;
     private test.ButtonRound addEventButton;
     private test.ButtonRound addOrgsButton;
+    private test.ButtonRound addParticipantsButton;
     private test.ButtonRound addUsersButton;
     private javax.swing.JLabel adviserInfo;
     private javax.swing.JButton backButton;

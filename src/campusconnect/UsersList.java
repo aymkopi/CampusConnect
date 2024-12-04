@@ -4,6 +4,7 @@ import static campusconnect.CampusConnect.conn;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 class UsersList extends javax.swing.JFrame {
@@ -27,7 +28,7 @@ class UsersList extends javax.swing.JFrame {
                 String studentName = rs.getString("user_name");
                 String studentLevel = rs.getString("student_type");
                 
-                studentTableModel.addRow(new Object[]{false,studentID, studentName, studentLevel});
+                studentTableModel.addRow(new Object[]{false, studentID, studentName, studentLevel});
             }
 
         } catch (SQLException e) {
@@ -138,7 +139,58 @@ class UsersList extends javax.swing.JFrame {
 
 
     private void addUserstoEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserstoEventButtonActionPerformed
+        try {
+            ArrayList<String> studentIDList = new ArrayList<>();
+            DefaultTableModel model = (DefaultTableModel) studentsList.getModel();
+            Statement st = conn().createStatement();
+            
+            
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Boolean isChecked = (Boolean) model.getValueAt(i, 0);
+                if (isChecked != null && isChecked) {
+                    studentIDList.add((String) model.getValueAt(i, 1));
+                }
+            }            
+            
+            for (int i = 0; i < studentIDList.size(); i++) {
+                studentIDList.set(i, studentIDList.get(i).replace("02000", ""));
+            }
+            System.out.println(studentIDList);
+            
+            // Concatenate student IDs into a single space-separated string
+            String newMembers = String.join(" ", studentIDList);
 
+            // Fetch existing members from the database
+            String eventName = CampusConnect.getInstance().getVisibleEventName(); // Replace with your event name or parameter
+            String fetchMembersSQL = "SELECT participants FROM events WHERE event_name = ?";
+            String existingMembers = "";
+
+            try (PreparedStatement fetchStmt = conn().prepareStatement(fetchMembersSQL)) {
+                fetchStmt.setString(1, eventName);
+                ResultSet rs = fetchStmt.executeQuery();
+                if (rs.next()) {
+                    existingMembers = rs.getString("participants");
+                }
+            }
+
+            // Append new members to existing members
+            if (!existingMembers.isEmpty()) {
+                existingMembers += " ";
+            }
+            existingMembers += newMembers;
+
+            // Update the members column in the database
+            String updateMembersSQL = "UPDATE events SET participants = ? WHERE event_name = ?";
+            try (PreparedStatement updateStmt = conn().prepareStatement(updateMembersSQL)) {
+                updateStmt.setString(1, existingMembers);
+                updateStmt.setString(2, eventName);
+                updateStmt.executeUpdate();
+            }
+
+            dispose();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_addUserstoEventButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

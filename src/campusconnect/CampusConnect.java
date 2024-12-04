@@ -67,6 +67,13 @@ public class CampusConnect extends JFrame {
         return activeTable;
     }
 
+    public String getVisibleEventName() {
+        if (eventsDetailedPanel.isVisible()) {
+            return eventNameInfo.getText();
+        }
+        return null;
+    }
+
     private void updateTotalUsersLabel() {
         int rowCount = usersTable.getRowCount();
         totalUsers.setText(rowCount + "");
@@ -1619,13 +1626,17 @@ public class CampusConnect extends JFrame {
     private void popupOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupOpenButtonActionPerformed
         ArrayList<String> membersList = new ArrayList<>();
         ArrayList<String> eventParticipantsList = new ArrayList<>();
-        
+
         DefaultTableModel membersTableModel = (DefaultTableModel) membersTable.getModel();
         DefaultTableModel eventParticipantsTableModel = (DefaultTableModel) eventParticipantsTable.getModel();
-        
+
+        membersTableModel.setRowCount(0); // Clear previous data
+        membersList.clear();
+        eventParticipantsList.clear();
+        eventParticipantsTableModel.setRowCount(0); // Clear previous data
+
         int selectedRow;
         Statement st;
-        membersTableModel.setRowCount(0);
 
         if (activeTable() != null) {
             if (activeTable().getSelectedRowCount() == 1) {
@@ -1689,7 +1700,7 @@ public class CampusConnect extends JFrame {
                         orgOngoingEventsInfo.setText(ongoingEventsCount + "");
                          */
                     } else if (activeTable() == eventsTable) {
-                        String getEventTitle = activeTable().getValueAt(selectedRow, 0).toString();
+                        String getEventTitle = eventsTable.getValueAt(selectedRow, 0).toString();
 
                         String openEvent = "SELECT * FROM events WHERE event_name = '" + getEventTitle + "'";
                         var rr = st.executeQuery(openEvent);
@@ -1701,21 +1712,17 @@ public class CampusConnect extends JFrame {
                         String facultyAssigned = rr.getString("faculty_assigned");
                         String status = rr.getString("status");
                         String participants = rr.getString("participants");
-                        
-                        
-                        
+
                         //adds data on table if members is not empty
                         if (!participants.isBlank()) {
-                            String[] membersIDArray = participants.split(" ");
+                            String[] participantIDArray = participants.split(" ");
 
-                            for (String participantID : membersIDArray) {
-                                eventParticipantsList.add(participantID);
-                                System.out.println(eventParticipantsList);
+                            for (String participantID : participantIDArray) {
+                                eventParticipantsList.add("02000" + participantID);
                             }
-                            for (int i = 0; i < eventParticipantsList.size(); i++) {
 
+                            for (int i = 0; i < eventParticipantsList.size(); i++) {
                                 String participantID = eventParticipantsList.get(i);
-                                
 
                                 String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + participantID + "'";
                                 var rt = st.executeQuery(getStudentDetailsSQL);
@@ -1729,20 +1736,11 @@ public class CampusConnect extends JFrame {
 
                             }
                         }
-                        
-                        
+
                         eventNameInfo.setText(eventName);
                         officerInChargeInfo.setText(facultyAssigned);
                         eventStatusInfo.setText(status);
                         totalParticipantsInfo.setText(eventParticipantsTableModel.getRowCount() + "");
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
 
                         eventsDetailedPanel.setVisible(true);
                         orgsDetailedPanel.setVisible(false);
@@ -1751,10 +1749,6 @@ public class CampusConnect extends JFrame {
                         ClubsAndOrgsPanel.setVisible(false);
                         EventsPanel.setVisible(false);
                         UsersPanel.setVisible(false);
-                        
-                        
-                        
-                        
 
                     } else if (activeTable() == usersTable) {
 

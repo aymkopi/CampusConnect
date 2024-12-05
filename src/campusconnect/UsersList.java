@@ -5,12 +5,16 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 class UsersList extends javax.swing.JFrame {
 
+    private JTable activeDetailedTable;
+
     public UsersList() {
         initComponents();
+        activeDetailedTable = CampusConnect.getInstance().getActiveDetailedTable();
         initTableData();
 
     }
@@ -27,14 +31,13 @@ class UsersList extends javax.swing.JFrame {
                 String studentID = rs.getString("user_id");
                 String studentName = rs.getString("user_name");
                 String studentLevel = rs.getString("student_type");
-                
+
                 studentTableModel.addRow(new Object[]{false, studentID, studentName, studentLevel});
             }
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -42,7 +45,7 @@ class UsersList extends javax.swing.JFrame {
     private void initComponents() {
 
         eventLabel = new javax.swing.JLabel();
-        addUserstoEventButton = new test.ButtonRound();
+        addUsersButton = new test.ButtonRound();
         textFieldRound1 = new test.TextFieldRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         studentsList = new javax.swing.JTable();
@@ -51,20 +54,20 @@ class UsersList extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
-        eventLabel.setText("Users List");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        eventLabel.setText("Users List");
 
-        addUserstoEventButton.setText("Confirm");
-        addUserstoEventButton.setBackground(new java.awt.Color(255, 255, 204));
-        addUserstoEventButton.setBorder(null);
-        addUserstoEventButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        addUserstoEventButton.setRoundBottomLeft(8);
-        addUserstoEventButton.setRoundBottomRight(8);
-        addUserstoEventButton.setRoundTopLeft(8);
-        addUserstoEventButton.setRoundTopRight(8);
-        addUserstoEventButton.addActionListener(new java.awt.event.ActionListener() {
+        addUsersButton.setBackground(new java.awt.Color(255, 255, 204));
+        addUsersButton.setBorder(null);
+        addUsersButton.setText("Confirm");
+        addUsersButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        addUsersButton.setRoundBottomLeft(8);
+        addUsersButton.setRoundBottomRight(8);
+        addUsersButton.setRoundTopLeft(8);
+        addUsersButton.setRoundTopRight(8);
+        addUsersButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUserstoEventButtonActionPerformed(evt);
+                addUsersButtonActionPerformed(evt);
             }
         });
 
@@ -114,7 +117,7 @@ class UsersList extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(eventLabel)
                         .addGap(305, 305, 305)
-                        .addComponent(addUserstoEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(textFieldRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -124,7 +127,7 @@ class UsersList extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addUserstoEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(textFieldRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,63 +141,72 @@ class UsersList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void addUserstoEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserstoEventButtonActionPerformed
+    private void addUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersButtonActionPerformed
         try {
             ArrayList<String> studentIDList = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) studentsList.getModel();
             Statement st = conn().createStatement();
-            
-            
+
             for (int i = 0; i < model.getRowCount(); i++) {
                 Boolean isChecked = (Boolean) model.getValueAt(i, 0);
                 if (isChecked != null && isChecked) {
                     studentIDList.add((String) model.getValueAt(i, 1));
                 }
-            }            
-            
+            }
+
             for (int i = 0; i < studentIDList.size(); i++) {
                 studentIDList.set(i, studentIDList.get(i).replace("02000", ""));
             }
             System.out.println(studentIDList);
-            
+
             // Concatenate student IDs into a single space-separated string
             String newMembers = String.join(" ", studentIDList);
 
-            // Fetch existing members from the database
-            String eventName = CampusConnect.getInstance().getVisibleEventName(); // Replace with your event name or parameter
-            String fetchMembersSQL = "SELECT participants FROM events WHERE event_name = ?";
-            String existingMembers = "";
+            if (activeDetailedTable == CampusConnect.getInstance().membersTable) {
+                // Fetch existing members from the database
+                String orgName = CampusConnect.getInstance().getVisibleOrgName();
+                String fetchMembersSQL = "SELECT members FROM orgs WHERE org_name = ?";
+                String existingMembers = "";
 
-            try (PreparedStatement fetchStmt = conn().prepareStatement(fetchMembersSQL)) {
-                fetchStmt.setString(1, eventName);
-                ResultSet rs = fetchStmt.executeQuery();
-                if (rs.next()) {
-                    existingMembers = rs.getString("participants");
+                try (PreparedStatement fetchStmt = conn().prepareStatement(fetchMembersSQL)) {
+                    fetchStmt.setString(1, orgName);
+                    ResultSet rs = fetchStmt.executeQuery();
+                    if (rs.next()) {
+                        existingMembers = rs.getString("members");
+                        if (existingMembers == null) {
+                            existingMembers = "";
+                        }
+                    }
                 }
-            }
+                // Append new members to existing members
+                if (existingMembers != null && !existingMembers.isEmpty()) {
+                    existingMembers += " ";
+                }
+                existingMembers += newMembers;
 
-            // Append new members to existing members
-            if (!existingMembers.isEmpty()) {
-                existingMembers += " ";
-            }
-            existingMembers += newMembers;
-
-            // Update the members column in the database
-            String updateMembersSQL = "UPDATE events SET participants = ? WHERE event_name = ?";
-            try (PreparedStatement updateStmt = conn().prepareStatement(updateMembersSQL)) {
-                updateStmt.setString(1, existingMembers);
-                updateStmt.setString(2, eventName);
-                updateStmt.executeUpdate();
+                // Update the members column in the database
+                String updateMembersSQL = "UPDATE orgs SET members = ? WHERE org_name = ?";
+                try (PreparedStatement updateStmt = conn().prepareStatement(updateMembersSQL)) {
+                    updateStmt.setString(1, existingMembers);
+                    updateStmt.setString(2, orgName);
+                    updateStmt.executeUpdate();
+                }
+            } else if (activeDetailedTable == CampusConnect.getInstance().eventParticipantsTable) {
+                // Fetch existing members from the database
+                String orgName = CampusConnect.getInstance().getVisibleOrgName();
+                String fetchOrgsSQL = "SELECT members FROM orgs WHERE org_name = ?";
+                String existingMembers = "";
             }
 
             dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
-    }//GEN-LAST:event_addUserstoEventButtonActionPerformed
+
+    }//GEN-LAST:event_addUsersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private test.ButtonRound addUserstoEventButton;
+    private test.ButtonRound addUsersButton;
     private javax.swing.JLabel eventLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable studentsList;

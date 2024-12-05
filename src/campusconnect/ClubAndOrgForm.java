@@ -9,22 +9,17 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
-
 class ClubAndOrgForm extends javax.swing.JFrame {
 
-    
-    
     DefaultComboBoxModel<Object> facultyComboBoxModel = new DefaultComboBoxModel<>();
     String orgName;
     String level;
     String adviser;
     String details;
     
-
     public ClubAndOrgForm() {
         initComponents();
         initFaculty();
-
     }
 
     private void initFaculty() {
@@ -37,9 +32,8 @@ class ClubAndOrgForm extends javax.swing.JFrame {
             while (sfrs.next()) {
                 String fcn = sfrs.getString("user_name");
                 facultyComboBoxModel.addElement(fcn);
-
             }
-
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }

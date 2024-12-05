@@ -13,13 +13,13 @@ public class CampusConnect extends JFrame {
 
     //instantiate an static frame of mainFrame
     private static CampusConnect instance;
-    
-    
+
+    private JTable activeDetailedTable = null;
 
     //table models
     DefaultTableModel orgsModel = new DefaultTableModel(new String[]{"Org/Club Name", "Members", "Level", "Adviser", "Details"}, 0);
     DefaultTableModel eventsModel = new DefaultTableModel(new String[]{"Event Name", "Start Date", "End Date", "Location", "User Access", "Club Assigned", "Faculty Assigned", "Details"}, 0);
-    DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "Password", "User Type", "Student Type"}, 0);
+    DefaultTableModel usersModel = new DefaultTableModel(new String[]{"User ID", "User Name", "User Type", "Student Type"}, 0);
 
     public CampusConnect() {
         instance = this;
@@ -69,9 +69,25 @@ public class CampusConnect extends JFrame {
         return activeTable;
     }
 
+    public JTable getActiveDetailedTable() {
+        if (orgsDetailedPanel.isVisible()) {
+            activeDetailedTable = membersTable;
+        } else if (eventsDetailedPanel.isVisible()) {
+            activeDetailedTable = eventParticipantsTable;
+        }
+        return activeDetailedTable;
+    }
+
     public String getVisibleEventName() {
         if (eventsDetailedPanel.isVisible()) {
             return eventNameInfo.getText();
+        }
+        return null;
+    }
+
+    public String getVisibleOrgName() {
+        if (orgsDetailedPanel.isVisible()) {
+            return orgsNameInfo.getText();
         }
         return null;
     }
@@ -81,7 +97,6 @@ public class CampusConnect extends JFrame {
         totalUsers.setText(rowCount + "");
     }
 
-    //initialize table
     private void initTableData() {
         try {
             Statement st = conn.createStatement();
@@ -112,11 +127,13 @@ public class CampusConnect extends JFrame {
             while (usrs.next()) {
                 String uid = usrs.getString("user_id");
                 String unm = usrs.getString("user_name");
-                String psw = usrs.getString("password");
                 String uty = usrs.getString("user_type");
                 String sty = usrs.getString("student_type");
+                if (sty.equals("null")) {
+                    sty = "";
+                }
 
-                usersModel.addRow(new Object[]{uid, unm, psw, uty, sty});
+                usersModel.addRow(new Object[]{uid, unm, uty, sty});
             }
 
             //adds orgs data from database to orgsTable
@@ -180,11 +197,18 @@ public class CampusConnect extends JFrame {
         panelRound5 = new test.PanelRound();
         clubAndOrgsLabel1 = new javax.swing.JLabel();
         panelRound6 = new test.PanelRound();
+        panelRound15 = new test.PanelRound();
+        jLabel5 = new javax.swing.JLabel();
+        totalUsers = new javax.swing.JLabel();
+        panelRound16 = new test.PanelRound();
+        jLabel8 = new javax.swing.JLabel();
+        panelRound17 = new test.PanelRound();
+        jLabel6 = new javax.swing.JLabel();
+        panelRound18 = new test.PanelRound();
+        jLabel7 = new javax.swing.JLabel();
         panelRound7 = new test.PanelRound();
         panelRound8 = new test.PanelRound();
         panelRound9 = new test.PanelRound();
-        jLabel4 = new javax.swing.JLabel();
-        totalUsers = new javax.swing.JLabel();
         ClubsAndOrgsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         orgsTable = new javax.swing.JTable();
@@ -206,16 +230,16 @@ public class CampusConnect extends JFrame {
         userTypeInfo = new javax.swing.JLabel();
         userTypeInfo1 = new javax.swing.JLabel();
         userTypeInfo2 = new javax.swing.JLabel();
-        userNameInfo1 = new javax.swing.JLabel();
-        userNameInfo2 = new javax.swing.JLabel();
+        userParticipatedEventsInfo = new javax.swing.JLabel();
+        userOrgsJoinedInfo = new javax.swing.JLabel();
         panelRound2 = new test.PanelRound();
         userTypeInfo5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        userOrgsJoinedTable = new javax.swing.JTable();
         panelRound3 = new test.PanelRound();
         userTypeInfo6 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        userParticipatedEventsTable = new javax.swing.JTable();
         orgsDetailedPanel = new javax.swing.JPanel();
         backToDashboardButton = new javax.swing.JButton();
         orgsNameInfo = new javax.swing.JLabel();
@@ -227,11 +251,12 @@ public class CampusConnect extends JFrame {
         panelRound10 = new test.PanelRound();
         userTypeInfo8 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        orgEventTable = new javax.swing.JTable();
         panelRound11 = new test.PanelRound();
         userTypeInfo9 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         membersTable = new javax.swing.JTable();
+        addOrgMembersButton = new test.ButtonRound();
         eventsDetailedPanel = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         eventNameInfo = new javax.swing.JLabel();
@@ -557,15 +582,150 @@ public class CampusConnect extends JFrame {
         panelRound6.setRoundTopLeft(20);
         panelRound6.setRoundTopRight(20);
 
+        panelRound15.setBackground(new java.awt.Color(204, 204, 204));
+        panelRound15.setPreferredSize(new java.awt.Dimension(301, 38));
+        panelRound15.setRoundBottomLeft(25);
+        panelRound15.setRoundBottomRight(25);
+        panelRound15.setRoundTopLeft(25);
+        panelRound15.setRoundTopRight(25);
+
+        jLabel5.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel5.setText("Total Events");
+
+        totalUsers.setFont(new java.awt.Font("Inter Display ExtraBold", 0, 18)); // NOI18N
+        totalUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalUsers.setText("102");
+        totalUsers.setFocusable(false);
+        totalUsers.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        totalUsers.setPreferredSize(new java.awt.Dimension(30, 18));
+
+        javax.swing.GroupLayout panelRound15Layout = new javax.swing.GroupLayout(panelRound15);
+        panelRound15.setLayout(panelRound15Layout);
+        panelRound15Layout.setHorizontalGroup(
+            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound15Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelRound15Layout.setVerticalGroup(
+            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound15Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(16, 16, 16))
+        );
+
+        panelRound16.setBackground(new java.awt.Color(204, 204, 204));
+        panelRound16.setPreferredSize(new java.awt.Dimension(301, 38));
+        panelRound16.setRoundBottomLeft(25);
+        panelRound16.setRoundBottomRight(25);
+        panelRound16.setRoundTopLeft(25);
+        panelRound16.setRoundTopRight(25);
+
+        jLabel8.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel8.setText("Finished");
+
+        javax.swing.GroupLayout panelRound16Layout = new javax.swing.GroupLayout(panelRound16);
+        panelRound16.setLayout(panelRound16Layout);
+        panelRound16Layout.setHorizontalGroup(
+            panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound16Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel8)
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
+        panelRound16Layout.setVerticalGroup(
+            panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound16Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelRound17.setBackground(new java.awt.Color(204, 204, 204));
+        panelRound17.setPreferredSize(new java.awt.Dimension(301, 38));
+        panelRound17.setRoundBottomLeft(25);
+        panelRound17.setRoundBottomRight(25);
+        panelRound17.setRoundTopLeft(25);
+        panelRound17.setRoundTopRight(25);
+
+        jLabel6.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel6.setText("Ongoing");
+
+        javax.swing.GroupLayout panelRound17Layout = new javax.swing.GroupLayout(panelRound17);
+        panelRound17.setLayout(panelRound17Layout);
+        panelRound17Layout.setHorizontalGroup(
+            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound17Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel6)
+                .addContainerGap(226, Short.MAX_VALUE))
+        );
+        panelRound17Layout.setVerticalGroup(
+            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound17Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelRound18.setBackground(new java.awt.Color(204, 204, 204));
+        panelRound18.setPreferredSize(new java.awt.Dimension(301, 38));
+        panelRound18.setRoundBottomLeft(25);
+        panelRound18.setRoundBottomRight(25);
+        panelRound18.setRoundTopLeft(25);
+        panelRound18.setRoundTopRight(25);
+
+        jLabel7.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel7.setText("Pending");
+
+        javax.swing.GroupLayout panelRound18Layout = new javax.swing.GroupLayout(panelRound18);
+        panelRound18.setLayout(panelRound18Layout);
+        panelRound18Layout.setHorizontalGroup(
+            panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound18Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7)
+                .addContainerGap(229, Short.MAX_VALUE))
+        );
+        panelRound18Layout.setVerticalGroup(
+            panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound18Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
         panelRound6Layout.setHorizontalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGroup(panelRound6Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelRound16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(panelRound15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelRound18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelRound16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         panelRound7.setRoundBottomLeft(20);
@@ -577,11 +737,11 @@ public class CampusConnect extends JFrame {
         panelRound7.setLayout(panelRound7Layout);
         panelRound7Layout.setHorizontalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
+            .addGap(0, 368, Short.MAX_VALUE)
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 385, Short.MAX_VALUE)
         );
 
         panelRound8.setMaximumSize(new java.awt.Dimension(250, 32767));
@@ -606,37 +766,15 @@ public class CampusConnect extends JFrame {
         panelRound9.setRoundTopLeft(20);
         panelRound9.setRoundTopRight(20);
 
-        jLabel4.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jLabel4.setText("Total Users");
-
-        totalUsers.setFont(new java.awt.Font("Inter Display ExtraBold", 2, 56)); // NOI18N
-        totalUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalUsers.setText("102");
-        totalUsers.setFocusable(false);
-        totalUsers.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-
         javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
         panelRound9.setLayout(panelRound9Layout);
         panelRound9Layout.setHorizontalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound9Layout.createSequentialGroup()
-                .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound9Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound9Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 741, Short.MAX_VALUE)
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound9Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalUsers)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGap(0, 167, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -650,7 +788,7 @@ public class CampusConnect extends JFrame {
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound5Layout.createSequentialGroup()
-                                .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelRound6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -667,9 +805,9 @@ public class CampusConnect extends JFrame {
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound5Layout.createSequentialGroup()
-                        .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(22, 22, 22))
@@ -694,8 +832,8 @@ public class CampusConnect extends JFrame {
         jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
 
         orgsTable.setBorder(null);
-        orgsTable.setFont(new java.awt.Font("Inter Display", 0, 12)); // NOI18N
         orgsTable.setModel(orgsModel);
+        orgsTable.setFont(new java.awt.Font("Inter Display", 0, 12)); // NOI18N
         orgsTable.setRowHeight(30);
         orgsTable.setShowGrid(false);
         orgsTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -930,17 +1068,17 @@ public class CampusConnect extends JFrame {
         userTypeInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         userTypeInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        userTypeInfo1.setText("Participated Events");
+        userTypeInfo1.setText("Events Participated");
         userTypeInfo1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        userTypeInfo2.setText("Clubs Joined");
+        userTypeInfo2.setText("Orgs Joined");
         userTypeInfo2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
 
-        userNameInfo1.setText("312");
-        userNameInfo1.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        userParticipatedEventsInfo.setText("312");
+        userParticipatedEventsInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
 
-        userNameInfo2.setText("36");
-        userNameInfo2.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        userOrgsJoinedInfo.setText("36");
+        userOrgsJoinedInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setPreferredSize(new java.awt.Dimension(673, 394));
@@ -949,22 +1087,27 @@ public class CampusConnect extends JFrame {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
-        userTypeInfo5.setText("Joined Clubs");
+        userTypeInfo5.setText("Organizations Joined");
         userTypeInfo5.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        userOrgsJoinedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Event Name", "Date", "Status"
+                "Organization Name", "Adviser"
             }
-        ));
-        jScrollPane4.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(userOrgsJoinedTable);
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -973,10 +1116,10 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(userTypeInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(userTypeInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelRound2Layout.setVerticalGroup(
@@ -1000,18 +1143,23 @@ public class CampusConnect extends JFrame {
         userTypeInfo6.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         userTypeInfo6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        userParticipatedEventsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Event Name", "Date", "Status"
             }
-        ));
-        jScrollPane5.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(userParticipatedEventsTable);
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -1054,13 +1202,13 @@ public class CampusConnect extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE))
                             .addGroup(userDetailedPanelLayout.createSequentialGroup()
                                 .addComponent(userNameInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)))
                         .addGroup(userDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(userTypeInfo1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userNameInfo1))
+                            .addComponent(userParticipatedEventsInfo))
                         .addGap(18, 18, 18)
                         .addGroup(userDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userNameInfo2)
+                            .addComponent(userOrgsJoinedInfo)
                             .addComponent(userTypeInfo2))))
                 .addGap(43, 43, 43))
             .addGroup(userDetailedPanelLayout.createSequentialGroup()
@@ -1081,8 +1229,8 @@ public class CampusConnect extends JFrame {
                             .addComponent(userTypeInfo2))
                         .addGap(5, 5, 5)
                         .addGroup(userDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userNameInfo1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userNameInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(userParticipatedEventsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userOrgsJoinedInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(userDetailedPanelLayout.createSequentialGroup()
                         .addComponent(userNameInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1113,11 +1261,11 @@ public class CampusConnect extends JFrame {
         });
 
         orgsNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        orgsNameInfo.setText("Justine Acuña");
+        orgsNameInfo.setText("Org Name");
         orgsNameInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         adviserInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        adviserInfo.setText("Faculty");
+        adviserInfo.setText("Adviser");
         adviserInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         userTypeInfo4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -1143,7 +1291,7 @@ public class CampusConnect extends JFrame {
         userTypeInfo8.setText("Events");
         userTypeInfo8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        orgEventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -1154,7 +1302,7 @@ public class CampusConnect extends JFrame {
                 "Event Name", "Date", "Status"
             }
         ));
-        jScrollPane6.setViewportView(jTable3);
+        jScrollPane6.setViewportView(orgEventTable);
 
         javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);
         panelRound10.setLayout(panelRound10Layout);
@@ -1209,6 +1357,18 @@ public class CampusConnect extends JFrame {
         membersTable.setRowHeight(25);
         jScrollPane7.setViewportView(membersTable);
 
+        addOrgMembersButton.setBorder(null);
+        addOrgMembersButton.setText("Add Members");
+        addOrgMembersButton.setRoundBottomLeft(10);
+        addOrgMembersButton.setRoundBottomRight(10);
+        addOrgMembersButton.setRoundTopLeft(10);
+        addOrgMembersButton.setRoundTopRight(10);
+        addOrgMembersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addOrgMembersButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
         panelRound11.setLayout(panelRound11Layout);
         panelRound11Layout.setHorizontalGroup(
@@ -1216,19 +1376,22 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound11Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(panelRound11Layout.createSequentialGroup()
                         .addComponent(userTypeInfo9, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addOrgMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelRound11Layout.setVerticalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userTypeInfo9)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userTypeInfo9)
+                    .addComponent(addOrgMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1246,11 +1409,11 @@ public class CampusConnect extends JFrame {
                     .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
                         .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
-                                .addComponent(adviserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
                                 .addComponent(orgsNameInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE))
+                            .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
+                                .addComponent(adviserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalMembersInfo)
                             .addComponent(userTypeInfo4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1585,7 +1748,6 @@ public class CampusConnect extends JFrame {
                             // Remove row from table
                             if (activeTable() == orgsTable) {
                                 ((DefaultTableModel) orgsTable.getModel()).removeRow(selectedRows[i]);
-
                             } else if (activeTable() == eventsTable) {
                                 ((DefaultTableModel) eventsTable.getModel()).removeRow(selectedRows[i]);
                             } else {
@@ -1631,11 +1793,18 @@ public class CampusConnect extends JFrame {
 
         DefaultTableModel membersTableModel = (DefaultTableModel) membersTable.getModel();
         DefaultTableModel eventParticipantsTableModel = (DefaultTableModel) eventParticipantsTable.getModel();
+        DefaultTableModel orgEventTableModel = (DefaultTableModel) orgEventTable.getModel();
+        DefaultTableModel userParticipatedEventsTableModel = (DefaultTableModel) userParticipatedEventsTable.getModel();
+        DefaultTableModel userOrgsJoinedTableModel = (DefaultTableModel) userOrgsJoinedTable.getModel();
 
-        membersTableModel.setRowCount(0); // Clear previous data
+        // Clear previous data
+        membersTableModel.setRowCount(0);
+        eventParticipantsTableModel.setRowCount(0);
+        orgEventTableModel.setRowCount(0);
+        userParticipatedEventsTableModel.setRowCount(0);
+        userOrgsJoinedTableModel.setRowCount(0);
         membersList.clear();
         eventParticipantsList.clear();
-        eventParticipantsTableModel.setRowCount(0); // Clear previous data
 
         int selectedRow;
         Statement st;
@@ -1649,6 +1818,7 @@ public class CampusConnect extends JFrame {
                     if (activeTable() == orgsTable) {
                         String getOrgNameSQL = orgsTable.getValueAt(selectedRow, 0).toString();
 
+                        //retrieves data of selected organization
                         String openOrgDetailsSQL = "SELECT * FROM orgs WHERE org_name = '" + getOrgNameSQL + "'";
                         var rs = st.executeQuery(openOrgDetailsSQL);
 
@@ -1656,29 +1826,55 @@ public class CampusConnect extends JFrame {
                         String orgName = rs.getString("org_name");
                         String adviser = rs.getString("adviser");
                         String totalMembers = rs.getString("member_count");
-                        String membersID = rs.getString("members");
+                        String members = rs.getString("members");
 
-                        String[] membersIDArray = membersID.split(" ");
+                        //adds data on table if members is not empty
+                        if (members != null && !members.isBlank()) {
+                            String[] membersIDArray = members.split(" ");
 
-                        for (String memberID : membersIDArray) {
-                            membersList.add("02000" + memberID);
+                            for (String membersID : membersIDArray) {
+                                membersList.add("02000" + membersID);
+                            }
+                            for (int i = 0; i < membersList.size(); i++) {
+
+                                String memberID = membersList.get(i);
+
+                                String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + memberID + "'";
+
+                                var rt = st.executeQuery(getStudentDetailsSQL);
+
+                                rt.next();
+                                String studentID = rt.getString("user_id");
+                                String studentName = rt.getString("user_name");
+                                String level = rt.getString("student_type");
+
+                                membersTableModel.addRow(new Object[]{studentID, studentName, level});
+                            }
                         }
-                        for (int i = 0; i < membersList.size(); i++) {
 
-                            String memberID = membersList.get(i);
+                        String getOrgEventsSQL = "SELECT * FROM events WHERE club_assigned = '" + orgName + "'";
+                        var rt = st.executeQuery(getOrgEventsSQL);
 
-                            String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + memberID + "'";
+                        while (rt.next()) {
+                            String eventName = rt.getString("event_name");
+                            String startDate = rt.getString("start_date");
+                            String status = rt.getString("status");
 
-                            var rt = st.executeQuery(getStudentDetailsSQL);
-
-                            rt.next();
-                            String studentID = rt.getString("user_id");
-                            String studentName = rt.getString("user_name");
-                            String level = rt.getString("student_type");
-
-                            membersTableModel.addRow(new Object[]{studentID, studentName, level});
-
+                            orgEventTableModel.addRow(new Object[]{eventName, startDate, status});
                         }
+
+                        //determines ongoing events
+                        int rowCount = 0;
+                        for (int i = 0; i < orgEventTableModel.getRowCount(); i++) {
+                            if ("ONGOING".equals(orgEventTableModel.getValueAt(i, 2))) {
+                                rowCount++;
+                            }
+                        }
+
+                        orgsNameInfo.setText(orgName);
+                        adviserInfo.setText(adviser);
+                        orgOngoingEventsInfo.setText(rowCount + "");
+                        totalMembersInfo.setText(membersTableModel.getRowCount() + "");
 
                         orgsDetailedPanel.setVisible(true);
                         eventsDetailedPanel.setVisible(false);
@@ -1688,20 +1884,6 @@ public class CampusConnect extends JFrame {
                         EventsPanel.setVisible(false);
                         UsersPanel.setVisible(false);
 
-
-                        /*retrieves total ongoing events
-                        orgsNameInfo.setText(orgName);
-                        adviserInfo.setText(adviser);
-                        String ongoingEventsSQL = "SELECT * FROM events WHERE status = ONGOING";
-                        var oe = st.executeQuery(ongoingEventsSQL);
-
-                        
-                        
-                        oe.afterLast();
-                        int ongoingEventsCount = oe.getRow();
-
-                        orgOngoingEventsInfo.setText(ongoingEventsCount + "");
-                         */
                     } else if (activeTable() == eventsTable) {
                         String getEventTitle = eventsTable.getValueAt(selectedRow, 0).toString();
 
@@ -1717,7 +1899,7 @@ public class CampusConnect extends JFrame {
                         String participants = rr.getString("participants");
 
                         //adds data on table if members is not empty
-                        if (!participants.isBlank()) {
+                        if (participants != null && !participants.isBlank()) {
                             String[] participantIDArray = participants.split(" ");
 
                             for (String participantID : participantIDArray) {
@@ -1736,7 +1918,6 @@ public class CampusConnect extends JFrame {
                                 String level = rt.getString("student_type");
 
                                 eventParticipantsTableModel.addRow(new Object[]{studentID, studentName, level});
-
                             }
                         }
 
@@ -1754,7 +1935,6 @@ public class CampusConnect extends JFrame {
                         UsersPanel.setVisible(false);
 
                     } else if (activeTable() == usersTable) {
-
                         String getUserID = usersTable.getValueAt(selectedRow, 0).toString();
 
                         String openUser = "SELECT * FROM users WHERE user_id = '" + getUserID + "'";
@@ -1767,12 +1947,48 @@ public class CampusConnect extends JFrame {
                         String userType = rs.getString("user_type");
                         String studentType = rs.getString("student_type");
 
+                        String getEventMembersSQL = "SELECT * FROM events";
+                        var rm = st.executeQuery(getEventMembersSQL);
+
+                        while (rm.next()) {
+                            String participantList = rm.getString("participants");
+                            String eventName = rm.getString("event_name");
+                            String startdate = rm.getString("start_date");
+                            String status = rm.getString("status");
+
+                            //removes 02000
+                            String UID = userID;
+                            UID = UID.replace("02000", "");
+
+                            if (participantList.contains(UID)) {
+                                userParticipatedEventsTableModel.addRow(new Object[]{eventName, startdate, status});
+                            }
+                        }
+
+                        String getJoinedOrgsSQL = "SELECT * FROM orgs";
+                        var rp = st.executeQuery(getJoinedOrgsSQL);
+
+                        while (rp.next()) {
+                            String memberList = rp.getString("members");
+                            String orgName = rp.getString("org_name");
+                            String adviser = rp.getString("adviser");
+
+                            String UID = userID;
+                            UID = UID.replace("02000", "");
+
+                            if (memberList.contains(UID)) {
+                                userOrgsJoinedTableModel.addRow(new Object[]{orgName, adviser});
+                            }
+                        }
+
                         userNameInfo.setText(userName);
-                        if (studentType.equals(" ")) {
+                        if (studentType.equals("null")) {
                             userTypeInfo.setText(userID + " | " + userType);
                         } else {
                             userTypeInfo.setText(userID + " | " + userType + " - " + studentType);
                         }
+                        userParticipatedEventsInfo.setText(userParticipatedEventsTableModel.getRowCount() + "");
+                        userOrgsJoinedInfo.setText(userOrgsJoinedTableModel.getRowCount() + "");
 
                         userDetailedPanel.setVisible(true);
                         DashBoardPanel.setVisible(false);
@@ -1786,17 +2002,15 @@ public class CampusConnect extends JFrame {
                     JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
                 }
             } else if (activeTable().getSelectedRowCount() < 1) {
-                JOptionPane.showMessageDialog(null, "No rows selected.");
+                JOptionPane.showMessageDialog(null, "No row selected.");
                 activeTable().clearSelection();
             } else {
-                JOptionPane.showMessageDialog(null, "Select only single user to open");
+                JOptionPane.showMessageDialog(null, "Select one row to open.");
                 activeTable().clearSelection();
 
             }
 
         }
-
-
     }//GEN-LAST:event_popupOpenButtonActionPerformed
 
     private void backUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUsersButtonActionPerformed
@@ -1814,7 +2028,6 @@ public class CampusConnect extends JFrame {
             public void run() {
                 if (ClubsAndOrgsPanel.isVisible()) {
                     new ClubAndOrgForm().setVisible(true);
-
                 } else if (EventsPanel.isVisible()) {
                     new EventsForm().setVisible(true);
                 } else {
@@ -1856,11 +2069,26 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_eventsTableMouseReleased
 
     private void backToDashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToDashboardButtonActionPerformed
-        // TODO add your handling code here:
+        if (orgsDetailedPanel.isVisible()) { 
+            orgsDetailedPanel.setVisible(false);
+            DashBoardPanel.setVisible(false);
+            ClubsAndOrgsPanel.setVisible(false);
+            EventsPanel.setVisible(false);
+            UsersPanel.setVisible(false);
+            ClubsAndOrgsPanel.setVisible(true);
+        }
     }//GEN-LAST:event_backToDashboardButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        if (eventsDetailedPanel.isVisible()) {
+            eventsDetailedPanel.setVisible(false);
+            orgsDetailedPanel.setVisible(false);
+            DashBoardPanel.setVisible(false);
+            ClubsAndOrgsPanel.setVisible(false);
+            EventsPanel.setVisible(true);
+            UsersPanel.setVisible(false);
+          
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addParticipantsButtonActionPerformed
@@ -1870,6 +2098,14 @@ public class CampusConnect extends JFrame {
             }
         });
     }//GEN-LAST:event_addParticipantsButtonActionPerformed
+
+    private void addOrgMembersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrgMembersButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UsersList().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_addOrgMembersButtonActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1908,6 +2144,7 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPanel EventsPanel;
     private javax.swing.JPanel UsersPanel;
     private test.ButtonRound addEventButton;
+    private test.ButtonRound addOrgMembersButton;
     private test.ButtonRound addOrgsButton;
     private test.ButtonRound addParticipantsButton;
     private test.ButtonRound addUsersButton;
@@ -1921,7 +2158,7 @@ public class CampusConnect extends JFrame {
     private test.ButtonRound clubsAndOrgsButton;
     private test.ButtonRound dashboardButton;
     private javax.swing.JLabel eventNameInfo;
-    private javax.swing.JTable eventParticipantsTable;
+    public javax.swing.JTable eventParticipantsTable;
     private javax.swing.JLabel eventStatusInfo;
     private test.ButtonRound eventsButton;
     private javax.swing.JPanel eventsDetailedPanel;
@@ -1929,7 +2166,10 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1940,14 +2180,12 @@ public class CampusConnect extends JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel logoPlaceHolder;
     private test.PanelRound mainDashboard;
-    private javax.swing.JTable membersTable;
+    public javax.swing.JTable membersTable;
     private javax.swing.JLabel officerInChargeInfo;
+    private javax.swing.JTable orgEventTable;
     private javax.swing.JLabel orgOngoingEventsInfo;
     private javax.swing.JPanel orgsDetailedPanel;
     private javax.swing.JLabel orgsNameInfo;
@@ -1956,6 +2194,10 @@ public class CampusConnect extends JFrame {
     private test.PanelRound panelRound10;
     private test.PanelRound panelRound11;
     private test.PanelRound panelRound13;
+    private test.PanelRound panelRound15;
+    private test.PanelRound panelRound16;
+    private test.PanelRound panelRound17;
+    private test.PanelRound panelRound18;
     private test.PanelRound panelRound2;
     private test.PanelRound panelRound3;
     private test.PanelRound panelRound4;
@@ -1978,8 +2220,10 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel totalUsers;
     private javax.swing.JPanel userDetailedPanel;
     private javax.swing.JLabel userNameInfo;
-    private javax.swing.JLabel userNameInfo1;
-    private javax.swing.JLabel userNameInfo2;
+    private javax.swing.JLabel userOrgsJoinedInfo;
+    private javax.swing.JTable userOrgsJoinedTable;
+    private javax.swing.JLabel userParticipatedEventsInfo;
+    private javax.swing.JTable userParticipatedEventsTable;
     private javax.swing.JLabel userTypeInfo;
     private javax.swing.JLabel userTypeInfo1;
     private javax.swing.JLabel userTypeInfo13;

@@ -429,11 +429,11 @@ class EventsForm extends javax.swing.JFrame {
             }
         }
         
-        if(inEventStartDate.getDate().isBefore(date)){
+        if (inEventStartDate.getDate().isAfter(date)) {
             status = "INCOMING";
-        } else if (inEventStartDate.getDate().isEqual(date)) {
+        } else if (inEventStartDate.getDate().isEqual(date) || (inEventStartDate.getDate().isBefore(date) && inEventEndDate.getDate().isAfter(date))) {
             status = "ONGOING";
-        } else if (inEventEndDate.getDate().isAfter(date)) {
+        } else if (inEventEndDate.getDate().isBefore(date) || inEventEndDate.getDate().isEqual(date)) {
             status = "FINISHED";
         }
         

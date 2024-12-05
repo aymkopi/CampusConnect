@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
@@ -31,7 +31,7 @@
                   <Group type="102" attributes="0">
                       <Component id="eventLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
-                      <Component id="addUserstoEventButton" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="addUsersButton" min="-2" pref="83" max="-2" attributes="0"/>
                   </Group>
                   <Component id="textFieldRound1" alignment="1" min="-2" pref="193" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
@@ -45,7 +45,7 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="addUserstoEventButton" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="addUsersButton" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="eventLabel" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -60,21 +60,21 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="eventLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Users List"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="1"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="Users List"/>
       </Properties>
     </Component>
-    <Component class="test.ButtonRound" name="addUserstoEventButton">
+    <Component class="test.ButtonRound" name="addUsersButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Confirm"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="Confirm"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="14" style="0"/>
         </Property>
@@ -84,7 +84,7 @@
         <Property name="roundTopRight" type="int" value="8"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUserstoEventButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUsersButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="test.TextFieldRound" name="textFieldRound1">

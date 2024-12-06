@@ -235,7 +235,7 @@ class UsersForm extends javax.swing.JFrame {
                         .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passwordLabel))
                     .addComponent(userIDLabel))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

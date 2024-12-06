@@ -1293,15 +1293,20 @@ public class CampusConnect extends JFrame {
 
         orgEventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Event Name", "Date", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(orgEventTable);
 
         javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);

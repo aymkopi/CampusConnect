@@ -145,7 +145,6 @@ class UsersList extends javax.swing.JFrame {
         try {
             ArrayList<String> studentIDList = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) studentsList.getModel();
-            Statement st = conn().createStatement();
 
             for (int i = 0; i < model.getRowCount(); i++) {
                 Boolean isChecked = (Boolean) model.getValueAt(i, 0);
@@ -193,11 +192,36 @@ class UsersList extends javax.swing.JFrame {
                 }
             } else if (activeDetailedTable == CampusConnect.getInstance().eventParticipantsTable) {
                 // Fetch existing members from the database
-                String orgName = CampusConnect.getInstance().getVisibleOrgName();
-                String fetchOrgsSQL = "SELECT members FROM orgs WHERE org_name = ?";
-                String existingMembers = "";
-            }
+                String eventName = CampusConnect.getInstance().getVisibleEventName();
+                String fetchParticipantsSQL = "SELECT participants FROM events WHERE event_name = ?";
+                String existingParticipants = "";
+                
+                try (PreparedStatement fetchStmt = conn().prepareStatement(fetchParticipantsSQL)) {
+                    fetchStmt.setString(1, eventName);
+                    ResultSet rs = fetchStmt.executeQuery();
+                    if (rs.next()) {
+                        existingParticipants = rs.getString("participants");
+                        if (existingParticipants == null) {
+                            existingParticipants = "";
+                        }
+                    }
+                }
+                // Append new members to existing members
+                if (existingParticipants != null && !existingParticipants.isEmpty()) {
+                    existingParticipants += " ";
+                }
+                existingParticipants += newMembers;
 
+                // Update the members column in the database
+                String updateMembersSQL = "UPDATE events SET participants = ? WHERE event_name = ?";
+                try (PreparedStatement updateStmt = conn().prepareStatement(updateMembersSQL)) {
+                    updateStmt.setString(1, existingParticipants);
+                    updateStmt.setString(2, eventName);
+                    updateStmt.executeUpdate();
+                }
+                
+            }
+            CampusConnect.getInstance().refreshTableData();
             dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

@@ -1706,7 +1706,7 @@ public class CampusConnect extends JFrame {
         int[] selectedRows;
 
         if (activeTable() != null) {
-            selectedRows = activeTable().getSelectedRows(); // Get selected rows
+            selectedRows = activeTable().getSelectedRows();// Get selected rows
 
             if (selectedRows.length > 0) {
                 int confirmDelete = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this data?", "Delete?", JOptionPane.YES_NO_OPTION);
@@ -1796,7 +1796,7 @@ public class CampusConnect extends JFrame {
         ArrayList<String> membersList = new ArrayList<>();
         ArrayList<String> eventParticipantsList = new ArrayList<>();
 
-        DefaultTableModel membersTableModel = (DefaultTableModel) membersTable.getModel();
+        DefaultTableModel membersTableModel = (DefaultTableModel)  membersTable.getModel();
         DefaultTableModel eventParticipantsTableModel = (DefaultTableModel) eventParticipantsTable.getModel();
         DefaultTableModel orgEventTableModel = (DefaultTableModel) orgEventTable.getModel();
         DefaultTableModel userParticipatedEventsTableModel = (DefaultTableModel) userParticipatedEventsTable.getModel();

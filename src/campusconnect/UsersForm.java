@@ -292,7 +292,7 @@ class UsersForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "User added successfully!");
                 
                 // Refresh the table in CampusConnect
-                CampusConnect.getInstance().refreshTableData();
+                CampusConnect.getInstance().refreshMainTableData();
                 dispose();
 
             } catch (SQLException e) {

@@ -24,7 +24,7 @@ public class CampusConnect extends JFrame {
     public CampusConnect() {
         instance = this;
         initComponents();
-        initTableData();
+        fetchMainTableData();
         updateTotalUsersLabel();
     }
 
@@ -47,15 +47,32 @@ public class CampusConnect extends JFrame {
     }
 
     //refresh data on tables
-    public void refreshTableData() {
+    public void refreshMainTableData() {
         // Clear the existing table data
         orgsModel.setRowCount(0);
         eventsModel.setRowCount(0);
         usersModel.setRowCount(0);
         // Reinitialize the data
-        initTableData();
+        fetchMainTableData();
     }
 
+    public void refreshInternalTableData() {
+        if (getActiveDetailedTable()!= null && getActiveDetailedTable().getSelectedRowCount() == 1) {
+            String tableName = getActiveDetailedTable().getName();
+            int selectedRow = getActiveDetailedTable().getSelectedRow();
+            switch (tableName) {
+                case "orgsTable" -> fetchOrgData(selectedRow);
+                case "eventsTable" -> fetchEventData(selectedRow);
+                case "usersTable" -> fetchUserData(selectedRow);
+                default -> JOptionPane.showMessageDialog(this, "Invalid table name provided.");
+            }
+        } else {
+            String message = getActiveDetailedTable().getSelectedRowCount() < 1 ? "No row selected." : "Select one row to open.";
+            JOptionPane.showMessageDialog(null, message);
+            getActiveDetailedTable().clearSelection();
+        }
+    }
+    
     public JTable activeTable() {
         JTable activeTable = null;
 
@@ -97,7 +114,7 @@ public class CampusConnect extends JFrame {
         totalUsers.setText(rowCount + "");
     }
 
-    private void initTableData() {
+    private void fetchMainTableData() {
         try {
             Statement st = conn.createStatement();
 
@@ -151,6 +168,208 @@ public class CampusConnect extends JFrame {
                 orgsModel.addRow(new Object[]{orn, mbc, lvl, adv, det});
             }
 
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }
+
+    private void fetchInternalTableData(JTable activeTable, int selectedRow) {
+        if (activeTable == orgsTable) {
+            fetchOrgData(selectedRow);
+        } else if (activeTable == eventsTable) {
+            fetchEventData(selectedRow);
+        } else if (activeTable == usersTable) {
+            fetchUserData(selectedRow);
+        }
+    }
+
+    private void fetchOrgData(int selectedRow) {
+        ArrayList<String> membersList = new ArrayList<>();
+        DefaultTableModel membersTableModel = (DefaultTableModel) membersTable.getModel();
+        DefaultTableModel orgEventTableModel = (DefaultTableModel) orgEventTable.getModel();
+
+        membersTableModel.setRowCount(0);
+        orgEventTableModel.setRowCount(0);
+        membersList.clear();
+
+        try {
+            Statement st = conn.createStatement();
+            String getOrgNameSQL = orgsTable.getValueAt(selectedRow, 0).toString();
+            String openOrgDetailsSQL = "SELECT * FROM orgs WHERE org_name = '" + getOrgNameSQL + "'";
+            var rs = st.executeQuery(openOrgDetailsSQL);
+
+            if (rs.next()) {
+                String orgName = rs.getString("org_name");
+                String adviser = rs.getString("adviser");
+                String members = rs.getString("members");
+
+                if (members != null && !members.isBlank()) {
+                    String[] membersIDArray = members.split(" ");
+                    for (String membersID : membersIDArray) {
+                        membersList.add("02000" + membersID);
+                    }
+                    for (String memberID : membersList) {
+                        String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + memberID + "'";
+                        var rt = st.executeQuery(getStudentDetailsSQL);
+                        if (rt.next()) {
+                            String studentID = rt.getString("user_id");
+                            String studentName = rt.getString("user_name");
+                            String level = rt.getString("student_type");
+                            membersTableModel.addRow(new Object[]{studentID, studentName, level});
+                        }
+                    }
+                }
+
+                String getOrgEventsSQL = "SELECT * FROM events WHERE club_assigned = '" + orgName + "'";
+                var rt = st.executeQuery(getOrgEventsSQL);
+                while (rt.next()) {
+                    String eventName = rt.getString("event_name");
+                    String startDate = rt.getString("start_date");
+                    String status = rt.getString("status");
+                    orgEventTableModel.addRow(new Object[]{eventName, startDate, status});
+                }
+
+                int rowCount = 0;
+                for (int i = 0; i < orgEventTableModel.getRowCount(); i++) {
+                    if ("ONGOING".equals(orgEventTableModel.getValueAt(i, 2))) {
+                        rowCount++;
+                    }
+                }
+
+                orgsNameInfo.setText(orgName);
+                adviserInfo.setText(adviser);
+                orgOngoingEventsInfo.setText(rowCount + "");
+                totalMembersInfo.setText(membersTableModel.getRowCount() + "");
+
+                orgsDetailedPanel.setVisible(true);
+                eventsDetailedPanel.setVisible(false);
+                userDetailedPanel.setVisible(false);
+                DashBoardPanel.setVisible(false);
+                ClubsAndOrgsPanel.setVisible(false);
+                EventsPanel.setVisible(false);
+                UsersPanel.setVisible(false);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }
+
+    private void fetchEventData(int selectedRow) {
+        ArrayList<String> eventParticipantsList = new ArrayList<>();
+        DefaultTableModel eventParticipantsTableModel = (DefaultTableModel) eventParticipantsTable.getModel();
+
+        eventParticipantsTableModel.setRowCount(0);
+        eventParticipantsList.clear();
+
+        try {
+            Statement st = conn.createStatement();
+            String getEventTitle = eventsTable.getValueAt(selectedRow, 0).toString();
+            String openEvent = "SELECT * FROM events WHERE event_name = '" + getEventTitle + "'";
+            var rr = st.executeQuery(openEvent);
+
+            if (rr.next()) {
+                String eventName = rr.getString("event_name");
+                String startDate = rr.getString("start_date");
+                String endDate = rr.getString("end_date");
+                String facultyAssigned = rr.getString("faculty_assigned");
+                String status = rr.getString("status");
+                String participants = rr.getString("participants");
+
+                if (participants != null && !participants.isBlank()) {
+                    String[] participantIDArray = participants.split(" ");
+                    for (String participantID : participantIDArray) {
+                        eventParticipantsList.add("02000" + participantID);
+                    }
+                    for (String participantID : eventParticipantsList) {
+                        String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + participantID + "'";
+                        var rt = st.executeQuery(getStudentDetailsSQL);
+                        if (rt.next()) {
+                            String studentID = rt.getString("user_id");
+                            String studentName = rt.getString("user_name");
+                            String level = rt.getString("student_type");
+                            eventParticipantsTableModel.addRow(new Object[]{studentID, studentName, level});
+                        }
+                    }
+                }
+
+                eventNameInfo.setText(eventName);
+                officerInChargeInfo.setText(facultyAssigned);
+                eventStatusInfo.setText(status);
+                totalParticipantsInfo.setText(eventParticipantsTableModel.getRowCount() + "");
+
+                eventsDetailedPanel.setVisible(true);
+                orgsDetailedPanel.setVisible(false);
+                userDetailedPanel.setVisible(false);
+                DashBoardPanel.setVisible(false);
+                ClubsAndOrgsPanel.setVisible(false);
+                EventsPanel.setVisible(false);
+                UsersPanel.setVisible(false);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }
+
+    private void fetchUserData(int selectedRow) {
+        DefaultTableModel userParticipatedEventsTableModel = (DefaultTableModel) userParticipatedEventsTable.getModel();
+        DefaultTableModel userOrgsJoinedTableModel = (DefaultTableModel) userOrgsJoinedTable.getModel();
+
+        userParticipatedEventsTableModel.setRowCount(0);
+        userOrgsJoinedTableModel.setRowCount(0);
+
+        try {
+            Statement st = conn.createStatement();
+            String getUserID = usersTable.getValueAt(selectedRow, 0).toString();
+            String openUser = "SELECT * FROM users WHERE user_id = '" + getUserID + "'";
+            var rs = st.executeQuery(openUser);
+
+            if (rs.next()) {
+                String userID = rs.getString("user_id");
+                String userName = rs.getString("user_name");
+                String userType = rs.getString("user_type");
+                String studentType = rs.getString("student_type");
+
+                String getEventMembersSQL = "SELECT * FROM events";
+                var rm = st.executeQuery(getEventMembersSQL);
+
+                while (rm.next()) {
+                    String participantList = rm.getString("participants");
+                    String eventName = rm.getString("event_name");
+                    String startdate = rm.getString("start_date");
+                    String status = rm.getString("status");
+
+                    String UID = userID.replace("02000", "");
+                    if (participantList.contains(UID)) {
+                        userParticipatedEventsTableModel.addRow(new Object[]{eventName, startdate, status});
+                    }
+                }
+
+                String getJoinedOrgsSQL = "SELECT * FROM orgs";
+                var rp = st.executeQuery(getJoinedOrgsSQL);
+
+                while (rp.next()) {
+                    String memberList = rp.getString("members");
+                    String orgName = rp.getString("org_name");
+                    String adviser = rp.getString("adviser");
+
+                    String UID = userID.replace("02000", "");
+                    if (memberList.contains(UID)) {
+                        userOrgsJoinedTableModel.addRow(new Object[]{orgName, adviser});
+                    }
+                }
+
+                userNameInfo.setText(userName);
+                userTypeInfo.setText(studentType.equals("null") ? userID + " | " + userType : userID + " | " + userType + " - " + studentType);
+                userParticipatedEventsInfo.setText(userParticipatedEventsTableModel.getRowCount() + "");
+                userOrgsJoinedInfo.setText(userOrgsJoinedTableModel.getRowCount() + "");
+
+                userDetailedPanel.setVisible(true);
+                DashBoardPanel.setVisible(false);
+                eventsDetailedPanel.setVisible(false);
+                ClubsAndOrgsPanel.setVisible(false);
+                EventsPanel.setVisible(false);
+                UsersPanel.setVisible(false);
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
@@ -1793,229 +2012,14 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_orgsTableMouseReleased
 
     private void popupOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupOpenButtonActionPerformed
-        ArrayList<String> membersList = new ArrayList<>();
-        ArrayList<String> eventParticipantsList = new ArrayList<>();
-
-        DefaultTableModel membersTableModel = (DefaultTableModel)  membersTable.getModel();
-        DefaultTableModel eventParticipantsTableModel = (DefaultTableModel) eventParticipantsTable.getModel();
-        DefaultTableModel orgEventTableModel = (DefaultTableModel) orgEventTable.getModel();
-        DefaultTableModel userParticipatedEventsTableModel = (DefaultTableModel) userParticipatedEventsTable.getModel();
-        DefaultTableModel userOrgsJoinedTableModel = (DefaultTableModel) userOrgsJoinedTable.getModel();
-
-        // Clear previous data
-        membersTableModel.setRowCount(0);
-        eventParticipantsTableModel.setRowCount(0);
-        orgEventTableModel.setRowCount(0);
-        userParticipatedEventsTableModel.setRowCount(0);
-        userOrgsJoinedTableModel.setRowCount(0);
-        membersList.clear();
-        eventParticipantsList.clear();
-
-        int selectedRow;
-        Statement st;
-
-        if (activeTable() != null) {
-            if (activeTable().getSelectedRowCount() == 1) {
-                try {
-                    selectedRow = activeTable().getSelectedRow();
-                    st = conn().createStatement();
-
-                    if (activeTable() == orgsTable) {
-                        String getOrgNameSQL = orgsTable.getValueAt(selectedRow, 0).toString();
-
-                        //retrieves data of selected organization
-                        String openOrgDetailsSQL = "SELECT * FROM orgs WHERE org_name = '" + getOrgNameSQL + "'";
-                        var rs = st.executeQuery(openOrgDetailsSQL);
-
-                        rs.next();
-                        String orgName = rs.getString("org_name");
-                        String adviser = rs.getString("adviser");
-                        String totalMembers = rs.getString("member_count");
-                        String members = rs.getString("members");
-
-                        //adds data on table if members is not empty
-                        if (members != null && !members.isBlank()) {
-                            String[] membersIDArray = members.split(" ");
-
-                            for (String membersID : membersIDArray) {
-                                membersList.add("02000" + membersID);
-                            }
-                            for (int i = 0; i < membersList.size(); i++) {
-
-                                String memberID = membersList.get(i);
-
-                                String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + memberID + "'";
-
-                                var rt = st.executeQuery(getStudentDetailsSQL);
-
-                                rt.next();
-                                String studentID = rt.getString("user_id");
-                                String studentName = rt.getString("user_name");
-                                String level = rt.getString("student_type");
-
-                                membersTableModel.addRow(new Object[]{studentID, studentName, level});
-                            }
-                        }
-
-                        String getOrgEventsSQL = "SELECT * FROM events WHERE club_assigned = '" + orgName + "'";
-                        var rt = st.executeQuery(getOrgEventsSQL);
-
-                        while (rt.next()) {
-                            String eventName = rt.getString("event_name");
-                            String startDate = rt.getString("start_date");
-                            String status = rt.getString("status");
-
-                            orgEventTableModel.addRow(new Object[]{eventName, startDate, status});
-                        }
-
-                        //determines ongoing events
-                        int rowCount = 0;
-                        for (int i = 0; i < orgEventTableModel.getRowCount(); i++) {
-                            if ("ONGOING".equals(orgEventTableModel.getValueAt(i, 2))) {
-                                rowCount++;
-                            }
-                        }
-
-                        orgsNameInfo.setText(orgName);
-                        adviserInfo.setText(adviser);
-                        orgOngoingEventsInfo.setText(rowCount + "");
-                        totalMembersInfo.setText(membersTableModel.getRowCount() + "");
-
-                        orgsDetailedPanel.setVisible(true);
-                        eventsDetailedPanel.setVisible(false);
-                        userDetailedPanel.setVisible(false);
-                        DashBoardPanel.setVisible(false);
-                        ClubsAndOrgsPanel.setVisible(false);
-                        EventsPanel.setVisible(false);
-                        UsersPanel.setVisible(false);
-
-                    } else if (activeTable() == eventsTable) {
-                        String getEventTitle = eventsTable.getValueAt(selectedRow, 0).toString();
-
-                        String openEvent = "SELECT * FROM events WHERE event_name = '" + getEventTitle + "'";
-                        var rr = st.executeQuery(openEvent);
-
-                        rr.next();
-                        String eventName = rr.getString("event_name");
-                        String startDate = rr.getString("start_date");
-                        String endDate = rr.getString("end_date");
-                        String facultyAssigned = rr.getString("faculty_assigned");
-                        String status = rr.getString("status");
-                        String participants = rr.getString("participants");
-
-                        //adds data on table if members is not empty
-                        if (participants != null && !participants.isBlank()) {
-                            String[] participantIDArray = participants.split(" ");
-
-                            for (String participantID : participantIDArray) {
-                                eventParticipantsList.add("02000" + participantID);
-                            }
-
-                            for (int i = 0; i < eventParticipantsList.size(); i++) {
-                                String participantID = eventParticipantsList.get(i);
-
-                                String getStudentDetailsSQL = "SELECT * FROM users WHERE user_id = '" + participantID + "'";
-                                var rt = st.executeQuery(getStudentDetailsSQL);
-
-                                rt.next();
-                                String studentID = rt.getString("user_id");
-                                String studentName = rt.getString("user_name");
-                                String level = rt.getString("student_type");
-
-                                eventParticipantsTableModel.addRow(new Object[]{studentID, studentName, level});
-                            }
-                        }
-
-                        eventNameInfo.setText(eventName);
-                        officerInChargeInfo.setText(facultyAssigned);
-                        eventStatusInfo.setText(status);
-                        totalParticipantsInfo.setText(eventParticipantsTableModel.getRowCount() + "");
-
-                        eventsDetailedPanel.setVisible(true);
-                        orgsDetailedPanel.setVisible(false);
-                        userDetailedPanel.setVisible(false);
-                        DashBoardPanel.setVisible(false);
-                        ClubsAndOrgsPanel.setVisible(false);
-                        EventsPanel.setVisible(false);
-                        UsersPanel.setVisible(false);
-
-                    } else if (activeTable() == usersTable) {
-                        String getUserID = usersTable.getValueAt(selectedRow, 0).toString();
-
-                        String openUser = "SELECT * FROM users WHERE user_id = '" + getUserID + "'";
-                        var rs = st.executeQuery(openUser);
-
-                        rs.next();
-                        String userID = rs.getString("user_id");
-                        String userName = rs.getString("user_name");
-                        String password = rs.getString("password");
-                        String userType = rs.getString("user_type");
-                        String studentType = rs.getString("student_type");
-
-                        String getEventMembersSQL = "SELECT * FROM events";
-                        var rm = st.executeQuery(getEventMembersSQL);
-
-                        while (rm.next()) {
-                            String participantList = rm.getString("participants");
-                            String eventName = rm.getString("event_name");
-                            String startdate = rm.getString("start_date");
-                            String status = rm.getString("status");
-
-                            //removes 02000
-                            String UID = userID;
-                            UID = UID.replace("02000", "");
-
-                            if (participantList.contains(UID)) {
-                                userParticipatedEventsTableModel.addRow(new Object[]{eventName, startdate, status});
-                            }
-                        }
-
-                        String getJoinedOrgsSQL = "SELECT * FROM orgs";
-                        var rp = st.executeQuery(getJoinedOrgsSQL);
-
-                        while (rp.next()) {
-                            String memberList = rp.getString("members");
-                            String orgName = rp.getString("org_name");
-                            String adviser = rp.getString("adviser");
-
-                            String UID = userID;
-                            UID = UID.replace("02000", "");
-
-                            if (memberList.contains(UID)) {
-                                userOrgsJoinedTableModel.addRow(new Object[]{orgName, adviser});
-                            }
-                        }
-
-                        userNameInfo.setText(userName);
-                        if (studentType.equals("null")) {
-                            userTypeInfo.setText(userID + " | " + userType);
-                        } else {
-                            userTypeInfo.setText(userID + " | " + userType + " - " + studentType);
-                        }
-                        userParticipatedEventsInfo.setText(userParticipatedEventsTableModel.getRowCount() + "");
-                        userOrgsJoinedInfo.setText(userOrgsJoinedTableModel.getRowCount() + "");
-
-                        userDetailedPanel.setVisible(true);
-                        DashBoardPanel.setVisible(false);
-                        eventsDetailedPanel.setVisible(false);
-                        ClubsAndOrgsPanel.setVisible(false);
-                        EventsPanel.setVisible(false);
-                        UsersPanel.setVisible(false);
-                    }
-
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-                }
-            } else if (activeTable().getSelectedRowCount() < 1) {
-                JOptionPane.showMessageDialog(null, "No row selected.");
-                activeTable().clearSelection();
-            } else {
-                JOptionPane.showMessageDialog(null, "Select one row to open.");
-                activeTable().clearSelection();
-
-            }
-
+        if (activeTable() != null && activeTable().getSelectedRowCount() == 1) {
+            fetchInternalTableData(activeTable(), activeTable().getSelectedRow());
+        } else {
+            String message = activeTable().getSelectedRowCount() < 1 ? "No row selected." : "Select one row to open.";
+            JOptionPane.showMessageDialog(null, message);
+            activeTable().clearSelection();
         }
+
     }//GEN-LAST:event_popupOpenButtonActionPerformed
 
     private void backUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUsersButtonActionPerformed
@@ -2045,7 +2049,7 @@ public class CampusConnect extends JFrame {
 
     private void popupSelectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupSelectAllButtonActionPerformed
         if (popupSelectAllButton.isSelected()) {
-            usersTable.selectAll();
+            activeTable().selectAll();
             popupSelectAllButton.setText("Deselect All");
         } else {
             usersTable.clearSelection();
@@ -2074,7 +2078,7 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_eventsTableMouseReleased
 
     private void backToDashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToDashboardButtonActionPerformed
-        if (orgsDetailedPanel.isVisible()) { 
+        if (orgsDetailedPanel.isVisible()) {
             orgsDetailedPanel.setVisible(false);
             DashBoardPanel.setVisible(false);
             ClubsAndOrgsPanel.setVisible(false);
@@ -2092,7 +2096,7 @@ public class CampusConnect extends JFrame {
             ClubsAndOrgsPanel.setVisible(false);
             EventsPanel.setVisible(true);
             UsersPanel.setVisible(false);
-          
+
         }
     }//GEN-LAST:event_backButtonActionPerformed
 

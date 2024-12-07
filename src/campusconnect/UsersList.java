@@ -221,7 +221,9 @@ class UsersList extends javax.swing.JFrame {
                 }
                 
             }
-            CampusConnect.getInstance().refreshTableData();
+            
+            CampusConnect.getInstance().refreshInternalTableData();
+            
             dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

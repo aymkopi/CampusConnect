@@ -243,7 +243,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Organization created successfully!");
                 
                 // Refresh the users table in CampusConnect
-                CampusConnect.getInstance().refreshTableData();
+                CampusConnect.getInstance().refreshMainTableData();
                 dispose();
 
             } catch (SQLException e) {

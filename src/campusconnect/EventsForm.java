@@ -354,7 +354,7 @@ class EventsForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Event created successfully!");
 
                 // Refresh the table in CampusConnect
-                CampusConnect.getInstance().refreshTableData();
+                CampusConnect.getInstance().refreshMainTableData();
                 
                 
                 dispose();

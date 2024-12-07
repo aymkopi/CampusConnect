@@ -56,23 +56,8 @@ public class CampusConnect extends JFrame {
         fetchMainTableData();
     }
 
-    public void refreshInternalTableData() {
-        if (getActiveDetailedTable()!= null && getActiveDetailedTable().getSelectedRowCount() == 1) {
-            String tableName = getActiveDetailedTable().getName();
-            int selectedRow = getActiveDetailedTable().getSelectedRow();
-            switch (tableName) {
-                case "orgsTable" -> fetchOrgData(selectedRow);
-                case "eventsTable" -> fetchEventData(selectedRow);
-                case "usersTable" -> fetchUserData(selectedRow);
-                default -> JOptionPane.showMessageDialog(this, "Invalid table name provided.");
-            }
-        } else {
-            String message = getActiveDetailedTable().getSelectedRowCount() < 1 ? "No row selected." : "Select one row to open.";
-            JOptionPane.showMessageDialog(null, message);
-            getActiveDetailedTable().clearSelection();
-        }
-    }
-    
+
+
     public JTable activeTable() {
         JTable activeTable = null;
 
@@ -86,14 +71,6 @@ public class CampusConnect extends JFrame {
         return activeTable;
     }
 
-    public JTable getActiveDetailedTable() {
-        if (orgsDetailedPanel.isVisible()) {
-            activeDetailedTable = membersTable;
-        } else if (eventsDetailedPanel.isVisible()) {
-            activeDetailedTable = eventParticipantsTable;
-        }
-        return activeDetailedTable;
-    }
 
     public String getVisibleEventName() {
         if (eventsDetailedPanel.isVisible()) {

@@ -142,7 +142,9 @@ class UsersList extends javax.swing.JFrame {
 
 
     private void addUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersButtonActionPerformed
+  
         try {
+            System.out.println("Button clicked");
             ArrayList<String> studentIDList = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) studentsList.getModel();
 
@@ -156,10 +158,11 @@ class UsersList extends javax.swing.JFrame {
             for (int i = 0; i < studentIDList.size(); i++) {
                 studentIDList.set(i, studentIDList.get(i).replace("02000", ""));
             }
-            System.out.println(studentIDList);
+            System.out.println("Student IDs: " + studentIDList);
 
             // Concatenate student IDs into a single space-separated string
             String newMembers = String.join(" ", studentIDList);
+            System.out.println("New members: " + newMembers);
 
             if (activeDetailedTable == CampusConnect.getInstance().membersTable) {
                 // Fetch existing members from the database
@@ -189,13 +192,14 @@ class UsersList extends javax.swing.JFrame {
                     updateStmt.setString(1, existingMembers);
                     updateStmt.setString(2, orgName);
                     updateStmt.executeUpdate();
+                    System.out.println("Members updated for org: " + orgName);
                 }
             } else if (activeDetailedTable == CampusConnect.getInstance().eventParticipantsTable) {
                 // Fetch existing members from the database
                 String eventName = CampusConnect.getInstance().getVisibleEventName();
                 String fetchParticipantsSQL = "SELECT participants FROM events WHERE event_name = ?";
                 String existingParticipants = "";
-                
+
                 try (PreparedStatement fetchStmt = conn().prepareStatement(fetchParticipantsSQL)) {
                     fetchStmt.setString(1, eventName);
                     ResultSet rs = fetchStmt.executeQuery();
@@ -218,17 +222,23 @@ class UsersList extends javax.swing.JFrame {
                     updateStmt.setString(1, existingParticipants);
                     updateStmt.setString(2, eventName);
                     updateStmt.executeUpdate();
+                    System.out.println("Participants updated for event: " + eventName);
                 }
-                
             }
-            
-            CampusConnect.getInstance().refreshInternalTableData();
-            
+
+            CampusConnect.getInstance().refreshMainTableData();
+            System.out.println("Table data refreshed");
+
             dispose();
         } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
-
+    
+    
     }//GEN-LAST:event_addUsersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

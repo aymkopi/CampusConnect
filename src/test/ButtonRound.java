@@ -11,6 +11,10 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
 public class ButtonRound extends JButton {
+    @Override
+    public Insets getInsets() {
+        return new Insets(0, 12, 0, 0);
+    }
 
    
     public int getRoundTopLeft() {

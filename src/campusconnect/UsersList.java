@@ -14,7 +14,7 @@ class UsersList extends javax.swing.JFrame {
 
     public UsersList() {
         initComponents();
-        activeDetailedTable = CampusConnect.getInstance().getActiveDetailedTable();
+        activeDetailedTable = CampusConnect.getInstance().activeDetailedTable();
         initTableData();
 
     }
@@ -142,9 +142,7 @@ class UsersList extends javax.swing.JFrame {
 
 
     private void addUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersButtonActionPerformed
-  
         try {
-            System.out.println("Button clicked");
             ArrayList<String> studentIDList = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) studentsList.getModel();
 
@@ -227,6 +225,7 @@ class UsersList extends javax.swing.JFrame {
             }
 
             CampusConnect.getInstance().refreshMainTableData();
+            CampusConnect.getInstance().refreshTables();
             System.out.println("Table data refreshed");
 
             dispose();
@@ -237,8 +236,8 @@ class UsersList extends javax.swing.JFrame {
             System.err.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
-    
-    
+
+
     }//GEN-LAST:event_addUsersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

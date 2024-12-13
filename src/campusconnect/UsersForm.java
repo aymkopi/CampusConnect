@@ -3,7 +3,8 @@ package campusconnect;
 import static campusconnect.CampusConnect.conn;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
@@ -11,8 +12,7 @@ class UsersForm extends javax.swing.JFrame {
 
     //variables
     String userName;
-    String userType;
-    ;
+    String userType = null;
     String studentLevel;
     String userID;
     String password;
@@ -20,7 +20,6 @@ class UsersForm extends javax.swing.JFrame {
     public UsersForm() {
         initComponents();
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,17 +45,16 @@ class UsersForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(913, 632));
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         eventLabel.setText("Add User");
+        eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
 
+        addUserSubmitButton.setText("Confirm");
         addUserSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         addUserSubmitButton.setBorder(null);
-        addUserSubmitButton.setText("Confirm");
         addUserSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         addUserSubmitButton.setRoundBottomLeft(8);
         addUserSubmitButton.setRoundBottomRight(8);
@@ -75,7 +73,7 @@ class UsersForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(eventLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                 .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -89,8 +87,8 @@ class UsersForm extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        userNameLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         userNameLabel.setText("User Name");
+        userNameLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inUserName.setBorder(null);
         inUserName.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -105,8 +103,8 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        userTypeLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         userTypeLabel.setText("User Type");
+        userTypeLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         studentTypeButton.setBorder(null);
         userTypeButtonGroup.add(studentTypeButton);
@@ -139,8 +137,8 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        studentLevelLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         studentLevelLabel.setText("Student Level");
+        studentLevelLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         tertiaryLevelButton.setBorder(null);
         studentLevelButtonGroup.add(tertiaryLevelButton);
@@ -173,9 +171,9 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         userIDLabel.setText("User ID");
         userIDLabel.setFocusable(false);
+        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inUserID.setBorder(null);
         inUserID.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -190,9 +188,9 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        passwordLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         passwordLabel.setText("Password");
         passwordLabel.setFocusable(false);
+        passwordLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inPassword.setBorder(null);
         inPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -211,7 +209,7 @@ class UsersForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,8 +232,7 @@ class UsersForm extends javax.swing.JFrame {
                             .addGap(1, 1, 1))
                         .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passwordLabel))
-                    .addComponent(userIDLabel))
-                .addGap(50, 50, 50))
+                    .addComponent(userIDLabel)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,25 +269,43 @@ class UsersForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void addUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserSubmitButtonActionPerformed
         if (validateInputs()) {
             try {
-                Statement st = conn().createStatement();
-                String checkUserExist = "SELECT * FROM users WHERE user_id = '" + userID + "' AND is_deleted = 0";
-                var rs = st.executeQuery(checkUserExist);
+                System.out.println("was here at -1");
+                String checkUserExist = "SELECT * FROM users WHERE user_id = ? AND is_deleted = 0";
+                PreparedStatement pst = conn().prepareStatement(checkUserExist);
+                pst.setString(1, userID);
+                ResultSet rs = pst.executeQuery();
+                System.out.println("was here at 0");
 
                 if (rs.next()) {  // If a matching student ID is found
                     JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");
                     return;  // Exit the method to avoid duplicate insertion
                 }
+                System.out.println("was here at 1");
 
-                String addUserQuery = "INSERT INTO users (user_name, user_type, student_type, user_id, password) "
-                        + "VALUES ('" + userName + "', '" + userType + "', '" + studentLevel + "', '" + userID + "', '" + password + "')";
-                st.executeUpdate(addUserQuery);
-
-                JOptionPane.showMessageDialog(this, "User added successfully!");
+                String addUserQuery = "INSERT INTO users (user_id, user_name, password, user_type, student_type) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+                pst = conn().prepareStatement(addUserQuery);
+                pst.setString(1, userID);
+                pst.setString(2, userName);
+                pst.setString(3, password);
+                pst.setString(4, userType);
                 
+                if (studentLevel != null && studentLevel.isBlank()) {
+                    pst.setString(5, studentLevel);
+                } else {
+                    studentLevel = "null";
+                    pst.setString(5, studentLevel);
+                }
+                
+                pst.executeUpdate();
+
+                System.out.println("was here at 2");
+                JOptionPane.showMessageDialog(this, "User added successfully!");
+
                 // Refresh the table in CampusConnect
                 CampusConnect.getInstance().refreshMainTableData();
                 dispose();
@@ -324,9 +339,9 @@ class UsersForm extends javax.swing.JFrame {
             inPassword.setBorder(null);
             password = inPassword.getText();
         }
+        System.out.println("was here at 3");
         //if faculty, sets boolean on sql of is_faculty to faculty, else user is Student
         if (facultyTypeButton.isSelected()) {
-
             userType = "Faculty";
         } else if (studentTypeButton.isSelected()) {
             userType = "Student";
@@ -338,6 +353,7 @@ class UsersForm extends javax.swing.JFrame {
         } else if (secondaryLevelButton.isSelected()) {
             studentLevel = "Secondary";
         }
+        System.out.println("was here at 4");
 
         return isValid;
 

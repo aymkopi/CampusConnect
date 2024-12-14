@@ -1,9 +1,11 @@
 package campusconnect;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -2389,18 +2391,57 @@ public class CampusConnect extends JFrame {
     }//GEN-LAST:event_backUsersButtonActionPerformed
 
     private void popupEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupEditButtonActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                if (ClubsAndOrgsPanel.isVisible()) {
-                    new ClubAndOrgForm().setVisible(true);
-                } else if (EventsPanel.isVisible()) {
-                    new EventsForm().setVisible(true);
-                } else {
-                    new UsersForm().setVisible(true);
-                }
+        try {
+            Statement st = conn.createStatement();
 
-            }
-        });
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    if (ClubsAndOrgsPanel.isVisible()) {
+                        new ClubAndOrgForm().setVisible(true);
+                    } else if (EventsPanel.isVisible()) {
+                        int selectedRow = eventsTable.getSelectedRow();
+                        if (selectedRow != -1) {
+                            try {
+                                String eventName = eventsTable.getValueAt(selectedRow, 0).toString();
+
+                                String getEventDataSQL = "SELECT * FROM events WHERE event_name = '" + eventName + "'";
+                                var rs = st.executeQuery(getEventDataSQL);
+
+                                if (rs.next()) {
+                                    String eventNameString = rs.getString("event_name");
+                                    String userAccessString = rs.getString("user_access");
+                                    String locationString = rs.getString("location");
+                                    String orgInChargeString = rs.getString("club_assigned");
+                                    String facultyInChargeString = rs.getString("faculty_assigned");
+                                    String startDateString = rs.getString("start_date");
+                                    String endDateString = rs.getString("end_date");
+
+                                    LocalDate startD = LocalDate.parse(startDateString);
+                                    LocalDate endD = LocalDate.parse(endDateString);
+                                    System.out.println(userAccessString);
+
+                                    EventsForm eventsForm = new EventsForm();
+                                    eventsForm.setEventDetails(eventNameString, userAccessString, locationString, orgInChargeString, facultyInChargeString, startD, endD);
+                                    eventsForm.setVisible(true);
+                                }
+
+                                // Add other relevant fields as necessary
+                            } catch (SQLException ex) {
+                                Logger.getLogger(CampusConnect.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(EventsPanel, "Please select a row to edit.");
+                        }
+                        
+                    } else {
+                        new UsersForm().setVisible(true);
+                    }
+
+                }
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(CampusConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_popupEditButtonActionPerformed
 
     private void popupSelectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popupSelectAllButtonActionPerformed

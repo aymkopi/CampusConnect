@@ -68,10 +68,11 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         createOrgLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         createOrgLabel.setText("Create Organization");
 
+        createOrgSubmitButton.setText(" Confirm");
         createOrgSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         createOrgSubmitButton.setBorder(null);
-        createOrgSubmitButton.setText("Confirm");
         createOrgSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        createOrgSubmitButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         createOrgSubmitButton.setRoundBottomLeft(8);
         createOrgSubmitButton.setRoundBottomRight(8);
         createOrgSubmitButton.setRoundTopLeft(8);

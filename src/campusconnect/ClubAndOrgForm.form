@@ -129,16 +129,17 @@
         </Component>
         <Component class="test.ButtonRound" name="createOrgSubmitButton">
           <Properties>
+            <Property name="text" type="java.lang.String" value=" Confirm"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Confirm"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter Medium" size="14" style="0"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="10"/>
             <Property name="roundBottomLeft" type="int" value="8"/>
             <Property name="roundBottomRight" type="int" value="8"/>
             <Property name="roundTopLeft" type="int" value="8"/>
@@ -167,10 +168,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="OrgClubLabel">
       <Properties>
+        <Property name="text" type="java.lang.String" value="Organization/Club Name"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Organization/Club Name"/>
       </Properties>
     </Component>
     <Component class="test.ToggleButtonRound" name="tertiaryLevelButton">
@@ -195,10 +196,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="levelLabel">
       <Properties>
+        <Property name="text" type="java.lang.String" value="Level"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Level"/>
       </Properties>
     </Component>
     <Component class="test.ToggleButtonRound" name="secondaryLevelButton">
@@ -222,19 +223,19 @@
     </Component>
     <Component class="javax.swing.JLabel" name="adviserLabel">
       <Properties>
+        <Property name="text" type="java.lang.String" value="Adviser"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Adviser"/>
       </Properties>
     </Component>
     <Component class="test.ComboBoxRound" name="inAdviser">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
-        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="facultyComboBoxModel" type="code"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
@@ -247,10 +248,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="additionalDetailsLabel">
       <Properties>
+        <Property name="text" type="java.lang.String" value="Additional Details"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter Medium" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Additional Details"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

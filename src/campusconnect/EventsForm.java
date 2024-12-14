@@ -3,7 +3,6 @@ package campusconnect;
 import static campusconnect.CampusConnect.conn;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-import com.github.lgooddatepicker.components.*;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -51,7 +50,25 @@ class EventsForm extends javax.swing.JFrame {
         });
 
     }
+    public void setEventDetails(String eventName, String userAccess, String location, String orgInCharge, String facultyInCharge, LocalDate startDate, LocalDate endDate) {
+        tertiaryAccessButton.setSelected(false);
+        secondaryAccessButton.setSelected(false);
 
+        inEventNameForm.setText(eventName);
+        if(userAccess.contains("Tertiary")){
+            tertiaryAccessButton.setSelected(true);
+        }
+        if (userAccess.contains("Secondary")){
+            secondaryAccessButton.setSelected(true);
+        }
+  
+        inLocationForm.setText(location);      
+        inOrgInChargeForm.setSelectedItem(orgInCharge);
+        inFacultyInChargeForm.setSelectedItem(facultyInCharge);
+        inEventStartDate.setDate(startDate);
+        inEventEndDate.setDate(endDate);
+        // Set other relevant fields as necessary
+    }
     private void initOrgs() {
         try {
             Statement st = conn().createStatement();
@@ -85,7 +102,7 @@ class EventsForm extends javax.swing.JFrame {
 
         eventNameLabel = new javax.swing.JLabel();
         eventStartLabel = new javax.swing.JLabel();
-        inClubInChargeForm = new test.ComboBoxRound();
+        inOrgInChargeForm = new test.ComboBoxRound();
         inEventStartDate = new com.github.lgooddatepicker.components.DatePicker();
         orgClubInChargeLabel = new javax.swing.JLabel();
         locationLabel = new javax.swing.JLabel();
@@ -115,12 +132,12 @@ class EventsForm extends javax.swing.JFrame {
         eventStartLabel.setText("Event Start");
         eventStartLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
-        inClubInChargeForm.setModel(orgsComboBoxModel);
-        inClubInChargeForm.setBorder(null);
-        inClubInChargeForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        inClubInChargeForm.addActionListener(new java.awt.event.ActionListener() {
+        inOrgInChargeForm.setModel(orgsComboBoxModel);
+        inOrgInChargeForm.setBorder(null);
+        inOrgInChargeForm.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        inOrgInChargeForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inClubInChargeFormActionPerformed(evt);
+                inOrgInChargeFormActionPerformed(evt);
             }
         });
 
@@ -187,10 +204,11 @@ class EventsForm extends javax.swing.JFrame {
         eventLabel.setText("Create Event");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
 
-        createEventSubmitButton.setText("Confirm");
+        createEventSubmitButton.setText(" Confirm");
         createEventSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         createEventSubmitButton.setBorder(null);
         createEventSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        createEventSubmitButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         createEventSubmitButton.setRoundBottomLeft(8);
         createEventSubmitButton.setRoundBottomRight(8);
         createEventSubmitButton.setRoundTopLeft(8);
@@ -259,7 +277,7 @@ class EventsForm extends javax.swing.JFrame {
                                         .addComponent(eventNameLabel))
                                     .addGap(1, 1, 1))
                                 .addComponent(orgClubInChargeLabel)
-                                .addComponent(inClubInChargeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(inOrgInChargeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(locationLabel)))
                     .addComponent(facultyInChargeLabel)
                     .addGroup(layout.createSequentialGroup()
@@ -314,7 +332,7 @@ class EventsForm extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(orgClubInChargeLabel)
                         .addGap(11, 11, 11)
-                        .addComponent(inClubInChargeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inOrgInChargeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(facultyInChargeLabel)
                         .addGap(11, 11, 11)
@@ -330,9 +348,9 @@ class EventsForm extends javax.swing.JFrame {
         startDate = newDate;
     }
 
-    private void inClubInChargeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inClubInChargeFormActionPerformed
+    private void inOrgInChargeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inOrgInChargeFormActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inClubInChargeFormActionPerformed
+    }//GEN-LAST:event_inOrgInChargeFormActionPerformed
 
     private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
         if (validateInputs()) {
@@ -396,12 +414,12 @@ class EventsForm extends javax.swing.JFrame {
             inLocationForm.setBorder(null);
             location = inLocationForm.getText();
         }
-        if (inClubInChargeForm.getSelectedItem().toString().isEmpty()) {
-            inClubInChargeForm.setBorder(new LineBorder(Color.RED, 1));
+        if (inOrgInChargeForm.getSelectedItem().toString().isEmpty()) {
+            inOrgInChargeForm.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
-            inClubInChargeForm.setBorder(null);
-            clubInCharge = inClubInChargeForm.getSelectedItem().toString();
+            inOrgInChargeForm.setBorder(null);
+            clubInCharge = inOrgInChargeForm.getSelectedItem().toString();
         }
         if (inFacultyInChargeForm.getSelectedItem().toString().isEmpty()) {
             inFacultyInChargeForm.setBorder(new LineBorder(Color.RED, 1));
@@ -452,13 +470,13 @@ class EventsForm extends javax.swing.JFrame {
     private javax.swing.JLabel eventNameLabel;
     private javax.swing.JLabel eventStartLabel;
     private javax.swing.JLabel facultyInChargeLabel;
-    private test.ComboBoxRound inClubInChargeForm;
     private test.TextAreaRound inDetailsForm;
     private com.github.lgooddatepicker.components.DatePicker inEventEndDate;
     private test.TextFieldRound inEventNameForm;
     private com.github.lgooddatepicker.components.DatePicker inEventStartDate;
     private test.ComboBoxRound inFacultyInChargeForm;
     private test.TextFieldRound inLocationForm;
+    private test.ComboBoxRound inOrgInChargeForm;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel locationLabel;

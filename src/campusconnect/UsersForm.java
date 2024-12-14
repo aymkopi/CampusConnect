@@ -49,13 +49,16 @@ class UsersForm extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        eventLabel.setText("Add User");
+        eventLabel.setText("User");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
 
-        addUserSubmitButton.setText("Confirm");
+        addUserSubmitButton.setText(" Confirm");
         addUserSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         addUserSubmitButton.setBorder(null);
         addUserSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        addUserSubmitButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        addUserSubmitButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        addUserSubmitButton.setIconTextGap(2);
         addUserSubmitButton.setRoundBottomLeft(8);
         addUserSubmitButton.setRoundBottomRight(8);
         addUserSubmitButton.setRoundTopLeft(8);
@@ -73,7 +76,7 @@ class UsersForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(eventLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -106,25 +109,25 @@ class UsersForm extends javax.swing.JFrame {
         userTypeLabel.setText("User Type");
         userTypeLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
-        studentTypeButton.setBorder(null);
         userTypeButtonGroup.add(studentTypeButton);
         studentTypeButton.setText("Student");
-        studentTypeButton.setToolTipText("");
+        studentTypeButton.setBorder(null);
         studentTypeButton.setFocusable(false);
         studentTypeButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         studentTypeButton.setRoundBottomLeft(10);
         studentTypeButton.setRoundBottomRight(10);
         studentTypeButton.setRoundTopLeft(10);
         studentTypeButton.setRoundTopRight(10);
+        studentTypeButton.setToolTipText("");
         studentTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentTypeButtonActionPerformed(evt);
             }
         });
 
-        facultyTypeButton.setBorder(null);
         userTypeButtonGroup.add(facultyTypeButton);
         facultyTypeButton.setText("Faculty");
+        facultyTypeButton.setBorder(null);
         facultyTypeButton.setFocusable(false);
         facultyTypeButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         facultyTypeButton.setRoundBottomLeft(10);
@@ -140,25 +143,25 @@ class UsersForm extends javax.swing.JFrame {
         studentLevelLabel.setText("Student Level");
         studentLevelLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
-        tertiaryLevelButton.setBorder(null);
         studentLevelButtonGroup.add(tertiaryLevelButton);
         tertiaryLevelButton.setText("Tertiary");
-        tertiaryLevelButton.setToolTipText("");
+        tertiaryLevelButton.setBorder(null);
         tertiaryLevelButton.setFocusable(false);
         tertiaryLevelButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         tertiaryLevelButton.setRoundBottomLeft(10);
         tertiaryLevelButton.setRoundBottomRight(10);
         tertiaryLevelButton.setRoundTopLeft(10);
         tertiaryLevelButton.setRoundTopRight(10);
+        tertiaryLevelButton.setToolTipText("");
         tertiaryLevelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tertiaryLevelButtonActionPerformed(evt);
             }
         });
 
-        secondaryLevelButton.setBorder(null);
         studentLevelButtonGroup.add(secondaryLevelButton);
         secondaryLevelButton.setText("Secondary");
+        secondaryLevelButton.setBorder(null);
         secondaryLevelButton.setFocusable(false);
         secondaryLevelButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         secondaryLevelButton.setRoundBottomLeft(10);
@@ -209,7 +212,6 @@ class UsersForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +234,9 @@ class UsersForm extends javax.swing.JFrame {
                             .addGap(1, 1, 1))
                         .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passwordLabel))
-                    .addComponent(userIDLabel)))
+                    .addComponent(userIDLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

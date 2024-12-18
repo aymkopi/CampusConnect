@@ -50,7 +50,7 @@ class EventsForm extends javax.swing.JFrame {
         });
 
     }
-    
+
     public void setEventDetails(String eventName, String userAccess, String location, String orgInCharge, String facultyInCharge, LocalDate startDate, LocalDate endDate, String details) {
         tertiaryAccessButton.setSelected(false);
         secondaryAccessButton.setSelected(false);
@@ -359,50 +359,24 @@ class EventsForm extends javax.swing.JFrame {
         if (validateInputs()) {
             try (Connection conn = conn()) {
                 int selectedRow = CampusConnect.getInstance().activeTable().getSelectedRow();
+                String existingEvent = "";
 
                 // Check if the event already exists and is not deleted
                 String getEditEventNameSQL = "SELECT * FROM events WHERE event_name = ? AND is_deleted = 0";
                 try (PreparedStatement pstmt = conn.prepareStatement(getEditEventNameSQL)) {
                     pstmt.setString(1, eventName);
+                    ResultSet rs = pstmt.executeQuery();
                     
-                    try (ResultSet rs = pstmt.executeQuery()) {
+                    System.out.println("here in checking");
+                    //proceed in add
+                    if (selectedRow == 0) {
+                        System.out.println("here in add");
+                        //if event exists
                         if (rs.next()) {
-                            int choice = JOptionPane.showConfirmDialog(this, "Event already exists. Update existing data?", "Existing Event",
-                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                                if (choice == JOptionPane.YES_OPTION) {
-                                String existingEvent = rs.getString("event_name");
-
-                                // Update the existing event
-                                String updateQuery = "UPDATE events SET event_name = ?, start_date = ?, end_date = ?, location = ?, user_access = ?, club_assigned = ?, faculty_assigned = ?, details = ?, status = ? WHERE event_name = ?";
-                                try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
-                                    updatePstmt.setString(1, eventName);
-                                    updatePstmt.setString(2, startDate);
-                                    updatePstmt.setString(3, endDate);
-                                    updatePstmt.setString(4, location);
-                                    updatePstmt.setString(5, userAccess);
-                                    updatePstmt.setString(6, clubInCharge);
-                                    updatePstmt.setString(7, facultyInCharge);
-                                    updatePstmt.setString(8, details);
-                                    updatePstmt.setString(9, status);
-                                    updatePstmt.setString(10, existingEvent);
-                                    updatePstmt.executeUpdate();
-                                }
-
-                                // Mark the selected event as deleted if applicable
-                                if (selectedRow != -1) {
-                                    String selectedEvent = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
-                                    String updateEventSQL = "UPDATE events SET is_deleted = 1 WHERE event_name = ?";
-                                    try (PreparedStatement deletePstmt = conn.prepareStatement(updateEventSQL)) {
-                                        deletePstmt.setString(1, selectedEvent);
-                                        deletePstmt.executeUpdate();
-                                    }
-                                }
-                                JOptionPane.showMessageDialog(this, "Event updated successfully!");
-                            } else {
-                                dispose();
-                            }
+                            JOptionPane.showMessageDialog(this, "Event exists.");
+                            dispose();
+                            //if event does not exist
                         } else {
-                            // Insert a new event
                             String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details, status) "
                                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             try (PreparedStatement insertPstmt = conn.prepareStatement(addEventQuery)) {
@@ -419,9 +393,56 @@ class EventsForm extends javax.swing.JFrame {
                             }
                             JOptionPane.showMessageDialog(this, "Event created successfully!");
                         }
-                    }
-                }
+                        //proceed in editing event
+                    } else {
+                        if (rs.next()) {
+                            existingEvent = rs.getString("event_name");
+                            System.out.println("here in edit");
 
+                            int choice = JOptionPane.showConfirmDialog(this, "Event already exists. Update existing data?", "Existing Event",
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if (choice == JOptionPane.YES_OPTION) {
+                                // Update the existing event
+                                String updateQuery = "UPDATE events SET event_name = ?, start_date = ?, end_date = ?, location = ?, user_access = ?, club_assigned = ?, faculty_assigned = ?, details = ?, status = ? WHERE event_name = ?";
+                                try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
+                                    updatePstmt.setString(1, eventName);
+                                    updatePstmt.setString(2, startDate);
+                                    updatePstmt.setString(3, endDate);
+                                    updatePstmt.setString(4, location);
+                                    updatePstmt.setString(5, userAccess);
+                                    updatePstmt.setString(6, clubInCharge);
+                                    updatePstmt.setString(7, facultyInCharge);
+                                    updatePstmt.setString(8, details);
+                                    updatePstmt.setString(9, status);
+                                    updatePstmt.setString(10, existingEvent);
+                                    updatePstmt.executeUpdate();
+                                }
+
+                                JOptionPane.showMessageDialog(this, "Event updated successfully!");
+                            }
+
+                        } else {
+                            existingEvent = rs.getString("event_name");
+                            System.out.println("here");
+                            // Update the existing event
+                            String updateQuery = "UPDATE events SET event_name = ?, start_date = ?, end_date = ?, location = ?, user_access = ?, club_assigned = ?, faculty_assigned = ?, details = ?, status = ? WHERE event_name = ?";
+                            try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
+                                updatePstmt.setString(1, eventName);
+                                updatePstmt.setString(2, startDate);
+                                updatePstmt.setString(3, endDate);
+                                updatePstmt.setString(4, location);
+                                updatePstmt.setString(5, userAccess);
+                                updatePstmt.setString(6, clubInCharge);
+                                updatePstmt.setString(7, facultyInCharge);
+                                updatePstmt.setString(8, details);
+                                updatePstmt.setString(9, status);
+                                updatePstmt.setString(10, existingEvent);
+                                updatePstmt.executeUpdate();
+                            }
+                        }
+                    }
+
+                }
                 CampusConnect.getInstance().refreshMainTableData();
                 dispose();
             } catch (SQLException e) {

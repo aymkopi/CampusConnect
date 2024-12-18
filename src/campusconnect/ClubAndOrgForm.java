@@ -249,10 +249,10 @@ class ClubAndOrgForm extends javax.swing.JFrame {
 
                     try (ResultSet rs = pstmt.executeQuery()) {
                         if (rs.next()) {
+                            String existingOrg = rs.getString("org_name");
                             int choice = JOptionPane.showConfirmDialog(this, "Organization already exists. Update existing data?", "Existing Organization",
                                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                             if (choice == JOptionPane.YES_OPTION) {
-                                String existingOrg = rs.getString("org_name");
 
                                 String updateQuery = "UPDATE orgs SET org_name = ?, level = ?, adviser = ?, details = ? WHERE org_name = ?";
                                 try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
@@ -264,19 +264,24 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                                     updatePstmt.executeUpdate();
                                 }
 
-                                if (selectedRow != -1) {
-                                    String selectedOrg = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
+                                if (selectedRow < 1) {
                                     String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
                                     try (PreparedStatement deletePstmt = conn.prepareStatement(updateOrgSQL)) {
-                                        deletePstmt.setString(1, selectedOrg);
+                                        deletePstmt.setString(1, existingOrg);
                                         deletePstmt.executeUpdate();
                                     }
                                 }
                                 JOptionPane.showMessageDialog(this, "Organization updated successfully!");
-                            } else {
-                                dispose();
                             }
                         } else {
+                            if (selectedRow > 0) {
+                                String selectedOrg = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
+                                String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
+                                try (PreparedStatement deletePstmt = conn.prepareStatement(updateOrgSQL)) {
+                                    deletePstmt.setString(1, selectedOrg);
+                                    deletePstmt.executeUpdate();
+                                }
+                            }
                             String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
                                     + "VALUES (?, ?, ?, ?)";
 

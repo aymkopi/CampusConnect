@@ -2,12 +2,14 @@ package campusconnect;
 
 import static campusconnect.CampusConnect.conn;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import java.sql.PreparedStatement;
 
 class ClubAndOrgForm extends javax.swing.JFrame {
 
@@ -16,10 +18,25 @@ class ClubAndOrgForm extends javax.swing.JFrame {
     String level;
     String adviser;
     String details;
-    
+
     public ClubAndOrgForm() {
         initComponents();
         initFaculty();
+    }
+
+    public void setOrgDetails(String orgName, String level, String adviser, String details) {
+        tertiaryLevelButton.setSelected(false);
+        secondaryLevelButton.setSelected(false);
+
+        inOrgClubName.setText(orgName);
+        if (level.equals("Tertiary")) {
+            tertiaryLevelButton.setSelected(true);
+        } else if (level.equals("Secondary")) {
+            secondaryLevelButton.setSelected(true);
+        }
+        inAdviser.setSelectedItem(adviser);
+        inAdditionalDetails.setText(details);
+
     }
 
     private void initFaculty() {
@@ -33,12 +50,12 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                 String fcn = sfrs.getString("user_name");
                 facultyComboBoxModel.addElement(fcn);
             }
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,26 +240,57 @@ class ClubAndOrgForm extends javax.swing.JFrame {
 
     private void createOrgSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrgSubmitButtonActionPerformed
         if (validateInputs()) {
-            try {
-                Statement st = conn().createStatement();
-                String checkExistingOrgQuery = "SELECT * FROM orgs WHERE org_name = '" + orgName + "'";
-                var rs = st.executeQuery(checkExistingOrgQuery);
+            try (Connection conn = conn()) {
+                int selectedRow = CampusConnect.getInstance().activeTable().getSelectedRow();
 
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(this, "Organization already exists.");
-                    return;  // Exit the method to avoid duplicate insertion
+                String getEditOrgNameSQL = "SELECT * FROM orgs WHERE org_name = ? AND is_deleted = 0";
+                try (PreparedStatement pstmt = conn.prepareStatement(getEditOrgNameSQL)) {
+                    pstmt.setString(1, orgName);
+
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        if (rs.next()) {
+                            int choice = JOptionPane.showConfirmDialog(this, "Organization already exists. Update existing data?", "Existing Organization",
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if (choice == JOptionPane.YES_OPTION) {
+                                String existingOrg = rs.getString("org_name");
+
+                                String updateQuery = "UPDATE orgs SET org_name = ?, level = ?, adviser = ?, details = ? WHERE org_name = ?";
+                                try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
+                                    updatePstmt.setString(1, orgName);
+                                    updatePstmt.setString(2, level);
+                                    updatePstmt.setString(3, adviser);
+                                    updatePstmt.setString(4, details);
+                                    updatePstmt.setString(5, existingOrg);
+                                    updatePstmt.executeUpdate();
+                                }
+
+                                if (selectedRow != -1) {
+                                    String selectedOrg = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
+                                    String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
+                                    try (PreparedStatement deletePstmt = conn.prepareStatement(updateOrgSQL)) {
+                                        deletePstmt.setString(1, selectedOrg);
+                                        deletePstmt.executeUpdate();
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(this, "Organization updated successfully!");
+                            } else {
+                                dispose();
+                            }
+                        } else {
+                            String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
+                                    + "VALUES (?, ?, ?, ?)";
+
+                            try (PreparedStatement insertPstmt = conn.prepareStatement(addOrgQuery)) {
+                                insertPstmt.setString(1, orgName);
+                                insertPstmt.setString(2, level);
+                                insertPstmt.setString(3, adviser);
+                                insertPstmt.setString(4, details);
+                                insertPstmt.executeUpdate();
+                            }
+                            JOptionPane.showMessageDialog(this, "Organization created successfully!");
+                        }
+                    }
                 }
-                
-                
-                
-                
-
-                String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
-                        + "VALUES ('" + orgName + "', '" + level + "', '" + adviser + "', '" + details + "')";
-                st.executeUpdate(addOrgQuery);
-
-                JOptionPane.showMessageDialog(this, "Organization created successfully!");
-                
                 // Refresh the users table in CampusConnect
                 CampusConnect.getInstance().refreshMainTableData();
                 dispose();
@@ -276,8 +324,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
             adviser = inAdviser.getSelectedItem().toString();
         }
         details = inAdditionalDetails.getText();
-        
-        
+
         return isValid;
     }//GEN-LAST:event_createOrgSubmitButtonActionPerformed
 

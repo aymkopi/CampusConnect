@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
 
 class EventsForm extends javax.swing.JFrame {
-    
+
     //current date
     LocalDate date = LocalDate.now();
 
@@ -50,25 +50,28 @@ class EventsForm extends javax.swing.JFrame {
         });
 
     }
-    public void setEventDetails(String eventName, String userAccess, String location, String orgInCharge, String facultyInCharge, LocalDate startDate, LocalDate endDate) {
+    
+    public void setEventDetails(String eventName, String userAccess, String location, String orgInCharge, String facultyInCharge, LocalDate startDate, LocalDate endDate, String details) {
         tertiaryAccessButton.setSelected(false);
         secondaryAccessButton.setSelected(false);
 
         inEventNameForm.setText(eventName);
-        if(userAccess.contains("Tertiary")){
+        if (userAccess.contains("Tertiary")) {
             tertiaryAccessButton.setSelected(true);
         }
-        if (userAccess.contains("Secondary")){
+        if (userAccess.contains("Secondary")) {
             secondaryAccessButton.setSelected(true);
         }
-  
-        inLocationForm.setText(location);      
+
+        inLocationForm.setText(location);
         inOrgInChargeForm.setSelectedItem(orgInCharge);
         inFacultyInChargeForm.setSelectedItem(facultyInCharge);
         inEventStartDate.setDate(startDate);
         inEventEndDate.setDate(endDate);
+        inDetailsForm.setText(details);
         // Set other relevant fields as necessary
     }
+
     private void initOrgs() {
         try {
             Statement st = conn().createStatement();
@@ -354,29 +357,73 @@ class EventsForm extends javax.swing.JFrame {
 
     private void createEventSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventSubmitButtonActionPerformed
         if (validateInputs()) {
-            try {
-                Statement st = conn().createStatement();
-                String checkExistingEventQuery = "SELECT * FROM events WHERE event_name = '" + eventName + "'";
-                var rs = st.executeQuery(checkExistingEventQuery);
+            try (Connection conn = conn()) {
+                int selectedRow = CampusConnect.getInstance().activeTable().getSelectedRow();
 
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(this, "Event already exists.");
-                    return;  // Exit the method to avoid duplicate insertion
+                // Check if the event already exists and is not deleted
+                String getEditEventNameSQL = "SELECT * FROM events WHERE event_name = ? AND is_deleted = 0";
+                try (PreparedStatement pstmt = conn.prepareStatement(getEditEventNameSQL)) {
+                    pstmt.setString(1, eventName);
+                    
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        if (rs.next()) {
+                            int choice = JOptionPane.showConfirmDialog(this, "Event already exists. Update existing data?", "Existing Event",
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                                if (choice == JOptionPane.YES_OPTION) {
+                                String existingEvent = rs.getString("event_name");
+
+                                // Update the existing event
+                                String updateQuery = "UPDATE events SET event_name = ?, start_date = ?, end_date = ?, location = ?, user_access = ?, club_assigned = ?, faculty_assigned = ?, details = ?, status = ? WHERE event_name = ?";
+                                try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
+                                    updatePstmt.setString(1, eventName);
+                                    updatePstmt.setString(2, startDate);
+                                    updatePstmt.setString(3, endDate);
+                                    updatePstmt.setString(4, location);
+                                    updatePstmt.setString(5, userAccess);
+                                    updatePstmt.setString(6, clubInCharge);
+                                    updatePstmt.setString(7, facultyInCharge);
+                                    updatePstmt.setString(8, details);
+                                    updatePstmt.setString(9, status);
+                                    updatePstmt.setString(10, existingEvent);
+                                    updatePstmt.executeUpdate();
+                                }
+
+                                // Mark the selected event as deleted if applicable
+                                if (selectedRow != -1) {
+                                    String selectedEvent = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
+                                    String updateEventSQL = "UPDATE events SET is_deleted = 1 WHERE event_name = ?";
+                                    try (PreparedStatement deletePstmt = conn.prepareStatement(updateEventSQL)) {
+                                        deletePstmt.setString(1, selectedEvent);
+                                        deletePstmt.executeUpdate();
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(this, "Event updated successfully!");
+                            } else {
+                                dispose();
+                            }
+                        } else {
+                            // Insert a new event
+                            String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details, status) "
+                                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            try (PreparedStatement insertPstmt = conn.prepareStatement(addEventQuery)) {
+                                insertPstmt.setString(1, eventName);
+                                insertPstmt.setString(2, startDate);
+                                insertPstmt.setString(3, endDate);
+                                insertPstmt.setString(4, location);
+                                insertPstmt.setString(5, userAccess);
+                                insertPstmt.setString(6, clubInCharge);
+                                insertPstmt.setString(7, facultyInCharge);
+                                insertPstmt.setString(8, details);
+                                insertPstmt.setString(9, status);
+                                insertPstmt.executeUpdate();
+                            }
+                            JOptionPane.showMessageDialog(this, "Event created successfully!");
+                        }
+                    }
                 }
-                
 
-                String addEventQuery = "INSERT INTO events (event_name, start_date, end_date, location, user_access, club_assigned, faculty_assigned, details, status) "
-                        + "VALUES ('" + eventName + "', '" + startDate + "', '" + endDate + "','" + location + "', '" + userAccess + "', '" + clubInCharge + "', '" + facultyInCharge + "', '" + details + "', '" + status + "')";
-                st.executeUpdate(addEventQuery);
-
-                JOptionPane.showMessageDialog(this, "Event created successfully!");
-
-                // Refresh the table in CampusConnect
                 CampusConnect.getInstance().refreshMainTableData();
-                
-                
                 dispose();
-
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
             }
@@ -392,7 +439,7 @@ class EventsForm extends javax.swing.JFrame {
             inEventNameForm.setBorder(null);
             eventName = inEventNameForm.getText();
         }
-        if (inEventStartDate.getDate().toString().isEmpty()) {
+        if (inEventStartDate.getDate() == null) {
             inEventStartDate.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
@@ -400,7 +447,7 @@ class EventsForm extends javax.swing.JFrame {
             startDate = inEventStartDate.getDate().toString();
         }
 
-        if (inEventEndDate.getDate().toString().isEmpty()) {
+        if (inEventEndDate.getDate() == null) {
             inEventEndDate.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
@@ -414,14 +461,14 @@ class EventsForm extends javax.swing.JFrame {
             inLocationForm.setBorder(null);
             location = inLocationForm.getText();
         }
-        if (inOrgInChargeForm.getSelectedItem().toString().isEmpty()) {
+        if (inOrgInChargeForm.getSelectedItem() == null || inOrgInChargeForm.getSelectedItem().toString().isEmpty()) {
             inOrgInChargeForm.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
             inOrgInChargeForm.setBorder(null);
             clubInCharge = inOrgInChargeForm.getSelectedItem().toString();
         }
-        if (inFacultyInChargeForm.getSelectedItem().toString().isEmpty()) {
+        if (inFacultyInChargeForm.getSelectedItem() == null || inFacultyInChargeForm.getSelectedItem().toString().isEmpty()) {
             inFacultyInChargeForm.setBorder(new LineBorder(Color.RED, 1));
             isValid = false;
         } else {
@@ -446,7 +493,7 @@ class EventsForm extends javax.swing.JFrame {
                 userAccess += ", Secondary";
             }
         }
-        
+
         if (inEventStartDate.getDate().isAfter(date)) {
             status = "INCOMING";
         } else if (inEventStartDate.getDate().isEqual(date) || (inEventStartDate.getDate().isBefore(date) && inEventEndDate.getDate().isAfter(date))) {
@@ -454,12 +501,11 @@ class EventsForm extends javax.swing.JFrame {
         } else if (inEventEndDate.getDate().isBefore(date) || inEventEndDate.getDate().isEqual(date)) {
             status = "FINISHED";
         }
-        
+
         System.out.println(inEventStartDate.getDate());
         System.out.println(date);
-        
-        return isValid;
 
+        return isValid;
     }//GEN-LAST:event_createEventSubmitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

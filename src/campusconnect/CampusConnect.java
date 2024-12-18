@@ -2661,29 +2661,28 @@ public class CampusConnect extends JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     int selectedRow;
-                    
+
                     if (ClubsAndOrgsPanel.isVisible()) {
                         selectedRow = orgsTable.getSelectedRow();
                         if (selectedRow != -1) {
                             try {
                                 String orgName = orgsTable.getValueAt(selectedRow, 0).toString();
-                                
+
                                 String getOrgsDataSQL = "SELECT * FROM orgs WHERE org_name = '" + orgName + "'";
                                 var rs = st.executeQuery(getOrgsDataSQL);
-                                
-                                if(rs.next()){
+
+                                if (rs.next()) {
                                     String orgNameString = rs.getString("org_name");
                                     String levelString = rs.getString("level");
                                     String adviserString = rs.getString("adviser");
                                     String detailsString = rs.getString("details");
-                                    
+
                                     ClubAndOrgForm clubAndOrgForm = new ClubAndOrgForm();
                                     clubAndOrgForm.setOrgDetails(orgName, levelString, adviserString, detailsString);
                                     clubAndOrgForm.setVisible(true);
-                                    
+
                                 }
-                                
-                                
+
                             } catch (SQLException ex) {
                                 Logger.getLogger(CampusConnect.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -2727,7 +2726,33 @@ public class CampusConnect extends JFrame {
                         }
 
                     } else {
-                        new UsersForm().setVisible(true);
+                        selectedRow = usersTable.getSelectedRow();
+                        if (selectedRow != -1) {
+                            try {
+                                String userID = usersTable.getValueAt(selectedRow, 0).toString();
+
+                                String getUserData = "SELECT * FROM users WHERE user_id = '" + userID + "'";
+                                var rs = st.executeQuery(getUserData);
+                                
+                                if(rs.next()){
+                                    String userIDString = rs.getString("user_id");
+                                    String userNameString = rs.getString("user_name");
+                                    String userTypeString = rs.getString("user_type");
+                                    String studentTypeString = rs.getString("student_type");
+                                    String passwordString = rs.getString("password");
+                                    
+                                    UsersForm usersForm = new UsersForm();
+                                    usersForm.setUserDetails(userNameString, userTypeString, studentTypeString, userIDString, passwordString);
+                                    usersForm.setVisible(true);
+                                }
+                                
+                                
+                            } catch (SQLException ex){
+                                JOptionPane.showMessageDialog(UsersPanel, ex.getMessage());
+                            }
+                        }
+
+                       
                     }
 
                 }

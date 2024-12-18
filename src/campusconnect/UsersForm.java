@@ -1,10 +1,13 @@
 package campusconnect;
 
 import static campusconnect.CampusConnect.conn;
+import java.sql.*;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
@@ -20,6 +23,29 @@ class UsersForm extends javax.swing.JFrame {
     public UsersForm() {
         initComponents();
     }
+    
+    public void setUserDetails(String userName, String userType, String studentLevel, String userID, String password){
+        studentTypeButton.setSelected(false);
+        facultyTypeButton.setSelected(false);
+        tertiaryLevelButton.setSelected(false);
+        secondaryLevelButton.setSelected(false);
+        
+        inUserName.setText(userName);
+        if (userType.equals("Faculty")) {
+            facultyTypeButton.setSelected(true);
+        } else {
+            studentTypeButton.setSelected(true);
+        }
+        if (studentLevel.equals("Tertiary")) {
+            tertiaryLevelButton.setSelected(true);
+        } else if (studentLevel.equals("Secondary")){
+            secondaryLevelButton.setSelected(true);
+        }
+        
+        inUserID.setText(userID);
+        inPassword.setText(password);
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -42,6 +68,7 @@ class UsersForm extends javax.swing.JFrame {
         inUserID = new test.TextFieldRound();
         passwordLabel = new javax.swing.JLabel();
         inPassword = new test.TextFieldRound();
+        userWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -49,12 +76,12 @@ class UsersForm extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        eventLabel.setText("User");
         eventLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        eventLabel.setText("User");
 
-        addUserSubmitButton.setText(" Confirm");
         addUserSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         addUserSubmitButton.setBorder(null);
+        addUserSubmitButton.setText(" Confirm");
         addUserSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         addUserSubmitButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         addUserSubmitButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -76,7 +103,7 @@ class UsersForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(eventLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
                 .addComponent(addUserSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -90,8 +117,8 @@ class UsersForm extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        userNameLabel.setText("User Name");
         userNameLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        userNameLabel.setText("User Name");
 
         inUserName.setBorder(null);
         inUserName.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -106,28 +133,28 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        userTypeLabel.setText("User Type");
         userTypeLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        userTypeLabel.setText("User Type");
 
+        studentTypeButton.setBorder(null);
         userTypeButtonGroup.add(studentTypeButton);
         studentTypeButton.setText("Student");
-        studentTypeButton.setBorder(null);
+        studentTypeButton.setToolTipText("");
         studentTypeButton.setFocusable(false);
         studentTypeButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         studentTypeButton.setRoundBottomLeft(10);
         studentTypeButton.setRoundBottomRight(10);
         studentTypeButton.setRoundTopLeft(10);
         studentTypeButton.setRoundTopRight(10);
-        studentTypeButton.setToolTipText("");
         studentTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentTypeButtonActionPerformed(evt);
             }
         });
 
+        facultyTypeButton.setBorder(null);
         userTypeButtonGroup.add(facultyTypeButton);
         facultyTypeButton.setText("Faculty");
-        facultyTypeButton.setBorder(null);
         facultyTypeButton.setFocusable(false);
         facultyTypeButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         facultyTypeButton.setRoundBottomLeft(10);
@@ -140,28 +167,28 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
-        studentLevelLabel.setText("Student Level");
         studentLevelLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
+        studentLevelLabel.setText("Student Level");
 
+        tertiaryLevelButton.setBorder(null);
         studentLevelButtonGroup.add(tertiaryLevelButton);
         tertiaryLevelButton.setText("Tertiary");
-        tertiaryLevelButton.setBorder(null);
+        tertiaryLevelButton.setToolTipText("");
         tertiaryLevelButton.setFocusable(false);
         tertiaryLevelButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         tertiaryLevelButton.setRoundBottomLeft(10);
         tertiaryLevelButton.setRoundBottomRight(10);
         tertiaryLevelButton.setRoundTopLeft(10);
         tertiaryLevelButton.setRoundTopRight(10);
-        tertiaryLevelButton.setToolTipText("");
         tertiaryLevelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tertiaryLevelButtonActionPerformed(evt);
             }
         });
 
+        secondaryLevelButton.setBorder(null);
         studentLevelButtonGroup.add(secondaryLevelButton);
         secondaryLevelButton.setText("Secondary");
-        secondaryLevelButton.setBorder(null);
         secondaryLevelButton.setFocusable(false);
         secondaryLevelButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         secondaryLevelButton.setRoundBottomLeft(10);
@@ -174,9 +201,9 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
+        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         userIDLabel.setText("User ID");
         userIDLabel.setFocusable(false);
-        userIDLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inUserID.setBorder(null);
         inUserID.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -191,9 +218,9 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
+        passwordLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
         passwordLabel.setText("Password");
         passwordLabel.setFocusable(false);
-        passwordLabel.setFont(new java.awt.Font("Inter Medium", 0, 15)); // NOI18N
 
         inPassword.setBorder(null);
         inPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -208,41 +235,56 @@ class UsersForm extends javax.swing.JFrame {
             }
         });
 
+        userWarning.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        userWarning.setForeground(new java.awt.Color(255, 0, 0));
+        userWarning.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tertiaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(secondaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(studentLevelLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(studentTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(facultyTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inUserID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(userNameLabel)
-                                .addComponent(userTypeLabel))
-                            .addGap(1, 1, 1))
-                        .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(passwordLabel))
-                    .addComponent(userIDLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(tertiaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(secondaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(userIDLabel)
+                                        .addComponent(studentLevelLabel)
+                                        .addComponent(passwordLabel)
+                                        .addComponent(userWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(userNameLabel))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(inUserID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(studentTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(facultyTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userTypeLabel)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
+                .addComponent(userIDLabel)
+                .addGap(11, 11, 11)
+                .addComponent(inUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(userWarning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(userNameLabel)
                 .addGap(11, 11, 11)
                 .addComponent(inUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,14 +301,10 @@ class UsersForm extends javax.swing.JFrame {
                     .addComponent(tertiaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(secondaryLevelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(userIDLabel)
-                .addGap(10, 10, 10)
-                .addComponent(inUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
                 .addComponent(passwordLabel)
-                .addGap(10, 10, 10)
+                .addGap(11, 11, 11)
                 .addComponent(inPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -277,12 +315,10 @@ class UsersForm extends javax.swing.JFrame {
     private void addUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserSubmitButtonActionPerformed
         if (validateInputs()) {
             try {
-                System.out.println("was here at -1");
                 String checkUserExist = "SELECT * FROM users WHERE user_id = ? AND is_deleted = 0";
                 PreparedStatement pst = conn().prepareStatement(checkUserExist);
                 pst.setString(1, userID);
                 ResultSet rs = pst.executeQuery();
-                System.out.println("was here at 0");
 
                 if (rs.next()) {  // If a matching student ID is found
                     JOptionPane.showMessageDialog(this, "Account with this User ID already exists.");
@@ -297,14 +333,14 @@ class UsersForm extends javax.swing.JFrame {
                 pst.setString(2, userName);
                 pst.setString(3, password);
                 pst.setString(4, userType);
-                
+
                 if (studentLevel != null && studentLevel.isBlank()) {
                     pst.setString(5, studentLevel);
                 } else {
                     studentLevel = "null";
                     pst.setString(5, studentLevel);
                 }
-                
+
                 pst.executeUpdate();
 
                 System.out.println("was here at 2");
@@ -321,46 +357,75 @@ class UsersForm extends javax.swing.JFrame {
     }
 
     private boolean validateInputs() {
-        boolean isValid = true;
-        if (inUserName.getText().isEmpty()) {
-            inUserName.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inUserName.setBorder(null);
-            userName = inUserName.getText();
-        }
-        if (inUserID.getText().isEmpty()) {
-            inUserID.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inUserID.setBorder(null);
-            userID = inUserID.getText();
-        }
-        if (inPassword.getText().isEmpty()) {
-            inPassword.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inPassword.setBorder(null);
-            password = inPassword.getText();
-        }
-        System.out.println("was here at 3");
-        //if faculty, sets boolean on sql of is_faculty to faculty, else user is Student
-        if (facultyTypeButton.isSelected()) {
-            userType = "Faculty";
-        } else if (studentTypeButton.isSelected()) {
-            userType = "Student";
-        }
+        try (Connection conn = conn(); Statement st = conn.createStatement()) {
+            boolean isValid = true;
 
-        //if, tertiary, sets boolean on sql of 
-        if (tertiaryLevelButton.isSelected()) {
-            studentLevel = "Tertiary";
-        } else if (secondaryLevelButton.isSelected()) {
-            studentLevel = "Secondary";
+            String usersExistingChecker = "SELECT * FROM users WHERE user_id = ? AND is_deleted = 0";
+            try (ResultSet rp = st.executeQuery(usersExistingChecker)) {
+                boolean orgExists = false;
+
+                while (rp.next()) {
+                    String UID = rp.getString("user_id");
+
+                    if (inUserID.getText().equalsIgnoreCase(UID)) {
+                        userWarning.setText("User exists");
+                        inUserID.setBorder(new LineBorder(Color.RED, 1));
+                        isValid = false;
+                        orgExists = true;
+                        break;
+                    }
+                }
+                if(!orgExists){
+                    if(inUserID.getText().isEmpty()){
+                        userWarning.setText("Cannot be empty.");
+                        inUserID.setBorder(new LineBorder(Color.RED, 1));
+                        isValid = false;
+                    } else {
+                        userWarning.setText("");
+                        inUserID.setBorder(null);
+                        userID = inUserID.getText();
+                    }
+                }
+
+            }
+
+            if (inUserName.getText().isEmpty()) {
+                inUserName.setBorder(new LineBorder(Color.RED, 1));
+                isValid = false;
+            } else {
+                inUserName.setBorder(null);
+                userName = inUserName.getText();
+            }
+           
+            if (inPassword.getText().isEmpty()) {
+                inPassword.setBorder(new LineBorder(Color.RED, 1));
+                isValid = false;
+            } else {
+                inPassword.setBorder(null);
+                password = inPassword.getText();
+            }
+            System.out.println("was here at 3");
+            //if faculty, sets boolean on sql of is_faculty to faculty, else user is Student
+            if (facultyTypeButton.isSelected()) {
+                userType = "Faculty";
+            } else if (studentTypeButton.isSelected()) {
+                userType = "Student";
+            }
+
+            //if, tertiary, sets boolean on sql of 
+            if (tertiaryLevelButton.isSelected()) {
+                studentLevel = "Tertiary";
+            } else if (secondaryLevelButton.isSelected()) {
+                studentLevel = "Secondary";
+            }
+            System.out.println("was here at 4");
+
+            return isValid;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            return false;
         }
-        System.out.println("was here at 4");
-
-        return isValid;
-
     }//GEN-LAST:event_addUserSubmitButtonActionPerformed
 
     private void inUserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inUserIDActionPerformed
@@ -413,5 +478,6 @@ class UsersForm extends javax.swing.JFrame {
     private javax.swing.JLabel userNameLabel;
     private javax.swing.ButtonGroup userTypeButtonGroup;
     private javax.swing.JLabel userTypeLabel;
+    private javax.swing.JLabel userWarning;
     // End of variables declaration//GEN-END:variables
 }

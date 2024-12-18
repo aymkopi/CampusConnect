@@ -2,6 +2,8 @@ package campusconnect;
 
 import static campusconnect.CampusConnect.conn;
 import java.awt.Color;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,6 +76,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         additionalDetailsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inAdditionalDetails = new test.TextAreaRound();
+        orgWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -83,11 +86,11 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         topPanel.setPreferredSize(new java.awt.Dimension(458, 83));
 
         createOrgLabel.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        createOrgLabel.setText("Create Organization");
+        createOrgLabel.setText("Organization");
 
-        createOrgSubmitButton.setText(" Confirm");
         createOrgSubmitButton.setBackground(new java.awt.Color(255, 255, 204));
         createOrgSubmitButton.setBorder(null);
+        createOrgSubmitButton.setText(" Confirm");
         createOrgSubmitButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         createOrgSubmitButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         createOrgSubmitButton.setRoundBottomLeft(8);
@@ -186,6 +189,10 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         inAdditionalDetails.setRoundTopRight(10);
         jScrollPane1.setViewportView(inAdditionalDetails);
 
+        orgWarning.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        orgWarning.setForeground(new java.awt.Color(255, 0, 0));
+        orgWarning.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,6 +201,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(orgWarning)
                     .addComponent(levelLabel)
                     .addComponent(inOrgClubName, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adviserLabel)
@@ -216,7 +224,9 @@ class ClubAndOrgForm extends javax.swing.JFrame {
                 .addComponent(OrgClubLabel)
                 .addGap(11, 11, 11)
                 .addComponent(inOrgClubName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(4, 4, 4)
+                .addComponent(orgWarning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(levelLabel)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -242,60 +252,34 @@ class ClubAndOrgForm extends javax.swing.JFrame {
         if (validateInputs()) {
             try (Connection conn = conn()) {
                 int selectedRow = CampusConnect.getInstance().activeTable().getSelectedRow();
+                String existingOrg = (selectedRow >= 0) ? CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString() : "";
 
-                String getEditOrgNameSQL = "SELECT * FROM orgs WHERE org_name = ? AND is_deleted = 0";
-                try (PreparedStatement pstmt = conn.prepareStatement(getEditOrgNameSQL)) {
-                    pstmt.setString(1, orgName);
+                if (selectedRow < 0) {
 
-                    try (ResultSet rs = pstmt.executeQuery()) {
-                        if (rs.next()) {
-                            String existingOrg = rs.getString("org_name");
-                            int choice = JOptionPane.showConfirmDialog(this, "Organization already exists. Update existing data?", "Existing Organization",
-                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if (choice == JOptionPane.YES_OPTION) {
+                    String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
+                            + "VALUES (?, ?, ?, ?)";
 
-                                String updateQuery = "UPDATE orgs SET org_name = ?, level = ?, adviser = ?, details = ? WHERE org_name = ?";
-                                try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
-                                    updatePstmt.setString(1, orgName);
-                                    updatePstmt.setString(2, level);
-                                    updatePstmt.setString(3, adviser);
-                                    updatePstmt.setString(4, details);
-                                    updatePstmt.setString(5, existingOrg);
-                                    updatePstmt.executeUpdate();
-                                }
-
-                                if (selectedRow < 1) {
-                                    String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
-                                    try (PreparedStatement deletePstmt = conn.prepareStatement(updateOrgSQL)) {
-                                        deletePstmt.setString(1, existingOrg);
-                                        deletePstmt.executeUpdate();
-                                    }
-                                }
-                                JOptionPane.showMessageDialog(this, "Organization updated successfully!");
-                            }
-                        } else {
-                            if (selectedRow > 0) {
-                                String selectedOrg = CampusConnect.getInstance().activeTable().getValueAt(selectedRow, 0).toString();
-                                String updateOrgSQL = "UPDATE orgs SET is_deleted = 1 WHERE org_name = ?";
-                                try (PreparedStatement deletePstmt = conn.prepareStatement(updateOrgSQL)) {
-                                    deletePstmt.setString(1, selectedOrg);
-                                    deletePstmt.executeUpdate();
-                                }
-                            }
-                            String addOrgQuery = "INSERT INTO orgs (org_name, level, adviser, details) "
-                                    + "VALUES (?, ?, ?, ?)";
-
-                            try (PreparedStatement insertPstmt = conn.prepareStatement(addOrgQuery)) {
-                                insertPstmt.setString(1, orgName);
-                                insertPstmt.setString(2, level);
-                                insertPstmt.setString(3, adviser);
-                                insertPstmt.setString(4, details);
-                                insertPstmt.executeUpdate();
-                            }
-                            JOptionPane.showMessageDialog(this, "Organization created successfully!");
-                        }
+                    try (PreparedStatement insertPstmt = conn.prepareStatement(addOrgQuery)) {
+                        insertPstmt.setString(1, orgName);
+                        insertPstmt.setString(2, level);
+                        insertPstmt.setString(3, adviser);
+                        insertPstmt.setString(4, details);
+                        insertPstmt.executeUpdate();
                     }
+                    JOptionPane.showMessageDialog(this, "Organization created successfully!");
+                } else {
+                    String updateQuery = "UPDATE orgs SET org_name = ?, level = ?, adviser = ?, details = ? WHERE org_name = ?";
+                    try (PreparedStatement updatePstmt = conn.prepareStatement(updateQuery)) {
+                        updatePstmt.setString(1, orgName);
+                        updatePstmt.setString(2, level);
+                        updatePstmt.setString(3, adviser);
+                        updatePstmt.setString(4, details);
+                        updatePstmt.setString(5, existingOrg);
+                        updatePstmt.executeUpdate();
+                    }
+                    JOptionPane.showMessageDialog(this, "Organization updated successfully!");
                 }
+
                 // Refresh the users table in CampusConnect
                 CampusConnect.getInstance().refreshMainTableData();
                 dispose();
@@ -307,36 +291,65 @@ class ClubAndOrgForm extends javax.swing.JFrame {
     }
 
     private boolean validateInputs() {
-        boolean isValid = true;
-        if (inOrgClubName.getText().isEmpty()) {
-            inOrgClubName.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inOrgClubName.setBorder(null);
-            orgName = inOrgClubName.getText();
-        }
-        if (tertiaryLevelButton.isSelected()) {
-            level = "Tertiary";
-        }
-        if (secondaryLevelButton.isSelected()) {
-            level = "Secondary";
-        }
-        if (inAdviser.getSelectedItem().toString().isEmpty()) {
-            inOrgClubName.setBorder(new LineBorder(Color.RED, 1));
-            isValid = false;
-        } else {
-            inOrgClubName.setBorder(null);
-            adviser = inAdviser.getSelectedItem().toString();
-        }
-        details = inAdditionalDetails.getText();
+        try (Connection conn = conn(); Statement st = conn.createStatement()) {
+            boolean isValid = true;
 
-        return isValid;
+            String eventExistingChecker = "SELECT * FROM orgs WHERE is_deleted = 0";
+            try (ResultSet rp = st.executeQuery(eventExistingChecker)) {
+                boolean orgExists = false;
+
+                while (rp.next()) {
+                    String orgNString = rp.getString("org_name");
+                    System.out.println(orgNString);
+
+                    // Check if org name exists
+                    if (inOrgClubName.getText().equalsIgnoreCase(orgNString)) {
+                        orgWarning.setText("Organization exists");
+                        inOrgClubName.setBorder(new LineBorder(Color.RED, 1));
+                        isValid = false;
+                        orgExists = true;
+                        break;
+                    }
+                }
+
+                // Check if org name is empty
+                if (!orgExists) {
+                    if (inOrgClubName.getText().isEmpty()) {
+                        orgWarning.setText("Cannot be empty.");
+                        inOrgClubName.setBorder(new LineBorder(Color.RED, 1));
+                        isValid = false;
+                    } else {
+                        orgWarning.setText("");
+                        inOrgClubName.setBorder(null);
+                        orgName = inOrgClubName.getText();
+                    }
+                }
+            }
+            if (tertiaryLevelButton.isSelected()) {
+                level = "Tertiary";
+            }
+            if (secondaryLevelButton.isSelected()) {
+                level = "Secondary";
+            }
+            if (inAdviser.getSelectedItem().toString().isEmpty()) {
+                inAdviser.setBorder(new LineBorder(Color.RED, 1));
+                isValid = false;
+            } else {
+                inAdviser.setBorder(null);
+                adviser = inAdviser.getSelectedItem().toString();
+            }
+            details = inAdditionalDetails.getText();
+
+            return isValid;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            return false;
+        }
     }//GEN-LAST:event_createOrgSubmitButtonActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
-
+         * @param args the command line arguments
+         */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel OrgClubLabel;
     private javax.swing.JLabel additionalDetailsLabel;
@@ -349,6 +362,7 @@ class ClubAndOrgForm extends javax.swing.JFrame {
     private test.TextFieldRound inOrgClubName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel levelLabel;
+    private javax.swing.JLabel orgWarning;
     private test.ToggleButtonRound secondaryLevelButton;
     private test.ToggleButtonRound tertiaryLevelButton;
     private javax.swing.JPanel topPanel;

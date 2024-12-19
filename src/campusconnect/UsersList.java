@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -178,20 +181,24 @@ class UsersList extends javax.swing.JFrame {
                         }
                     }
                 }
-                // Append new members to existing members
-                if (existingMembers != null && !existingMembers.isEmpty()) {
-                    existingMembers += " ";
-                }
-                existingMembers += newMembers;
+
+                // Convert existing members and new members to a set to avoid duplicates
+                Set<String> membersSet = new HashSet<>(Arrays.asList(existingMembers.split("\\s+")));
+                membersSet.addAll(studentIDList);
+
+                // Convert the set back to a single space-separated string
+                String updatedMembers = String.join(" ", membersSet);
+                System.out.println("Updated members: " + updatedMembers);
 
                 // Update the members column in the database
                 String updateMembersSQL = "UPDATE orgs SET members = ? WHERE org_name = ?";
                 try (PreparedStatement updateStmt = conn().prepareStatement(updateMembersSQL)) {
-                    updateStmt.setString(1, existingMembers);
+                    updateStmt.setString(1, updatedMembers);
                     updateStmt.setString(2, orgName);
                     updateStmt.executeUpdate();
                     System.out.println("Members updated for org: " + orgName);
                 }
+
             } else if (activeDetailedTable == CampusConnect.getInstance().eventParticipantsTable) {
                 // Fetch existing members from the database
                 String eventName = CampusConnect.getInstance().getVisibleEventName();

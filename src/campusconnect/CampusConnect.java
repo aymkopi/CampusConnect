@@ -677,8 +677,9 @@ public class CampusConnect extends JFrame {
         sideDashboard.setOpaque(false);
         sideDashboard.setPreferredSize(new java.awt.Dimension(218, 715));
 
-        dashboardButton.setBackground(new java.awt.Color(201, 207, 222));
+        dashboardButton.setBackground(new java.awt.Color(19, 62, 135));
         dashboardButton.setBorder(null);
+        dashboardButton.setForeground(new java.awt.Color(255, 255, 255));
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboards (1).png"))); // NOI18N
         dashboardButton.setText("Dashboard");
         dashboardButton.setAlignmentX(0.5F);
@@ -697,7 +698,7 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        clubsAndOrgsButton.setBackground(java.awt.Color.lightGray);
+        clubsAndOrgsButton.setBackground(new java.awt.Color(165, 198, 227));
         clubsAndOrgsButton.setBorder(null);
         clubsAndOrgsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hierarchical-structure.png"))); // NOI18N
         clubsAndOrgsButton.setText("Organizations");
@@ -720,7 +721,7 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        eventsButton.setBackground(java.awt.Color.lightGray);
+        eventsButton.setBackground(new java.awt.Color(165, 198, 227));
         eventsButton.setBorder(null);
         eventsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
         eventsButton.setText("Events");
@@ -742,7 +743,7 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        usersButton.setBackground(java.awt.Color.lightGray);
+        usersButton.setBackground(new java.awt.Color(165, 198, 227));
         usersButton.setBorder(null);
         usersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/multiple-users-silhouette.png"))); // NOI18N
         usersButton.setText("Users");
@@ -767,7 +768,7 @@ public class CampusConnect extends JFrame {
         logoPlaceHolder.setBackground(new java.awt.Color(255, 0, 153));
         logoPlaceHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CampusConnectLogo1.png"))); // NOI18N
 
-        panelRound1.setBackground(new java.awt.Color(143, 182, 194));
+        panelRound1.setBackground(new java.awt.Color(19, 62, 135));
         panelRound1.setPreferredSize(new java.awt.Dimension(180, 55));
         panelRound1.setRoundBottomLeft(25);
         panelRound1.setRoundBottomRight(25);
@@ -775,10 +776,12 @@ public class CampusConnect extends JFrame {
         panelRound1.setRoundTopRight(25);
 
         jLabel1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Administrator");
         jLabel1.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Justine A.");
         jLabel3.setToolTipText("");
 
@@ -831,7 +834,7 @@ public class CampusConnect extends JFrame {
         toolsLabel.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         toolsLabel.setText("TOOLS");
 
-        reportsButton.setBackground(java.awt.Color.lightGray);
+        reportsButton.setBackground(new java.awt.Color(165, 198, 227));
         reportsButton.setBorder(null);
         reportsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/profit-report.png"))); // NOI18N
         reportsButton.setText("Reports");
@@ -853,7 +856,7 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        binButton.setBackground(java.awt.Color.lightGray);
+        binButton.setBackground(new java.awt.Color(165, 198, 227));
         binButton.setBorder(null);
         binButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bin.png"))); // NOI18N
         binButton.setText("Bin");
@@ -935,16 +938,17 @@ public class CampusConnect extends JFrame {
         DashBoardPanel.setBackground(new java.awt.Color(204, 255, 51));
         DashBoardPanel.setOpaque(false);
 
-        panelRound5.setBackground(new java.awt.Color(143, 182, 194));
+        panelRound5.setBackground(new java.awt.Color(19, 62, 135));
         panelRound5.setRoundBottomLeft(25);
         panelRound5.setRoundBottomRight(25);
         panelRound5.setRoundTopLeft(25);
         panelRound5.setRoundTopRight(25);
 
         clubAndOrgsLabel1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        clubAndOrgsLabel1.setForeground(new java.awt.Color(255, 255, 255));
         clubAndOrgsLabel1.setText("Dashboard");
 
-        panelRound6.setBackground(new java.awt.Color(201, 217, 222));
+        panelRound6.setBackground(new java.awt.Color(165, 198, 227));
         panelRound6.setPreferredSize(new java.awt.Dimension(357, 369));
         panelRound6.setRoundBottomLeft(20);
         panelRound6.setRoundBottomRight(20);
@@ -1143,7 +1147,7 @@ public class CampusConnect extends JFrame {
                 .addGap(30, 30, 30))
         );
 
-        panelRound7.setBackground(new java.awt.Color(201, 217, 222));
+        panelRound7.setBackground(new java.awt.Color(165, 198, 227));
         panelRound7.setPreferredSize(new java.awt.Dimension(358, 369));
         panelRound7.setRoundBottomLeft(20);
         panelRound7.setRoundBottomRight(20);
@@ -1301,7 +1305,7 @@ public class CampusConnect extends JFrame {
                 .addGap(32, 32, 32))
         );
 
-        panelRound8.setBackground(new java.awt.Color(201, 217, 222));
+        panelRound8.setBackground(new java.awt.Color(165, 198, 227));
         panelRound8.setMaximumSize(new java.awt.Dimension(250, 250));
         panelRound8.setRoundBottomLeft(20);
         panelRound8.setRoundBottomRight(20);
@@ -1319,7 +1323,7 @@ public class CampusConnect extends JFrame {
             .addGap(0, 593, Short.MAX_VALUE)
         );
 
-        panelRound9.setBackground(new java.awt.Color(201, 217, 222));
+        panelRound9.setBackground(new java.awt.Color(165, 198, 227));
         panelRound9.setRoundBottomLeft(20);
         panelRound9.setRoundBottomRight(20);
         panelRound9.setRoundTopLeft(20);
@@ -1387,13 +1391,14 @@ public class CampusConnect extends JFrame {
 
         ClubsAndOrgsPanel.setOpaque(false);
 
-        panelRound12.setBackground(new java.awt.Color(143, 182, 194));
+        panelRound12.setBackground(new java.awt.Color(19, 62, 135));
         panelRound12.setRoundBottomLeft(25);
         panelRound12.setRoundBottomRight(25);
         panelRound12.setRoundTopLeft(25);
         panelRound12.setRoundTopRight(25);
 
         clubAndOrgsLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
+        clubAndOrgsLabel.setForeground(new java.awt.Color(255, 255, 255));
         clubAndOrgsLabel.setText("Clubs And Organizations");
 
         addOrgsButton.setBackground(new java.awt.Color(255, 255, 204));
@@ -1452,7 +1457,7 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound12Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE)
                     .addGroup(panelRound12Layout.createSequentialGroup()
                         .addComponent(clubAndOrgsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1487,13 +1492,14 @@ public class CampusConnect extends JFrame {
         EventsPanel.setBackground(new java.awt.Color(255, 204, 204));
         EventsPanel.setOpaque(false);
 
-        panelRound14.setBackground(new java.awt.Color(143, 182, 194));
+        panelRound14.setBackground(new java.awt.Color(19, 62, 135));
         panelRound14.setRoundBottomLeft(25);
         panelRound14.setRoundBottomRight(25);
         panelRound14.setRoundTopLeft(25);
         panelRound14.setRoundTopRight(25);
 
         lblEvent.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
+        lblEvent.setForeground(new java.awt.Color(255, 255, 255));
         lblEvent.setText("Events");
 
         addEventButton.setBackground(new java.awt.Color(255, 255, 204));
@@ -1581,7 +1587,7 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(EventsPanel, "card4");
 
-        panelRound16.setBackground(new java.awt.Color(143, 182, 194));
+        panelRound16.setBackground(new java.awt.Color(19, 62, 135));
         panelRound16.setRoundBottomLeft(25);
         panelRound16.setRoundBottomRight(25);
         panelRound16.setRoundTopLeft(25);
@@ -1605,6 +1611,7 @@ public class CampusConnect extends JFrame {
         });
 
         usersLabel.setFont(new java.awt.Font("Inter Medium", 1, 24)); // NOI18N
+        usersLabel.setForeground(new java.awt.Color(255, 255, 255));
         usersLabel.setText("Users");
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1676,9 +1683,10 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(UsersPanel, "card5");
 
-        facultyDetailedPanel.setBackground(new java.awt.Color(204, 255, 204));
+        facultyDetailedPanel.setBackground(new java.awt.Color(19, 62, 135));
 
         backUsersButton1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        backUsersButton1.setForeground(new java.awt.Color(255, 255, 255));
         backUsersButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
         backUsersButton1.setText("Users");
         backUsersButton1.setBorder(null);
@@ -1693,23 +1701,29 @@ public class CampusConnect extends JFrame {
         });
 
         facultyNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        facultyNameInfo.setForeground(new java.awt.Color(255, 255, 255));
         facultyNameInfo.setText("Justine Acuña");
         facultyNameInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         facultyTypeInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        facultyTypeInfo.setForeground(new java.awt.Color(255, 255, 255));
         facultyTypeInfo.setText("Faculty");
         facultyTypeInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         userTypeInfo10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        userTypeInfo10.setForeground(new java.awt.Color(255, 255, 255));
         userTypeInfo10.setText("Events Headed");
 
         userTypeInfo11.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        userTypeInfo11.setForeground(new java.awt.Color(255, 255, 255));
         userTypeInfo11.setText("Advised Org");
 
         facultyEventsHeadedInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        facultyEventsHeadedInfo.setForeground(new java.awt.Color(255, 255, 255));
         facultyEventsHeadedInfo.setText("312");
 
         facultyOrgsAdvisorInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        facultyOrgsAdvisorInfo.setForeground(new java.awt.Color(255, 255, 255));
         facultyOrgsAdvisorInfo.setText("36");
 
         panelRound17.setBackground(new java.awt.Color(255, 255, 255));
@@ -1878,7 +1892,7 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(facultyDetailedPanel, "card6");
 
-        studentDetailedPanel.setBackground(new java.awt.Color(204, 255, 204));
+        studentDetailedPanel.setBackground(new java.awt.Color(156, 204, 247));
 
         backUsersButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         backUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
@@ -2033,9 +2047,9 @@ public class CampusConnect extends JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(studentDetailedPanelLayout.createSequentialGroup()
-                        .addComponent(panelRound29, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                        .addComponent(panelRound29, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                         .addGap(28, 28, 28)
-                        .addComponent(panelRound30, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                        .addComponent(panelRound30, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
                     .addGroup(studentDetailedPanelLayout.createSequentialGroup()
                         .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(studentDetailedPanelLayout.createSequentialGroup()
@@ -2085,9 +2099,11 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(studentDetailedPanel, "card6");
 
-        orgsDetailedPanel.setBackground(new java.awt.Color(204, 255, 204));
+        orgsDetailedPanel.setBackground(new java.awt.Color(19, 62, 135));
+        orgsDetailedPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         backToDashboardButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        backToDashboardButton.setForeground(new java.awt.Color(255, 255, 255));
         backToDashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
         backToDashboardButton.setText("Clubs and Organizations");
         backToDashboardButton.setBorder(null);
@@ -2102,23 +2118,29 @@ public class CampusConnect extends JFrame {
         });
 
         orgsNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        orgsNameInfo.setForeground(new java.awt.Color(255, 255, 255));
         orgsNameInfo.setText("Org Name");
         orgsNameInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         adviserInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        adviserInfo.setForeground(new java.awt.Color(255, 255, 255));
         adviserInfo.setText("Adviser");
         adviserInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         userTypeInfo4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        userTypeInfo4.setForeground(new java.awt.Color(255, 255, 255));
         userTypeInfo4.setText("Total Members");
 
         userTypeInfo7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        userTypeInfo7.setForeground(new java.awt.Color(255, 255, 255));
         userTypeInfo7.setText("Ongoing Events");
 
         totalMembersInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        totalMembersInfo.setForeground(new java.awt.Color(255, 255, 255));
         totalMembersInfo.setText("312");
 
         orgOngoingEventsInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        orgOngoingEventsInfo.setForeground(new java.awt.Color(255, 255, 255));
         orgOngoingEventsInfo.setText("36");
 
         panelRound31.setBackground(new java.awt.Color(255, 255, 255));
@@ -2305,9 +2327,11 @@ public class CampusConnect extends JFrame {
 
         mainDashboard.add(orgsDetailedPanel, "card6");
 
-        eventsDetailedPanel.setBackground(new java.awt.Color(143, 182, 194));
+        eventsDetailedPanel.setBackground(new java.awt.Color(19, 62, 135));
+        eventsDetailedPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         backButton.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
         backButton.setText("Events");
         backButton.setBorder(null);
@@ -2322,10 +2346,12 @@ public class CampusConnect extends JFrame {
         });
 
         eventNameInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        eventNameInfo.setForeground(new java.awt.Color(255, 255, 255));
         eventNameInfo.setText("Event Title");
         eventNameInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         eventStatusInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        eventStatusInfo.setForeground(new java.awt.Color(255, 255, 255));
         eventStatusInfo.setText("Status");
         eventStatusInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -2336,6 +2362,7 @@ public class CampusConnect extends JFrame {
         totalParticipantsInfo.setText("36");
 
         officerInChargeInfo.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        officerInChargeInfo.setForeground(new java.awt.Color(255, 255, 255));
         officerInChargeInfo.setText("Officer-In-Charge");
         officerInChargeInfo.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 

@@ -90,10 +90,14 @@ public class LoginPage extends JFrame {
         panelRound1.setRoundTopRight(25);
 
         imagePlaceHolder.setBorder(null);
-        imagePlaceHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bird-thumbnail.jpg"))); // NOI18N
+        imagePlaceHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sd.png"))); // NOI18N
+        imagePlaceHolder.setAlignmentY(0.0F);
         imagePlaceHolder.setBorderPainted(false);
         imagePlaceHolder.setFocusPainted(false);
         imagePlaceHolder.setFocusable(false);
+        imagePlaceHolder.setHideActionText(true);
+        imagePlaceHolder.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        imagePlaceHolder.setIconTextGap(0);
         imagePlaceHolder.setRoundBottomLeft(20);
         imagePlaceHolder.setRoundBottomRight(20);
         imagePlaceHolder.setRoundTopLeft(20);
@@ -197,11 +201,11 @@ public class LoginPage extends JFrame {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(imagePlaceHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagePlaceHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(40, 40, 40)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblWelcomeBack, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAlreadyHaveAccount1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,35 +235,30 @@ public class LoginPage extends JFrame {
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(70, 70, 70)
+                .addComponent(lblWelcomeBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAlreadyHaveAccount1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inStudentIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(userIDWarning)
+                .addGap(20, 20, 20)
+                .addComponent(inPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(lblWelcomeBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAlreadyHaveAccount1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(inUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inStudentIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addComponent(userIDWarning)
-                        .addGap(20, 20, 20)
-                        .addComponent(inPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordWarning)
-                            .addComponent(showLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(83, 83, 83)
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(imagePlaceHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                    .addComponent(passwordWarning)
+                    .addComponent(showLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(imagePlaceHolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

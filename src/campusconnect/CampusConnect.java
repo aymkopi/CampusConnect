@@ -582,12 +582,12 @@ public class CampusConnect extends JFrame {
         facultyOrgsAdvisorInfo = new javax.swing.JLabel();
         panelRound17 = new test.PanelRound();
         userTypeInfo12 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        facultyOrgAdvisoryTable = new javax.swing.JTable();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        facultyOrgAdvisoryTable = new test.Table();
         panelRound18 = new test.PanelRound();
         userTypeInfo14 = new javax.swing.JLabel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        facultyHeadedEventsTable = new javax.swing.JTable();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        facultyHeadedEventsTable = new test.Table();
         studentDetailedPanel = new javax.swing.JPanel();
         backUsersButton = new javax.swing.JButton();
         studentNameInfo = new javax.swing.JLabel();
@@ -596,14 +596,14 @@ public class CampusConnect extends JFrame {
         studentOrgsJoinedLabel = new javax.swing.JLabel();
         studentParticipatedEventsInfo = new javax.swing.JLabel();
         studentOrgsJoinedInfo = new javax.swing.JLabel();
-        panelRound2 = new test.PanelRound();
-        studentOrgsTableLabel = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        studentOrgsJoinedTable = new javax.swing.JTable();
-        panelRound3 = new test.PanelRound();
+        panelRound29 = new test.PanelRound();
         studentEventTableLabel = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        studentParticipatedEventsTable = new javax.swing.JTable();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        studentParticipatedEventsTable = new test.Table();
+        panelRound30 = new test.PanelRound();
+        studentOrgsTableLabel = new javax.swing.JLabel();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        studentOrgsJoinedTable = new test.Table();
         orgsDetailedPanel = new javax.swing.JPanel();
         backToDashboardButton = new javax.swing.JButton();
         orgsNameInfo = new javax.swing.JLabel();
@@ -612,15 +612,15 @@ public class CampusConnect extends JFrame {
         userTypeInfo7 = new javax.swing.JLabel();
         totalMembersInfo = new javax.swing.JLabel();
         orgOngoingEventsInfo = new javax.swing.JLabel();
-        panelRound10 = new test.PanelRound();
-        userTypeInfo8 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        orgEventTable = new javax.swing.JTable();
-        panelRound11 = new test.PanelRound();
-        userTypeInfo9 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        membersTable = new javax.swing.JTable();
+        panelRound31 = new test.PanelRound();
+        studentEventTableLabel1 = new javax.swing.JLabel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        membersTable = new test.Table();
         addOrgMembersButton = new test.ButtonRound();
+        panelRound32 = new test.PanelRound();
+        studentOrgsTableLabel1 = new javax.swing.JLabel();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        orgEventTable = new test.Table();
         eventsDetailedPanel = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         eventNameInfo = new javax.swing.JLabel();
@@ -631,9 +631,13 @@ public class CampusConnect extends JFrame {
         userTypeInfo13 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         eventParticipantsTable = new javax.swing.JTable();
-        addParticipantsButton = new test.ButtonRound();
         officerInChargeInfo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        panelRound33 = new test.PanelRound();
+        studentEventTableLabel2 = new javax.swing.JLabel();
+        jScrollPane21 = new javax.swing.JScrollPane();
+        eventParticipantsTabl = new test.Table();
+        addParticipantsButton = new test.ButtonRound();
 
         popupMenu.setBorder(null);
 
@@ -978,7 +982,7 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound15Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(totalEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1177,7 +1181,7 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound19Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                 .addComponent(totalUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1320,7 +1324,7 @@ public class CampusConnect extends JFrame {
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 593, Short.MAX_VALUE)
         );
 
         panelRound9.setBackground(new java.awt.Color(201, 217, 222));
@@ -1333,7 +1337,7 @@ public class CampusConnect extends JFrame {
         panelRound9.setLayout(panelRound9Layout);
         panelRound9Layout.setHorizontalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
         panelRound9Layout.setVerticalGroup(
             panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1351,9 +1355,9 @@ public class CampusConnect extends JFrame {
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound5Layout.createSequentialGroup()
-                                .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                .addComponent(panelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+                                .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE))
                             .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1444,6 +1448,10 @@ public class CampusConnect extends JFrame {
         });
         jScrollPane1.setViewportView(orgsTable);
         orgsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (orgsTable.getColumnModel().getColumnCount() > 0) {
+            orgsTable.getColumnModel().getColumn(3).setHeaderValue("Adviser");
+            orgsTable.getColumnModel().getColumn(4).setHeaderValue("Details");
+        }
 
         javax.swing.GroupLayout panelRound12Layout = new javax.swing.GroupLayout(panelRound12);
         panelRound12.setLayout(panelRound12Layout);
@@ -1549,7 +1557,7 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound14Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(panelRound14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
                     .addGroup(panelRound14Layout.createSequentialGroup()
                         .addComponent(lblEvent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1564,8 +1572,8 @@ public class CampusConnect extends JFrame {
                     .addComponent(lblEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addEventButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
@@ -1647,7 +1655,7 @@ public class CampusConnect extends JFrame {
                     .addComponent(jScrollPane3)
                     .addGroup(panelRound16Layout.createSequentialGroup()
                         .addComponent(usersLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 886, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 922, Short.MAX_VALUE)
                         .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
@@ -1658,9 +1666,9 @@ public class CampusConnect extends JFrame {
                 .addGroup(panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usersLabel)
                     .addComponent(addUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                .addGap(31, 31, 31))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout UsersPanelLayout = new javax.swing.GroupLayout(UsersPanel);
@@ -1704,7 +1712,7 @@ public class CampusConnect extends JFrame {
         userTypeInfo10.setText("Events Headed");
 
         userTypeInfo11.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        userTypeInfo11.setText("Orgs Advisor");
+        userTypeInfo11.setText("Advised Org");
 
         facultyEventsHeadedInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         facultyEventsHeadedInfo.setText("312");
@@ -1719,8 +1727,8 @@ public class CampusConnect extends JFrame {
         panelRound17.setRoundTopLeft(15);
         panelRound17.setRoundTopRight(15);
 
-        userTypeInfo12.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        userTypeInfo12.setText("Advisor");
+        userTypeInfo12.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        userTypeInfo12.setText("Advised Organization");
         userTypeInfo12.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         facultyOrgAdvisoryTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1732,14 +1740,16 @@ public class CampusConnect extends JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane8.setViewportView(facultyOrgAdvisoryTable);
+        facultyOrgAdvisoryTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane12.setViewportView(facultyOrgAdvisoryTable);
+        facultyOrgAdvisoryTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout panelRound17Layout = new javax.swing.GroupLayout(panelRound17);
         panelRound17.setLayout(panelRound17Layout);
@@ -1748,19 +1758,19 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound17Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                     .addGroup(panelRound17Layout.createSequentialGroup()
-                        .addComponent(userTypeInfo12, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userTypeInfo12, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRound17Layout.setVerticalGroup(
             panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(userTypeInfo12)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1771,8 +1781,8 @@ public class CampusConnect extends JFrame {
         panelRound18.setRoundTopLeft(15);
         panelRound18.setRoundTopRight(15);
 
-        userTypeInfo14.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        userTypeInfo14.setText("Events Head");
+        userTypeInfo14.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        userTypeInfo14.setText("Headed Events");
         userTypeInfo14.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         facultyHeadedEventsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1791,28 +1801,29 @@ public class CampusConnect extends JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane10.setViewportView(facultyHeadedEventsTable);
+        facultyHeadedEventsTable.setColumnSelectionAllowed(true);
+        facultyHeadedEventsTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane11.setViewportView(facultyHeadedEventsTable);
+        facultyHeadedEventsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout panelRound18Layout = new javax.swing.GroupLayout(panelRound18);
         panelRound18.setLayout(panelRound18Layout);
         panelRound18Layout.setHorizontalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(22, 22, 22)
                 .addGroup(panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound18Layout.createSequentialGroup()
-                        .addComponent(userTypeInfo14, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                    .addComponent(userTypeInfo14, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         panelRound18Layout.setVerticalGroup(
             panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(userTypeInfo14)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1824,29 +1835,27 @@ public class CampusConnect extends JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
-                        .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                        .addGap(29, 29, 29)
-                        .addComponent(panelRound17, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                        .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
+                                .addComponent(panelRound18, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                                .addGap(29, 29, 29)
+                                .addComponent(panelRound17, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(facultyTypeInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(facultyNameInfo, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(43, 43, 43))
                     .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
-                                .addComponent(facultyTypeInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE))
-                            .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
-                                .addComponent(facultyNameInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)))
-                        .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userTypeInfo10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(facultyEventsHeadedInfo))
+                            .addComponent(facultyEventsHeadedInfo)
+                            .addComponent(userTypeInfo10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(facultyOrgsAdvisorInfo)
-                            .addComponent(userTypeInfo11))))
-                .addGap(43, 43, 43))
+                            .addComponent(userTypeInfo11))
+                        .addGap(64, 64, 64))))
             .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(backUsersButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(backUsersButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         facultyDetailedPanelLayout.setVerticalGroup(
             facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1854,19 +1863,20 @@ public class CampusConnect extends JFrame {
                 .addContainerGap()
                 .addComponent(backUsersButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
-                        .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userTypeInfo10)
-                            .addComponent(userTypeInfo11))
-                        .addGap(5, 5, 5)
-                        .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(facultyEventsHeadedInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(facultyOrgsAdvisorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
                         .addComponent(facultyNameInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(facultyTypeInfo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(facultyTypeInfo))
+                    .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
+                            .addComponent(userTypeInfo11)
+                            .addGap(5, 5, 5)
+                            .addComponent(facultyOrgsAdvisorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(facultyDetailedPanelLayout.createSequentialGroup()
+                            .addComponent(userTypeInfo10)
+                            .addGap(5, 5, 5)
+                            .addComponent(facultyEventsHeadedInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(119, 119, 119)
                 .addGroup(facultyDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound17, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
@@ -1912,66 +1922,14 @@ public class CampusConnect extends JFrame {
         studentOrgsJoinedInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         studentOrgsJoinedInfo.setText("36");
 
-        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound2.setPreferredSize(new java.awt.Dimension(673, 394));
-        panelRound2.setRoundBottomLeft(15);
-        panelRound2.setRoundBottomRight(15);
-        panelRound2.setRoundTopLeft(15);
-        panelRound2.setRoundTopRight(15);
+        panelRound29.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound29.setPreferredSize(new java.awt.Dimension(673, 394));
+        panelRound29.setRoundBottomLeft(15);
+        panelRound29.setRoundBottomRight(15);
+        panelRound29.setRoundTopLeft(15);
+        panelRound29.setRoundTopRight(15);
 
-        studentOrgsTableLabel.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        studentOrgsTableLabel.setText("Organizations Joined");
-        studentOrgsTableLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        studentOrgsJoinedTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Organization Name", "Adviser"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(studentOrgsJoinedTable);
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(studentOrgsTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(studentOrgsTableLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelRound3.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound3.setPreferredSize(new java.awt.Dimension(673, 394));
-        panelRound3.setRoundBottomLeft(15);
-        panelRound3.setRoundBottomRight(15);
-        panelRound3.setRoundTopLeft(15);
-        panelRound3.setRoundTopRight(15);
-
-        studentEventTableLabel.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        studentEventTableLabel.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         studentEventTableLabel.setText("Participated Events");
         studentEventTableLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -1991,28 +1949,85 @@ public class CampusConnect extends JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(studentParticipatedEventsTable);
+        studentParticipatedEventsTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane17.setViewportView(studentParticipatedEventsTable);
+        studentParticipatedEventsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(studentEventTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout panelRound29Layout = new javax.swing.GroupLayout(panelRound29);
+        panelRound29.setLayout(panelRound29Layout);
+        panelRound29Layout.setHorizontalGroup(
+            panelRound29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound29Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(panelRound29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound29Layout.createSequentialGroup()
+                        .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                        .addGap(25, 25, 25))
+                    .addGroup(panelRound29Layout.createSequentialGroup()
+                        .addComponent(studentEventTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
+        panelRound29Layout.setVerticalGroup(
+            panelRound29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound29Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(studentEventTableLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelRound30.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound30.setPreferredSize(new java.awt.Dimension(673, 394));
+        panelRound30.setRoundBottomLeft(15);
+        panelRound30.setRoundBottomRight(15);
+        panelRound30.setRoundTopLeft(15);
+        panelRound30.setRoundTopRight(15);
+
+        studentOrgsTableLabel.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        studentOrgsTableLabel.setText("Organizations Joined");
+        studentOrgsTableLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        studentOrgsJoinedTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Organization Name", "Adviser"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        studentOrgsJoinedTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane18.setViewportView(studentOrgsJoinedTable);
+        studentOrgsJoinedTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        javax.swing.GroupLayout panelRound30Layout = new javax.swing.GroupLayout(panelRound30);
+        panelRound30.setLayout(panelRound30Layout);
+        panelRound30Layout.setHorizontalGroup(
+            panelRound30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound30Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(studentOrgsTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound30Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        panelRound30Layout.setVerticalGroup(
+            panelRound30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(studentOrgsTableLabel)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2024,17 +2039,17 @@ public class CampusConnect extends JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(studentDetailedPanelLayout.createSequentialGroup()
-                        .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                        .addComponent(panelRound29, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                        .addComponent(panelRound30, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                     .addGroup(studentDetailedPanelLayout.createSequentialGroup()
                         .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(studentDetailedPanelLayout.createSequentialGroup()
                                 .addComponent(studentTypeInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(studentDetailedPanelLayout.createSequentialGroup()
                                 .addComponent(studentNameInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(studentEventParticipatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(studentParticipatedEventsInfo))
@@ -2069,8 +2084,8 @@ public class CampusConnect extends JFrame {
                         .addComponent(studentTypeInfo)))
                 .addGap(119, 119, 119)
                 .addGroup(studentDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                    .addComponent(panelRound29, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .addComponent(panelRound30, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
                 .addGap(36, 36, 36))
         );
 
@@ -2112,68 +2127,16 @@ public class CampusConnect extends JFrame {
         orgOngoingEventsInfo.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
         orgOngoingEventsInfo.setText("36");
 
-        panelRound10.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound10.setPreferredSize(new java.awt.Dimension(673, 394));
-        panelRound10.setRoundBottomLeft(15);
-        panelRound10.setRoundBottomRight(15);
-        panelRound10.setRoundTopLeft(15);
-        panelRound10.setRoundTopRight(15);
+        panelRound31.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound31.setPreferredSize(new java.awt.Dimension(673, 394));
+        panelRound31.setRoundBottomLeft(15);
+        panelRound31.setRoundBottomRight(15);
+        panelRound31.setRoundTopLeft(15);
+        panelRound31.setRoundTopRight(15);
 
-        userTypeInfo8.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        userTypeInfo8.setText("Events");
-        userTypeInfo8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        orgEventTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Event Name", "Date", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(orgEventTable);
-
-        javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);
-        panelRound10.setLayout(panelRound10Layout);
-        panelRound10Layout.setHorizontalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound10Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound10Layout.createSequentialGroup()
-                        .addComponent(userTypeInfo8, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        panelRound10Layout.setVerticalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userTypeInfo8)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelRound11.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound11.setPreferredSize(new java.awt.Dimension(673, 394));
-        panelRound11.setRoundBottomLeft(15);
-        panelRound11.setRoundBottomRight(15);
-        panelRound11.setRoundTopLeft(15);
-        panelRound11.setRoundTopRight(15);
-
-        userTypeInfo9.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        userTypeInfo9.setText("Members");
-        userTypeInfo9.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        studentEventTableLabel1.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        studentEventTableLabel1.setText("Members");
+        studentEventTableLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         membersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2191,11 +2154,13 @@ public class CampusConnect extends JFrame {
                 return canEdit [columnIndex];
             }
         });
-        membersTable.setRowHeight(25);
-        jScrollPane7.setViewportView(membersTable);
+        membersTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane19.setViewportView(membersTable);
+        membersTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         addOrgMembersButton.setBorder(null);
         addOrgMembersButton.setText("Add Members");
+        addOrgMembersButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         addOrgMembersButton.setRoundBottomLeft(10);
         addOrgMembersButton.setRoundBottomRight(10);
         addOrgMembersButton.setRoundTopLeft(10);
@@ -2206,29 +2171,84 @@ public class CampusConnect extends JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
-        panelRound11.setLayout(panelRound11Layout);
-        panelRound11Layout.setHorizontalGroup(
-            panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound11Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                    .addGroup(panelRound11Layout.createSequentialGroup()
-                        .addComponent(userTypeInfo9, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelRound31Layout = new javax.swing.GroupLayout(panelRound31);
+        panelRound31.setLayout(panelRound31Layout);
+        panelRound31Layout.setHorizontalGroup(
+            panelRound31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound31Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(panelRound31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound31Layout.createSequentialGroup()
+                        .addComponent(studentEventTableLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addOrgMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addOrgMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
+        );
+        panelRound31Layout.setVerticalGroup(
+            panelRound31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(studentEventTableLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(addOrgMembersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelRound11Layout.setVerticalGroup(
-            panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound11Layout.createSequentialGroup()
+
+        panelRound32.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound32.setPreferredSize(new java.awt.Dimension(673, 394));
+        panelRound32.setRoundBottomLeft(15);
+        panelRound32.setRoundBottomRight(15);
+        panelRound32.setRoundTopLeft(15);
+        panelRound32.setRoundTopRight(15);
+
+        studentOrgsTableLabel1.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        studentOrgsTableLabel1.setText("Events");
+        studentOrgsTableLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        orgEventTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Event Name", "Date", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        orgEventTable.setColumnSelectionAllowed(true);
+        orgEventTable.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane20.setViewportView(orgEventTable);
+        orgEventTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        javax.swing.GroupLayout panelRound32Layout = new javax.swing.GroupLayout(panelRound32);
+        panelRound32.setLayout(panelRound32Layout);
+        panelRound32Layout.setHorizontalGroup(
+            panelRound32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound32Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(studentOrgsTableLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(426, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound32Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        panelRound32Layout.setVerticalGroup(
+            panelRound32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound32Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userTypeInfo9)
-                    .addComponent(addOrgMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addComponent(studentOrgsTableLabel1)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2240,17 +2260,16 @@ public class CampusConnect extends JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
-                        .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                        .addComponent(panelRound31, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(panelRound10, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                        .addComponent(panelRound32, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                     .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
                         .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
                                 .addComponent(orgsNameInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE))
-                            .addGroup(orgsDetailedPanelLayout.createSequentialGroup()
-                                .addComponent(adviserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(adviserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalMembersInfo)
                             .addComponent(userTypeInfo4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2285,8 +2304,8 @@ public class CampusConnect extends JFrame {
                         .addComponent(adviserInfo)))
                 .addGap(119, 119, 119)
                 .addGroup(orgsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound10, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                    .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                    .addComponent(panelRound32, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .addComponent(panelRound31, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
                 .addGap(36, 36, 36))
         );
 
@@ -2352,13 +2371,6 @@ public class CampusConnect extends JFrame {
         eventParticipantsTable.setRowHeight(25);
         jScrollPane9.setViewportView(eventParticipantsTable);
 
-        addParticipantsButton.setText("Add Participants");
-        addParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addParticipantsButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRound13Layout = new javax.swing.GroupLayout(panelRound13);
         panelRound13.setLayout(panelRound13Layout);
         panelRound13Layout.setHorizontalGroup(
@@ -2366,20 +2378,17 @@ public class CampusConnect extends JFrame {
             .addGroup(panelRound13Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                     .addGroup(panelRound13Layout.createSequentialGroup()
                         .addComponent(userTypeInfo13, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelRound13Layout.setVerticalGroup(
             panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userTypeInfo13)
-                    .addComponent(addParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(userTypeInfo13)
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2403,6 +2412,72 @@ public class CampusConnect extends JFrame {
             }
         });
 
+        panelRound33.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound33.setPreferredSize(new java.awt.Dimension(673, 394));
+        panelRound33.setRoundBottomLeft(15);
+        panelRound33.setRoundBottomRight(15);
+        panelRound33.setRoundTopLeft(15);
+        panelRound33.setRoundTopRight(15);
+
+        studentEventTableLabel2.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        studentEventTableLabel2.setText("Members");
+        studentEventTableLabel2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        eventParticipantsTabl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Student ID", "Student Name", "Level"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        eventParticipantsTabl.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jScrollPane21.setViewportView(eventParticipantsTabl);
+        eventParticipantsTabl.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        addParticipantsButton.setBorder(null);
+        addParticipantsButton.setText("Add Participants");
+        addParticipantsButton.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        addParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addParticipantsButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound33Layout = new javax.swing.GroupLayout(panelRound33);
+        panelRound33.setLayout(panelRound33Layout);
+        panelRound33Layout.setHorizontalGroup(
+            panelRound33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound33Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(panelRound33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound33Layout.createSequentialGroup()
+                        .addComponent(studentEventTableLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
+        );
+        panelRound33Layout.setVerticalGroup(
+            panelRound33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound33Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRound33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(studentEventTableLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(addParticipantsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout eventsDetailedPanelLayout = new javax.swing.GroupLayout(eventsDetailedPanel);
         eventsDetailedPanel.setLayout(eventsDetailedPanelLayout);
         eventsDetailedPanelLayout.setHorizontalGroup(
@@ -2416,7 +2491,10 @@ public class CampusConnect extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eventsDetailedPanelLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(eventsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelRound13, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
+                    .addGroup(eventsDetailedPanelLayout.createSequentialGroup()
+                        .addComponent(panelRound33, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelRound13, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
                     .addGroup(eventsDetailedPanelLayout.createSequentialGroup()
                         .addGroup(eventsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(eventNameInfo)
@@ -2449,7 +2527,9 @@ public class CampusConnect extends JFrame {
                         .addComponent(eventStatusInfo))
                     .addComponent(officerInChargeInfo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(119, 119, 119)
-                .addComponent(panelRound13, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addGroup(eventsDetailedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound13, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .addComponent(panelRound33, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
                 .addGap(36, 36, 36))
         );
 
@@ -2925,6 +3005,7 @@ public class CampusConnect extends JFrame {
     private test.ButtonRound clubsAndOrgsButton;
     private test.ButtonRound dashboardButton;
     private javax.swing.JLabel eventNameInfo;
+    public test.Table eventParticipantsTabl;
     public javax.swing.JTable eventParticipantsTable;
     private javax.swing.JLabel eventStatusInfo;
     private test.ButtonRound eventsButton;
@@ -2932,9 +3013,9 @@ public class CampusConnect extends JFrame {
     private test.Table eventsTable;
     private javax.swing.JPanel facultyDetailedPanel;
     private javax.swing.JLabel facultyEventsHeadedInfo;
-    private javax.swing.JTable facultyHeadedEventsTable;
+    private test.Table facultyHeadedEventsTable;
     private javax.swing.JLabel facultyNameInfo;
-    private javax.swing.JTable facultyOrgAdvisoryTable;
+    private test.Table facultyOrgAdvisoryTable;
     private javax.swing.JLabel facultyOrgsAdvisorInfo;
     private javax.swing.JLabel facultyTypeInfo;
     private javax.swing.JButton jButton1;
@@ -2952,14 +3033,15 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane20;
+    private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -2967,16 +3049,14 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel lblEvent;
     private javax.swing.JLabel logoPlaceHolder;
     private test.PanelRound mainDashboard;
-    public javax.swing.JTable membersTable;
+    public test.Table membersTable;
     private javax.swing.JLabel officerInChargeInfo;
-    private javax.swing.JTable orgEventTable;
+    private test.Table orgEventTable;
     private javax.swing.JLabel orgOngoingEventsInfo;
     private javax.swing.JPanel orgsDetailedPanel;
     private javax.swing.JLabel orgsNameInfo;
     private test.Table orgsTable;
     private test.PanelRound panelRound1;
-    private test.PanelRound panelRound10;
-    private test.PanelRound panelRound11;
     private test.PanelRound panelRound12;
     private test.PanelRound panelRound13;
     private test.PanelRound panelRound14;
@@ -2985,13 +3065,16 @@ public class CampusConnect extends JFrame {
     private test.PanelRound panelRound17;
     private test.PanelRound panelRound18;
     private test.PanelRound panelRound19;
-    private test.PanelRound panelRound2;
     private test.PanelRound panelRound20;
     private test.PanelRound panelRound21;
     private test.PanelRound panelRound22;
     private test.PanelRound panelRound24;
     private test.PanelRound panelRound25;
-    private test.PanelRound panelRound3;
+    private test.PanelRound panelRound29;
+    private test.PanelRound panelRound30;
+    private test.PanelRound panelRound31;
+    private test.PanelRound panelRound32;
+    private test.PanelRound panelRound33;
     private test.PanelRound panelRound4;
     private test.PanelRound panelRound5;
     private test.PanelRound panelRound6;
@@ -3008,13 +3091,16 @@ public class CampusConnect extends JFrame {
     private javax.swing.JPanel studentDetailedPanel;
     private javax.swing.JLabel studentEventParticipatedLabel;
     private javax.swing.JLabel studentEventTableLabel;
+    private javax.swing.JLabel studentEventTableLabel1;
+    private javax.swing.JLabel studentEventTableLabel2;
     private javax.swing.JLabel studentNameInfo;
     private javax.swing.JLabel studentOrgsJoinedInfo;
     private javax.swing.JLabel studentOrgsJoinedLabel;
-    private javax.swing.JTable studentOrgsJoinedTable;
+    private test.Table studentOrgsJoinedTable;
     private javax.swing.JLabel studentOrgsTableLabel;
+    private javax.swing.JLabel studentOrgsTableLabel1;
     private javax.swing.JLabel studentParticipatedEventsInfo;
-    private javax.swing.JTable studentParticipatedEventsTable;
+    private test.Table studentParticipatedEventsTable;
     private javax.swing.JLabel studentTypeInfo;
     private javax.swing.JLabel toolsLabel;
     private javax.swing.JLabel totalEvents;
@@ -3034,8 +3120,6 @@ public class CampusConnect extends JFrame {
     private javax.swing.JLabel userTypeInfo14;
     private javax.swing.JLabel userTypeInfo4;
     private javax.swing.JLabel userTypeInfo7;
-    private javax.swing.JLabel userTypeInfo8;
-    private javax.swing.JLabel userTypeInfo9;
     private test.ButtonRound usersButton;
     private javax.swing.JLabel usersLabel;
     private test.Table usersTable;
